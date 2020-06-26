@@ -129,3 +129,13 @@ Note: the version of Lua that Neovim embeds is Lua 5.1, or more specifically Lua
 ### vim.lsp
 
 ### vim.treesitter
+
+<!-- TODO: add interesting projects (transpilers) -->
+<!-- https://github.com/svermeulen/nvim-moonmaker -->
+<!-- https://github.com/Olical/aniseed -->
+<!-- https://github.com/Olical/conjure -->
+<!-- https://github.com/TypeScriptToLua/TypeScriptToLua -->
+<!-- https://github.com/teal-language/tl -->
+<!-- https://haxe.org/ -->
+<!-- https://github.com/SwadicalRag/wasm2lua -->
+<!-- https://github.com/hengestone/lua-languages -->
