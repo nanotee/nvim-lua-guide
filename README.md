@@ -8,6 +8,17 @@ This guide assumes you are using the latest [nightly build](https://github.com/n
 
 ### Learning Lua
 
+If you are not already familiar with the language, there are plenty of resources to get started:
+
+- The [Learn X in Y minutes page about Lua](https://learnxinyminutes.com/docs/lua/) should give you a quick overview of the basics
+- If videos are more to your liking, Derek Banas has a [1-hour tutorial on the language](https://www.youtube.com/watch?v=iMacxZQMPXs)
+- The [lua-users wiki](http://lua-users.org/wiki/LuaDirectory) is full of useful information on all kinds of Lua-related topics
+- The [official reference manual for Lua](https://www.lua.org/manual/5.1/) should give you the most comprehensive tour of the language
+
+It should also be noted that Lua is a very clean and simple language. It is easy to learn, especially if you have experience with similar scripting languages like JavaScript. You may already know more Lua than you realise!
+
+Note: the version of Lua that Neovim embeds is Lua 5.1, or more specifically LuaJIT
+
 ### Existing tutorials for writing Lua in Neovim
 
 ## Where to put Lua files
