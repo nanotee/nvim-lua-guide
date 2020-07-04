@@ -21,6 +21,11 @@ Note: the version of Lua that Neovim embeds is Lua 5.1, or more specifically Lua
 
 ### Existing tutorials for writing Lua in Neovim
 
+A few tutorials have already been written to help people write plugins in Lua. Some of them helped quite a bit when writing this guide. Many thanks to their authors.
+
+- [teukka.tech - From init.vim to init.lua](https://teukka.tech/luanvim.html)
+- [2n.pl - How to write neovim plugins in Lua](https://www.2n.pl/blog/how-to-write-neovim-plugins-in-lua.md)
+
 ## Where to put Lua files
 
 ## Using Lua from Vimscript
