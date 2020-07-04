@@ -28,6 +28,56 @@ A few tutorials have already been written to help people write plugins in Lua. S
 
 ## Where to put Lua files
 
+Lua files are typically found inside a `lua/` folder in your `runtimepath` (for most users, this will mean `~/.config/nvim/lua` on *nix systems and `~/AppData/Local/nvim/lua` on Windows). The `package.path` and `package.cpath` globals are automatically adjusted to include lua files in this folder. This means you can `require()` these files as Lua modules.
+
+Let's take the following folder structure as an example:
+
+```
+📂 ~/.config/nvim
+├── 📁 after
+├── 📁 ftplugin
+├── 📂 lua
+│  ├── 🌑 myluamodule.lua
+│  └── 📂 other_modules
+│     ├── 🌑 anothermodule.lua
+│     └── 🌑 init.lua
+├── 📁 pack
+├── 📁 plugin
+├── 📁 syntax
+└── 🇻 init.vim
+```
+
+The following Lua code will load `myluamodule.lua`:
+
+```lua
+require('myluamodule')
+```
+
+Notice the absence of a `.lua` extension.
+
+Similarly, loading `other_modules/anothermodule.lua` is done like so:
+
+```lua
+require('other_modules.anothermodule')
+-- or
+require('other_modules/anothermodule')
+```
+
+Path separators are denoted by either a dot `.` or a slash `/`.
+
+A folder containing an `init.lua` file can be required directly, without have to specify the name of the file.
+
+```lua
+require('other_modules') -- loads other_modules/init.lua
+```
+
+For more information: `:help lua-require`
+
+Unlike .vim files, .lua files are not automatically sourced from directories in your `runtimepath`. Instead, you have to source/require them from Vimscript. There are plans to add the option to load an `init.lua` file as an alternative to `init.vim`:
+
+- [Issue #7895](https://github.com/neovim/neovim/issues/7895)
+- [Corresponding pull request](https://github.com/neovim/neovim/pull/12235)
+
 ## Using Lua from Vimscript
 
 ### :lua
