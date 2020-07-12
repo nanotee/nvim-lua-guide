@@ -165,6 +165,10 @@ Unlike .vim files, .lua files are not automatically sourced from directories in 
 <!-- nvim_buf_get_keymap() -->
 <!-- nvim_buf_del_keymap() -->
 
+## Defining user commands
+
+<!-- https://github.com/neovim/neovim/pull/11613 -->
+
 ## Defining autocommands
 
 <!-- TODO: Mention wrapper + pending PR -->
@@ -180,6 +184,7 @@ Unlike .vim files, .lua files are not automatically sourced from directories in 
 ### vim.loop
 
 <!-- TODO: Mention libuv docs + luvit api -->
+<!-- https://teukka.tech/vimloop.html -->
 
 ### vim.lsp
 
