@@ -25,6 +25,7 @@ A few tutorials have already been written to help people write plugins in Lua. S
 
 - [teukka.tech - From init.vim to init.lua](https://teukka.tech/luanvim.html)
 - [2n.pl - How to write neovim plugins in Lua](https://www.2n.pl/blog/how-to-write-neovim-plugins-in-lua.md)
+- [2n.pl - How to make UI for neovim plugins in Lua](https://www.2n.pl/blog/how-to-make-ui-for-neovim-plugins-in-lua)
 - [ms-jpq - Neovim Async Tutorial](https://ms-jpq.github.io/neovim-async-tutorial/)
 
 ## Where to put Lua files
@@ -173,6 +174,10 @@ Unlike .vim files, .lua files are not automatically sourced from directories in 
 ## Defining autocommands
 
 <!-- TODO: Mention wrapper + pending PR -->
+
+## Defining highlights
+
+<!-- mention colorbuddy.nvim -->
 
 ## Making your code more robust
 
