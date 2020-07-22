@@ -30,7 +30,7 @@ A few tutorials have already been written to help people write plugins in Lua. S
 
 ## Where to put Lua files
 
-Lua files are typically found inside a `lua/` folder in your `runtimepath` (for most users, this will mean `~/.config/nvim/lua` on *nix systems and `~/AppData/Local/nvim/lua` on Windows). The `package.path` and `package.cpath` globals are automatically adjusted to include lua files in this folder. This means you can `require()` these files as Lua modules.
+Lua files are typically found inside a `lua/` folder in your `runtimepath` (for most users, this will mean `~/.config/nvim/lua` on *nix systems and `~/AppData/Local/nvim/lua` on Windows). The `package.path` and `package.cpath` globals are automatically adjusted to include Lua files in this folder. This means you can `require()` these files as Lua modules.
 
 Let's take the following folder structure as an example:
 
@@ -75,6 +75,8 @@ require('other_modules') -- loads other_modules/init.lua
 
 For more information: `:help lua-require`
 
+#### Caveats
+
 Unlike .vim files, .lua files are not automatically sourced from directories in your `runtimepath`. Instead, you have to source/require them from Vimscript. There are plans to add the option to load an `init.lua` file as an alternative to `init.vim`:
 
 - [Issue #7895](https://github.com/neovim/neovim/issues/7895)
@@ -84,7 +86,7 @@ Unlike .vim files, .lua files are not automatically sourced from directories in 
 
 ### :lua
 
-This command executes a chunk of lua code.
+This command executes a chunk of Lua code.
 
 ```vim
 :lua require('myluamodule')
@@ -114,11 +116,11 @@ See also:
 
 #### Caveats
 
-You don't get correct syntax highlighting when writing Lua in a .vim file. It might be more convenient to use the `:lua` command as an entry point for requiring external lua files.
+You don't get correct syntax highlighting when writing Lua in a .vim file. It might be more convenient to use the `:lua` command as an entry point for requiring external Lua files.
 
 ### :luado
 
-This command executes a chunk of lua code that acts on a range of lines in the current buffer. If no range is specified, the whole buffer is used instead. Whatever string is `return`ed from the chunk is used to determine what each line should be replaced with.
+This command executes a chunk of Lua code that acts on a range of lines in the current buffer. If no range is specified, the whole buffer is used instead. Whatever string is `return`ed from the chunk is used to determine what each line should be replaced with.
 
 The following command would replace every line in the current buffer with the text `hello world`:
 
@@ -138,7 +140,7 @@ See also:
 
 ### :luafile
 
-This command sources a lua file.
+This command sources a Lua file.
 
 ```vim
 :luafile ~/foo/bar/baz/myluafile.lua
