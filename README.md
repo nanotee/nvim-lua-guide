@@ -152,9 +152,58 @@ See also:
 
 ### luaeval()
 
+This built-in Vimscript function evaluates a Lua expression string and returns its value. Lua data types are automatically converted to Vimscript types (and vice versa).
+
+```vim
+" You can store the result in a variable
+let variable = luaeval('1 + 1')
+echo variable
+" 2
+let concat = luaeval('"Lua".." is ".."awesome"')
+echo concat
+" 'Lua is awesome'
+
+" List-like tables are converted to Vim lists
+let list = luaeval('{1, 2, 3, 4}')
+echo list[0]
+" 1
+echo list[1]
+" 2
+" Note that unlike Lua tables, Vim lists are 0-indexed
+
+" Dict-like tables are converted to Vim dictionaries
+let dict = luaeval('{foo = "bar", baz = "qux"}')
+echo dict.foo
+" 'bar'
+
+" Same thing for booleans and nil
+echo luaeval('true')
+" v:true
+echo luaeval('nil')
+" v:null
+
+" You can create Vimscript aliases for Lua functions
+let LuaMathPow = luaeval('math.pow')
+echo LuaMathPow(2, 2)
+" 4
+let LuaModuleFunction = luaeval('require("mymodule").myfunction')
+call LuaModuleFunction()
+```
+
+`luaeval()` takes an optional second argument that allows you to pass data to the expression. You can then access that data from Lua using the magic global `_A`:
+
+```vim
+echo luaeval('_A[1] + _A[2]', [1, 1])
+" 2
+
+echo luaeval('string.format("Lua is %s", _A)', 'awesome')
+" 'Lua is awesome'
+```
+
+See also:
+- `:help luaeval()`
+
 ### v:lua
-
-
 
 ## Using Vimscript from Lua
 
