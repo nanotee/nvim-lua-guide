@@ -118,6 +118,24 @@ You don't get correct syntax highlighting when writing Lua in a .vim file. It mi
 
 ### :luado
 
+This command executes a chunk of lua code that acts on a range of lines in the current buffer. If no range is specified, the whole buffer is used instead. Whatever string is `return`ed from the chunk is used to determine what each line should be replaced with.
+
+The following command would replace every line in the current buffer with the text `hello world`:
+
+```vim
+:luado return 'hello world'
+```
+
+Two implicit `line` and `linenr` variables are also provided. `line` is the text of the line being iterated upon whereas `linenr` is its number. The following command would make every line whose number is divisible by 2 uppercase:
+
+```vim
+:luado if linenr % 2 == 0 then return line:upper() end
+```
+
+See also:
+
+- `:help :luado`
+
 ### :luafile
 
 ### luaeval()
