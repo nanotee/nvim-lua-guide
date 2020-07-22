@@ -138,6 +138,18 @@ See also:
 
 ### :luafile
 
+This command sources a lua file.
+
+```vim
+:luafile ~/foo/bar/baz/myluafile.lua
+```
+
+It is analogous to the `:source` command for .vim files or the built-in `dofile()` function in Lua.
+
+See also:
+
+- `:help :luafile`
+
 ### luaeval()
 
 ### v:lua
