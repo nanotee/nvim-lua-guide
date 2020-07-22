@@ -154,11 +154,13 @@ See also:
 
 ### v:lua
 
+
+
+## Using Vimscript from Lua
+
 ## The vim namespace
 
 ### vim.inspect()
-
-## Using Vimscript from Lua
 
 ### vim.api.nvim_eval()
 
