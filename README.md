@@ -84,6 +84,38 @@ Unlike .vim files, .lua files are not automatically sourced from directories in 
 
 ### :lua
 
+This command executes a chunk of lua code.
+
+```vim
+:lua require('myluamodule')
+```
+
+Multi-line scripts are possible using heredoc syntax:
+
+```vim
+echo "Here's a bigger chunk of Lua code"
+
+lua << EOF
+local mod = require('mymodule')
+local tbl = {1, 2, 3}
+
+for k, v in ipairs(tbl) do
+    mod.method(v)
+end
+
+print(tbl)
+EOF
+```
+
+See also:
+
+- `:help :lua`
+- `:help :lua-heredoc`
+
+#### Caveats
+
+You don't get correct syntax highlighting when writing Lua in a .vim file. It might be more convenient to use the `:lua` command as an entry point for requiring external lua files.
+
 ### :luado
 
 ### :luafile
