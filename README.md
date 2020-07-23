@@ -459,6 +459,13 @@ vim.bo.shiftwidth = 4
 print(vim.bo.shiftwidth) -- 4
 ```
 
+You can specify a number for buffer-local and window-local options. If no number is given, the current buffer/window is used:
+
+```lua
+vim.bo[4].expandtab = true -- same as vim.api.nvim_buf_set_option(4, 'expandtab', true)
+vim.wo.number = true -- same as vim.api.nvim_win_set_option(0, 'number', true)
+```
+
 See also:
 - `:help lua-vim-internal-options`
 
