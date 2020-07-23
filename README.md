@@ -268,11 +268,11 @@ echo v:lua.some_global_dict['key']
 echo map([1, 2, 3], v:lua.global_callback)
 ```
 
-## Using Vimscript from Lua
-
 ## The vim namespace
 
 ### vim.inspect()
+
+## Using Vimscript from Lua
 
 ### vim.api.nvim_eval()
 
