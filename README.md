@@ -471,16 +471,16 @@ See also:
 
 #### Caveats
 
-**WARNING**: The following section if based on a few experiments I did. The docs don't seem to mention this behavior and I haven't checked the source code to verify my claims.
+**WARNING**: The following section is based on a few experiments I did. The docs don't seem to mention this behavior and I haven't checked the source code to verify my claims.  
 **TODO**: Can anyone confirm this?
 
 If you've only ever dealt with options using the `:set` command, the behavior of some options might surprise you.
 
-Essentially, options can either be global, local to a buffer/window, or have both a global AND a local value.
+Essentially, options can either be global, local to a buffer/window, or have both a global **and** a local value.
 
 The `:setglobal` command sets the global value of an option.
 The `:setlocal` command sets the local value of an option.
-The `:set` command sets the global AND local value of an option.
+The `:set` command sets the global **and** local value of an option.
 
 Here's a handy table from `:help :setglobal`:
 
@@ -527,7 +527,7 @@ See also:
 - `:help :setglobal`
 - `:help global-local`
 
-**TODO**: Why does this happen? Do all buffer-local options behave this way? Might be related to [neovim/neovim#7658](https://github.com/neovim/neovim/issues/7658) and [vim/vim#2390](https://github.com/vim/vim/issues/2390)
+**TODO**: Why does this happen? Do all buffer-local options behave this way? Might be related to [neovim/neovim#7658](https://github.com/neovim/neovim/issues/7658) and [vim/vim#2390](https://github.com/vim/vim/issues/2390). Also for window-local options: [neovim/neovim#11525](https://github.com/neovim/neovim/issues/11525) and [vim/vim#4945](https://github.com/vim/vim/issues/4945)
 
 ## Managing vim internal variables
 
