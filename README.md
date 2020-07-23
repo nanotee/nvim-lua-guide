@@ -344,6 +344,25 @@ Unlike `luaeval()`, `vim.api.nvim_eval()` does not provide an implicit `_A` vari
 
 ### vim.api.nvim_exec()
 
+This function evaluates a chunk of Vimscript code. It takes in a string containing the source code to execute and a boolean to determine whether the output of the code should be returned by the function (you can then store the output in a variable, for example).
+
+```lua
+local result = vim.api.nvim_exec(
+[[
+let text = 'hello world'
+echo text
+
+function! MyFunction()
+    " do something inside this function
+endfunction
+
+call MyFunction()
+]],
+true)
+
+print(result)
+```
+
 ### vim.api.nvim_command()
 
 <!-- TODO: talk about the vim.cmd alias -->
