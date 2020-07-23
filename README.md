@@ -365,7 +365,7 @@ print(result) -- 'hello world'
 
 ### vim.api.nvim_command()
 
-This function executes an ex command. It take in a string containing the command to execute.
+This function executes an ex command. It takes in a string containing the command to execute.
 
 ```lua
 vim.api.nvim_command('new')
