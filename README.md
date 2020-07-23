@@ -217,6 +217,7 @@ let scream = v:lua.string.rep('A', 10)
 echo scream
 " 'AAAAAAAAAA'
 
+" Requiring modules works
 call v:lua.require('mymodule').myfunction()
 
 " How about a nice statusline?
@@ -263,8 +264,13 @@ See also:
 This variable can only be used to call functions. The following will always throw an error:
 
 ```vim
+" Aliasing functions doesn't work
 let LuaPrint = v:lua.print
+
+" Accessing dictionaries doesn't work
 echo v:lua.some_global_dict['key']
+
+" Using a function as a value doesn't work
 echo map([1, 2, 3], v:lua.global_callback)
 ```
 
