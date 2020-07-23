@@ -284,7 +284,42 @@ echo map([1, 2, 3], v:lua.global_callback)
 
 ## The vim namespace
 
-### vim.inspect()
+Neovim exposes a global `vim` variable which serves as an entry point to interact with its APIs from Lua. It provides users with an extended "standard library" of functions as well as various sub-modules.
+
+Some notable functions and modules include:
+
+- `vim.inspect`: pretty-print Lua objects (useful for inspecting tables)
+- `vim.regex`: use Vim regexes from Lua
+- `vim.api`: module that exposes API functions (the same API used by remote plugins)
+- `vim.loop`: module that exposes the functionality of Neovim's event-loop (using LibUV)
+- `vim.lsp`: module that controls the built-in LSP client
+- `vim.treesitter`: module that exposes the functionality of the tree-sitter library
+
+This list is by no means comprehensive. If you wish to know more about what's made available by the `vim` variable, `:help lua-stdlib` and `:help lua-vim` are the way to go. Alternatively, you can do `:lua print(vim.inspect(vim))` to get a list of every module.
+
+#### Tips
+
+Writing `print(vim.inspect(x))` every time you want to inspect the contents of an object can get pretty tedious. It might be worthwhile to have a global wrapper function somewhere in your configuration:
+
+```lua
+function _G.dump(...)
+    local objects = vim.tbl_map(vim.inspect, {...})
+    print(unpack(objects))
+end
+```
+
+You can then inspect the contents of an object very quickly in your code or from the command-line:
+
+```lua
+dump({1, 2, 3})
+```
+
+```vim
+:lua dump(vim.loop)
+```
+
+
+Additionally, you may find that built-in Lua functions (such as `math.max()` or `string.rep()`) are sometimes lacking compared to what you would find in other languages (for example `os.clock()` only returns a value in seconds, not milliseconds). Be sure to look at the Neovim stdlib (and `vim.fn`, more on that later), it probably has what you're looking for.
 
 ## Using Vimscript from Lua
 
