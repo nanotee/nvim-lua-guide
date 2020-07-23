@@ -82,6 +82,14 @@ Unlike .vim files, .lua files are not automatically sourced from directories in 
 - [Issue #7895](https://github.com/neovim/neovim/issues/7895)
 - [Corresponding pull request](https://github.com/neovim/neovim/pull/12235)
 
+#### Tips
+
+Several Lua plugins might have identical filenames in their `lua/` folder. This could lead to namespace clashes.
+
+If two different plugins have a `lua/main.lua` file, then doing `require('main')` is ambiguous: which file do we want to source?
+
+It might be a good idea to namespace your config or your plugin with a top-level folder, like so: `lua/plugin_name/main.lua`
+
 ## Using Lua from Vimscript
 
 ### :lua
