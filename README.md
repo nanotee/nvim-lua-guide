@@ -360,7 +360,7 @@ call MyFunction()
 ]],
 true)
 
-print(result)
+print(result) -- 'hello world'
 ```
 
 ### vim.api.nvim_command()
