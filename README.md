@@ -338,6 +338,8 @@ print(vim.api.nvim_eval('v:true')) -- true
 print(vim.api.nvim_eval('v:null')) -- nil
 ```
 
+**TODO**: is it possible for `vim.api.nvim_eval()` to return a `funcref`?
+
 #### Caveats
 
 Unlike `luaeval()`, `vim.api.nvim_eval()` does not provide an implicit `_A` variable to pass data to the expression.
@@ -515,6 +517,8 @@ See also:
 - `:help :setglobal`
 - `:help global-local`
 
+**TODO**: Why does this happen? Do all buffer-local options behave this way? Might be related to [neovim/neovim#7658](https://github.com/neovim/neovim/issues/7658) and [vim/vim#2390](https://github.com/vim/vim/issues/2390)
+
 ## Managing vim internal variables
 
 ### Using api functions
@@ -544,8 +548,6 @@ See also:
 
 ## Calling Vimscript functions
 
-### vim.api.nvim_call_function()
-
 ### vim.call()
 
 ### vim.fn.{function}()
@@ -567,8 +569,10 @@ See also:
 
 <!-- TODO: Mention wrapper + pending PR -->
 
-## Defining highlights
+## Defining syntax/highlights
 
+<!-- https://github.com/neovim/neovim/issues/9876 -->
+<!-- :help nvim_buf_add_highlight -->
 <!-- mention colorbuddy.nvim -->
 
 ## Making your code more robust
