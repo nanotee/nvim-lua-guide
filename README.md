@@ -207,6 +207,67 @@ See also:
 
 ### v:lua
 
+This global Vim variable allows you to call global Lua functions directly from Vimscript. Again, Vim data types are converted to Lua types and vice versa.
+
+```vim
+call v:lua.print('Hello from Lua!')
+" 'Hello from Lua!'
+
+let scream = v:lua.string.rep('A', 10)
+echo scream
+" 'AAAAAAAAAA'
+
+call v:lua.require('mymodule').myfunction()
+
+" How about a nice statusline?
+lua << EOF
+function _G.statusline()
+    local filepath = '%f'
+    local align_section = '%='
+    local percentage_through_file = '%p%%'
+    return string.format(
+        '%s%s%s',
+        filepath,
+        align_section,
+        percentage_through_file
+    )
+end
+EOF
+
+set statusline=%!v:lua.statusline()
+
+" Also works in expression mappings
+lua << EOF
+function _G.check_back_space()
+    local col = vim.fn.col('.') - 1
+    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+        return true
+    else
+        return false
+    end
+end
+EOF
+
+inoremap <silent> <expr> <Tab>
+    \ pumvisible() ? '\<C-n>' :
+    \ v:lua.check_back_space() ? '\<Tab>' :
+    \ completion#trigger_completion()
+```
+
+See also:
+- `:help v:lua`
+- `:help v:lua-call`
+
+#### Caveats
+
+This variable can only be used to call functions. The following will always throw an error:
+
+```vim
+let LuaPrint = v:lua.print
+echo v:lua.some_global_dict['key']
+echo map([1, 2, 3], v:lua.global_callback)
+```
+
 ## Using Vimscript from Lua
 
 ## The vim namespace
