@@ -325,6 +325,23 @@ Additionally, you may find that built-in Lua functions (such as `math.max()` or 
 
 ### vim.api.nvim_eval()
 
+This function evaluates a Vimscript expression string and returns its value. Vimscript data types are automatically converted to Lua types (and vice versa).
+
+It is the Lua equivalent of the `luaeval()` function in Vimscript
+
+```lua
+-- Data types are converted correctly
+print(vim.api.nvim_eval('1 + 1')) -- 2
+print(vim.inspect(vim.api.nvim_eval('[1, 2, 3]'))) -- { 1, 2, 3 }
+print(vim.inspect(vim.api.nvim_eval('{"foo": "bar", "baz": "qux"}'))) -- { baz = "qux", foo = "bar" }
+print(vim.api.nvim_eval('v:true')) -- true
+print(vim.api.nvim_eval('v:null')) -- nil
+```
+
+#### Caveats
+
+Unlike `luaeval()`, `vim.api.nvim_eval()` does not provide an implicit `_A` variable to pass data to the expression.
+
 ### vim.api.nvim_exec()
 
 ### vim.api.nvim_command()
