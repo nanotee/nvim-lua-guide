@@ -365,7 +365,34 @@ print(result)
 
 ### vim.api.nvim_command()
 
-<!-- TODO: talk about the vim.cmd alias -->
+This function executes an ex command. It take in a string containing the command to execute.
+
+```lua
+vim.api.nvim_command('new')
+vim.api.nvim_command('wincmd H')
+vim.api.nvim_command('set nonumber')
+vim.api.nvim_command('%s/foo/bar/g')
+```
+
+Note: `vim.cmd` is a shorter alias to this function (currently not documented in `:help`)
+
+```lua
+vim.cmd('buffers')
+```
+
+#### Tips
+
+Since you have to pass strings to these functions, you often end up having to escape backslashes:
+
+```lua
+vim.cmd('%s/\\Vfoo/bar/g')
+```
+
+Literal strings are easier to use as they do not require escaping characters:
+
+```lua
+vim.cmd([[%s/\Vfoo/bar/g]])
+```
 
 ## Managing vim options
 
