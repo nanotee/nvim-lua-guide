@@ -509,7 +509,7 @@ vim.o.expandtab = true
 
 This time, you insert tabs when you first launch Neovim. Open another buffer and pressing `<Tab>` does what you expect.
 
-In short, options that are "local to buffer" have to be set like this if you want them to be global-local:
+In short, options that are "local to buffer" have to be set like this if you want the correct behavior:
 
 ```lua
 vim.bo.expandtab = true
