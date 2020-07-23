@@ -464,9 +464,12 @@ See also:
 
 #### Caveats
 
+**WARNING**: The following section if based on a few experiments I did. The docs don't seem to mention this behavior and I haven't checked the source code to verify my claims.
+**TODO**: Can anyone confirm this?
+
 If you've only ever dealt with options using the `:set` command, the behavior of some options might surprise you.
 
-Essentially, options can either be global, local to a buffer/window, or have both a global AND a local value. 
+Essentially, options can either be global, local to a buffer/window, or have both a global AND a local value.
 
 The `:setglobal` command sets the global value of an option.
 The `:setlocal` command sets the local value of an option.
