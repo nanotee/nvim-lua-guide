@@ -398,18 +398,122 @@ vim.cmd([[%s/\Vfoo/bar/g]])
 
 ### Using api functions
 
-<!-- vim.api.nvim_set_option() -->
-<!-- vim.api.nvim_get_option() -->
-<!-- vim.api.nvim_buf_set_option() -->
-<!-- vim.api.nvim_buf_get_option() -->
-<!-- vim.api.nvim_win_set_option() -->
-<!-- vim.api.nvim_win_get_option() -->
+Neovim provides a set of API functions to either set an option or get its current value:
+
+- `vim.api.nvim_set_option()`
+- `vim.api.nvim_get_option()`
+- `vim.api.nvim_buf_set_option()`
+- `vim.api.nvim_buf_get_option()`
+- `vim.api.nvim_win_set_option()`
+- `vim.api.nvim_win_get_option()`
+
+The first two functions manage global options while the last four manage options that are local to either a buffer or a window.
+
+They take a string containing the name of the option to set/get as well as the value you want to set it to.
+
+Boolean options (like `(no)number`) have to be set to either `true` or `false`:
+
+```lua
+vim.api.nvim_set_option('smarttab', false)
+print(vim.api.nvim_get_option('smarttab')) -- false
+```
+
+Unsurprisingly, string options have to be set to a string:
+
+```lua
+vim.api.nvim_set_option('selection', 'exclusive')
+print(vim.api.nvim_get_option('selection')) -- 'exclusive'
+```
+
+Same thing for number options:
+
+```lua
+vim.api.nvim_set_option('updatetime', 3000)
+print(vim.api.nvim_get_option('updatetime')) -- 3000
+```
+
+Buffer-local and window-local options also need a buffer number or a window number (using `0` will set the option for the current buffer/window):
+
+```lua
+vim.api.nvim_win_set_option(0, 'number', true)
+vim.api.nvim_buf_set_option(10, 'shiftwidth', 4)
+print(vim.api.nvim_win_get_option(0, 'number')) -- true
+print(vim.api.nvim_buf_get_option(10, 'shiftwidth')) -- 4
+```
 
 ### Using meta-accessors
 
-<!-- vim.o.{option} -->
-<!-- vim.bo.{option} -->
-<!-- vim.wo.{option} -->
+A few meta-accessors are available if you want to set options in a more "idiomatic" way. They essentially wrap the above API functions and allow you to manipulate options as if they were variables:
+
+- `vim.o.{option}`: global options
+- `vim.bo.{option}`: buffer-local options
+- `vim.wo.{option}`: window-local options
+
+```lua
+vim.o.smarttab = false
+print(vim.o.smarttab) -- false
+
+vim.bo.shiftwidth = 4
+print(vim.bo.shiftwidth) -- 4
+```
+
+See also:
+- `:help lua-vim-internal-options`
+
+#### Caveats
+
+If you've only ever dealt with options using the `:set` command, the behavior of some options might surprise you.
+
+Essentially, options can either be global, local to a buffer/window, or have both a global AND a local value. 
+
+The `:setglobal` command sets the global value of an option.
+The `:setlocal` command sets the local value of an option.
+The `:set` command sets the global AND local value of an option.
+
+Here's a handy table from `:help :setglobal`:
+
+|                 Command | global value | local value |
+| ----------------------: | :----------: | :---------: |
+|       :set option=value |     set      |     set     |
+|  :setlocal option=value |      -       |     set     |
+| :setglobal option=value |     set      |      -      |
+
+There is no equivalent to the `:set` command in Lua, you either set an option globally or locally.
+
+You might expect the `number` option to be global, but the documentation describes it as being "local to window". Such options are actually "sticky": if you set the option in a given window, it sets it for the current window and it becomes the value for every subsequent window you open.
+
+So if you were to set the option from your `init.lua`, you would do it like so:
+
+```lua
+vim.wo.number = true
+```
+
+Options that are "local to buffer" like `shiftwidth`, `expandtab` or `undofile`  are even more confusing. Let's say your `init.lua` contains the following code:
+
+```lua
+vim.bo.expandtab = true
+```
+
+When you launch Neovim and start editing, everything is fine: pressing `<Tab>` inserts spaces instead of a tab character. Open another buffer and you're suddenly back to tabs...
+
+Setting it globally has the opposite problem:
+
+```lua
+vim.o.expandtab = true
+```
+
+This time, you insert tabs when you first launch Neovim. Open another buffer and pressing `<Tab>` does what you expect.
+
+In short, options that are "local to buffer" have to be set like this if you want them to be global-local:
+
+```lua
+vim.bo.expandtab = true
+vim.o.expandtab = true
+```
+
+See also:
+- `:help :setglobal`
+- `:help global-local`
 
 ## Managing vim internal variables
 
