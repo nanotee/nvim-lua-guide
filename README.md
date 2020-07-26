@@ -402,14 +402,15 @@ vim.cmd([[%s/\Vfoo/bar/g]])
 
 Neovim provides a set of API functions to either set an option or get its current value:
 
-- `vim.api.nvim_set_option()`
-- `vim.api.nvim_get_option()`
-- `vim.api.nvim_buf_set_option()`
-- `vim.api.nvim_buf_get_option()`
-- `vim.api.nvim_win_set_option()`
-- `vim.api.nvim_win_get_option()`
-
-The first two functions manage global options while the last four manage options that are local to either a buffer or a window.
+- Global options:
+    - `vim.api.nvim_set_option()`
+    - `vim.api.nvim_get_option()`
+- Buffer-local options:
+    - `vim.api.nvim_buf_set_option()`
+    - `vim.api.nvim_buf_get_option()`
+- Window-local options:
+    - `vim.api.nvim_win_set_option()`
+    - `vim.api.nvim_win_get_option()`
 
 They take a string containing the name of the option to set/get as well as the value you want to set it to.
 
@@ -434,7 +435,7 @@ vim.api.nvim_set_option('updatetime', 3000)
 print(vim.api.nvim_get_option('updatetime')) -- 3000
 ```
 
-Buffer-local and window-local options also need a buffer number or a window number (using `0` will set the option for the current buffer/window):
+Buffer-local and window-local options also need a buffer number or a window number (using `0` will set/get the option for the current buffer/window):
 
 ```lua
 vim.api.nvim_win_set_option(0, 'number', true)
@@ -533,28 +534,92 @@ See also:
 
 ### Using api functions
 
-<!-- vim.api.nvim_set_var() -->
-<!-- vim.api.nvim_get_var() -->
-<!-- vim.api.nvim_del_var() -->
-<!-- vim.api.nvim_buf_set_var() -->
-<!-- vim.api.nvim_buf_get_var() -->
-<!-- vim.api.nvim_buf_del_var() -->
-<!-- vim.api.nvim_win_set_var() -->
-<!-- vim.api.nvim_win_get_var() -->
-<!-- vim.api.nvim_win_del_var() -->
-<!-- vim.api.nvim_tabpage_set_var() -->
-<!-- vim.api.nvim_tabpage_get_var() -->
-<!-- vim.api.nvim_tabpage_del_var() -->
-<!-- vim.api.nvim_set_vvar() -->
-<!-- vim.api.nvim_get_vvar() -->
+Much like options, internal variables have their own set of API functions:
+
+- Global variables (`g:`):
+    - `vim.api.nvim_set_var()`
+    - `vim.api.nvim_get_var()`
+    - `vim.api.nvim_del_var()`
+- Buffer variables (`b:`):
+    - `vim.api.nvim_buf_set_var()`
+    - `vim.api.nvim_buf_get_var()`
+    - `vim.api.nvim_buf_del_var()`
+- Window variables (`w:`):
+    - `vim.api.nvim_win_set_var()`
+    - `vim.api.nvim_win_get_var()`
+    - `vim.api.nvim_win_del_var()`
+- Tabpage variables (`t:`):
+    - `vim.api.nvim_tabpage_set_var()`
+    - `vim.api.nvim_tabpage_get_var()`
+    - `vim.api.nvim_tabpage_del_var()`
+- Predefined Vim variables (`v:`):
+    - `vim.api.nvim_set_vvar()`
+    - `vim.api.nvim_get_vvar()`
+
+With the exception of predefined Vim variables, they can also be deleted (the `:unlet` command is the equivalent in Vimscript). Local variables (`l:`), script variables (`s:`) and function arguments (`a:`) cannot be manipulated as they only make sense in the context of a Vim script, Lua has its own scoping rules.
+
+If you are unfamiliar with what these variables do, `:help internal-variables` describes them in detail.
+
+These functions take a string containing the name of the variable to set/get/delete as well as the value you want to set it to.
+
+```lua
+vim.api.nvim_set_var('some_global_variable', { key1 = 'value', key2 = 300 })
+print(vim.inspect(vim.api.nvim_get_var('some_global_variable'))) -- { key1 = "value", key2 = 300 }
+vim.api.nvim_del_var('some_global_variable')
+```
+
+Variables that are scoped to a buffer, a window or a tabpage also receive a number (using `0` will set/get/delete the variable for the current buffer/window/tabpage):
+
+```lua
+vim.api.nvim_win_set_var(0, 'some_window_variable', 2500)
+vim.api.nvim_tab_set_var(3, 'some_tabpage_variable', 'hello world')
+print(vim.api.nvim_win_get_var(0, 'some_window_variable')) -- 2500
+print(vim.api.nvim_buf_get_var(3, 'some_tabpage_variable')) -- 'hello world'
+vim.api.nvim_win_del_var(0, 'some_window_variable')
+vim.api.nvim_buf_del_var(3, 'some_tabpage_variable')
+```
 
 ### Using meta-accessors
 
-<!-- vim.g.{name} -->
-<!-- vim.b.{name} -->
-<!-- vim.w.{name} -->
-<!-- vim.t.{name} -->
-<!-- vim.v.{name} -->
+Internal variables can be manipulated more intuitively using these meta-accessors:
+
+- `vim.g.{name}`: global variables
+- `vim.b.{name}`: buffer variables
+- `vim.w.{name}`: window variables
+- `vim.t.{name}`: tabpage variables
+- `vim.v.{name}`: predefined Vim variables
+
+```lua
+vim.g.some_global_variable = {
+    key1 = 'value',
+    key2 = 300
+}
+
+print(vim.inspect(vim.g.some_global_variable)) -- { key1 = "value", key2 = 300 }
+```
+
+To delete one of these variables, simply assign `nil` to it:
+
+```lua
+vim.g.some_global_variable = nil
+```
+
+#### Caveats
+
+Unlike options meta-accessors, you cannot specify a number for buffer/window/tabpage-scoped variables.
+
+Additionally, you cannot add/update/delete keys from a dictionary stored in one of these variables. For example, this snippet of Vimscript code does not work as expected:
+
+```vim
+let g:variable = {}
+lua vim.g.variable.key = 'a'
+echo g:variable
+" {}
+```
+
+This is a known issue:
+
+- [Issue #12544](https://github.com/neovim/neovim/issues/12544)
 
 ## Calling Vimscript functions
 
