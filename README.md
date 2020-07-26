@@ -376,7 +376,7 @@ vim.api.nvim_command('set nonumber')
 vim.api.nvim_command('%s/foo/bar/g')
 ```
 
-Note: `vim.cmd` is a shorter alias to this function (currently not documented in `:help`)
+Note: `vim.cmd` is a shorter alias for this function (currently not documented in `:help`)
 
 ```lua
 vim.cmd('buffers')
@@ -427,7 +427,7 @@ vim.api.nvim_set_option('selection', 'exclusive')
 print(vim.api.nvim_get_option('selection')) -- 'exclusive'
 ```
 
-Same thing for number options:
+Number options accept a number:
 
 ```lua
 vim.api.nvim_set_option('updatetime', 3000)
@@ -492,7 +492,7 @@ Here's a handy table from `:help :setglobal`:
 
 There is no equivalent to the `:set` command in Lua, you either set an option globally or locally.
 
-You might expect the `number` option to be global, but the documentation describes it as being "local to window". Such options are actually "sticky": if you set the option in a given window, it sets it for the current window and it becomes the value for every subsequent window you open.
+You might expect the `number` option to be global, but the documentation describes it as being "local to window". Such options are actually "sticky": their value is copied over from the current window when you open a new one.
 
 So if you were to set the option from your `init.lua`, you would do it like so:
 
