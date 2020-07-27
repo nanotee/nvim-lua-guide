@@ -793,7 +793,19 @@ The syntax API is still a work in progress. Here are a couple of pointers:
 - [Luv documentation](https://github.com/luvit/luv/blob/master/docs.md)
 - [teukka.tech - Using LibUV in Neovim](https://teukka.tech/vimloop.html)
 
+See also:
+- `:help vim.loop`
+
 ### vim.lsp
+
+`vim.lsp` is the module that controls the built-in LSP client. The [neovim/nvim-lsp](https://github.com/neovim/nvim-lsp/) repository contains default configurations for popular language servers.
+
+You may also want to take a look at plugins built around the LSP client:
+- [nvim-lua/completion-nvim](https://github.com/nvim-lua/completion-nvim)
+- [nvim-lua/diagnostic-nvim](https://github.com/nvim-lua/diagnostic-nvim)
+
+See also:
+- `:help vim.lsp`
 
 ### vim.treesitter
 
