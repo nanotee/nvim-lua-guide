@@ -805,9 +805,16 @@ You may also want to take a look at plugins built around the LSP client:
 - [nvim-lua/diagnostic-nvim](https://github.com/nvim-lua/diagnostic-nvim)
 
 See also:
-- `:help vim.lsp`
+- `:help lsp`
 
 ### vim.treesitter
+
+`vim.treesitter` is the module that controls the integration of the [Tree-sitter](https://tree-sitter.github.io/tree-sitter/) library in Neovim. If you want to know more about Tree-sitter, you may be interested in this [presentation (38:37)](https://www.youtube.com/watch?v=Jes3bD6P0To).
+
+The [nvim-treesitter](https://github.com/nvim-treesitter/) organisation hosts various plugins taking advantage of the library.
+
+See also:
+- `:help lua-treesitter`
 
 <!-- TODO: add interesting projects (transpilers) -->
 <!-- https://github.com/svermeulen/nvim-moonmaker -->
