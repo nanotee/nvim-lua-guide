@@ -726,17 +726,27 @@ vim.api.nvim_buf_set_keymap(0, '', 'cc', 'line(".") == 1 ? "cc" : "ggcc"', { nor
 
 ## Defining user commands
 
-<!-- https://github.com/neovim/neovim/pull/11613 -->
+There is currently no interface to create user commands in Lua. It is planned, though:
+
+- [Pull request #11613](https://github.com/neovim/neovim/pull/11613)
+
+For the time being, you're probably better off creating commands in Vimscript.
 
 ## Defining autocommands
 
-<!-- TODO: Mention wrapper + pending PR -->
+Augroups and autocommands do not have an interface yet but it is being worked on:
+
+- [Pull request #12378](https://github.com/neovim/neovim/pull/12378)
+
+In the meantime, you can either create autocommands in Vimscript or use [this wrapper from norcalli/nvim_utils](https://github.com/norcalli/nvim_utils/blob/master/lua/nvim_utils.lua#L554-L567)
 
 ## Defining syntax/highlights
 
-<!-- https://github.com/neovim/neovim/issues/9876 -->
-<!-- :help nvim_buf_add_highlight -->
-<!-- mention colorbuddy.nvim -->
+The syntax API is still a work in progress. Here are a couple of pointers:
+
+- [Issue #9876](https://github.com/neovim/neovim/issues/9876)
+- [tjdevries/colorbuddy.vim, a library for creating colorschemes in Lua](https://github.com/tjdevries/colorbuddy.vim)
+- `:help lua-treesitter`
 
 ## Making your code more robust
 
