@@ -776,11 +776,12 @@ The syntax API is still a work in progress. Here are a couple of pointers:
 - [tjdevries/colorbuddy.vim, a library for creating colorschemes in Lua](https://github.com/tjdevries/colorbuddy.vim)
 - `:help lua-treesitter`
 
-## Making your code more robust
+## General tips and recommendations
 
-### vim.validate()
-
-### Unit tests
+**TODO**:
+- vim.validate()?
+- Add stuff about unit tests? I know Neovim uses the [busted](http://olivinelabs.com/busted/) framework, but I don't know how to use it for plugins
+- Best practices? I'm not a Lua wizard so I wouldn't know
 
 ## Miscellaneous
 
