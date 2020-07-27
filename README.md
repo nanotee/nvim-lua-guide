@@ -724,6 +724,34 @@ vim.api.nvim_buf_set_keymap(0, '', 'cc', 'line(".") == 1 ? "cc" : "ggcc"', { nor
 -- :noremap <buffer> <expr> cc line('.') == 1 ? 'cc' : 'ggcc'
 ```
 
+`vim.api.nvim_get_keymap()` takes a string containing the shortname of the mode for which you want the list of mappings (see table above). The return value is a table containing all global mappings for the mode.
+
+```lua
+print(vim.inspect(vim.api.nvim_get_keymap('n')))
+-- :verbose nmap
+```
+
+`vim.api.nvim_buf_get_keymap()` takes an additional buffer number as its first argument (`0` will get mapppings for the current bufffer)
+
+```lua
+print(vim.inspect(vim.api.nvim_buf_get_keymap(0, 'i')))
+-- :verbose imap <buffer>
+```
+
+`vim.api.nvim_del_keymap()` takes a mode and the left-hand side of a mapping.
+
+```lua
+vim.api.nvim_del_keymap('n', '<leader><Space>')
+-- :nunmap <leader><Space>
+```
+
+Again, `vim.api.nvim_buf_del_keymap()`, takes a buffer number as its first argument, with `0` representing the current buffer.
+
+```lua
+vim.api.nvim_buf_del_keymap(0, 'i', '<Tab>')
+-- :iunmap <buffer> <Tab>
+```
+
 ## Defining user commands
 
 There is currently no interface to create user commands in Lua. It is planned, though:
