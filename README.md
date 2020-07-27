@@ -625,7 +625,45 @@ This is a known issue:
 
 ### vim.call()
 
+`vim.call()` calls a Vimscript function. This can either be a built-in Vim function or a user function. Again, data types are converted back and forth from Lua to Vimscript.
+
+It takes in the name of the function followed by the arguments you want to pass to that function:
+
+```lua
+print(vim.call('printf', 'Hello from %s', 'Lua'))
+
+local reversed_list = vim.call('reverse', { 'a', 'b', 'c' })
+print(vim.inspect(reversed_list)) -- { "c", "b", "a" }
+
+vim.call('my#autoload#function')
+```
+
+See also:
+- `:help vim.call()`
+
 ### vim.fn.{function}()
+
+`vim.fn` does the exact same thing as `vim.call()`, but looks more like a native Lua function call:
+
+```lua
+print(vim.fn.printf('Hello from %s', 'Lua'))
+
+local reversed_list = vim.fn.reverse({ 'a', 'b', 'c' })
+print(vim.inspect(reversed_list)) -- { "c", "b", "a" }
+```
+
+Hashes `#` aren't valid characters for indentifiers in Lua, so autoload functions have to be called with this syntax:
+
+```lua
+vim.fn['my#autoload#function']()
+```
+
+See also:
+- `:help vim.fn`
+
+#### Tips
+
+Neovim has an extensive library of powerful built-in functions that are very useful for plugins. See `:help vim-function` for an alphabetical list and `:help function-list` for a list of functions grouped by topic.
 
 ## Defining mappings
 
