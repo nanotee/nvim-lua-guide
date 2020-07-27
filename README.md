@@ -816,12 +816,21 @@ The [nvim-treesitter](https://github.com/nvim-treesitter/) organisation hosts va
 See also:
 - `:help lua-treesitter`
 
-<!-- TODO: add interesting projects (transpilers) -->
-<!-- https://github.com/svermeulen/nvim-moonmaker -->
-<!-- https://github.com/Olical/aniseed -->
-<!-- https://github.com/Olical/conjure -->
-<!-- https://github.com/TypeScriptToLua/TypeScriptToLua -->
-<!-- https://github.com/teal-language/tl -->
-<!-- https://haxe.org/ -->
-<!-- https://github.com/SwadicalRag/wasm2lua -->
-<!-- https://github.com/hengestone/lua-languages -->
+### Transpilers
+
+One advantage of using Lua is that you don't actually have to write Lua code! There is a multitude of transpilers available for the language.
+
+- [Moonscript](https://moonscript.org/)
+
+Probably one of the most well-known transpilers for Lua. Adds a lots of convenient features like classes, list comprehensions or function literals. The [svermeulen/nvim-moonmaker](https://github.com/svermeulen/nvim-moonmaker) plugin allows you to write Neovim plugins and configuration directly in Moonscript.
+
+- [Fennel](https://fennel-lang.org/)
+
+A lisp that compiles to Lua. You can write configuration and plugins for Neovim in Fennel with the [Olical/aniseed](https://github.com/Olical/aniseed) plugin. Additionally, the [Olical/conjure](https://github.com/Olical/conjure) plugin provides an interactive development environment that supports Fennel (among other languages).
+
+Other interesting projects:
+- [TypeScriptToLua/TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua)
+- [teal-language/tl](https://github.com/teal-language/tl)
+- [Haxe](https://haxe.org/)
+- [SwadicalRag/wasm2lua](https://github.com/SwadicalRag/wasm2lua)
+- [hengestone/lua-languages](https://github.com/hengestone/lua-languages)
