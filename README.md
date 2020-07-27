@@ -780,15 +780,18 @@ The syntax API is still a work in progress. Here are a couple of pointers:
 
 **TODO**:
 - vim.validate()?
-- Add stuff about unit tests? I know Neovim uses the [busted](http://olivinelabs.com/busted/) framework, but I don't know how to use it for plugins
+- Add stuff about unit tests? I know Neovim uses the [busted](https://olivinelabs.com/busted/) framework, but I don't know how to use it for plugins
 - Best practices? I'm not a Lua wizard so I wouldn't know
 
 ## Miscellaneous
 
 ### vim.loop
 
-<!-- TODO: Mention libuv docs + luvit api -->
-<!-- https://teukka.tech/vimloop.html -->
+`vim.loop` is the module that exposes the LibUV API. Some resources:
+
+- [Official documentation for LibUV](https://docs.libuv.org/en/v1.x/)
+- [Luv documentation](https://github.com/luvit/luv/blob/master/docs.md)
+- [teukka.tech - Using LibUV in Neovim](https://teukka.tech/vimloop.html)
 
 ### vim.lsp
 
