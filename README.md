@@ -679,12 +679,50 @@ Neovim has an extensive library of powerful built-in functions that are very use
 
 ## Defining mappings
 
-<!-- nvim_set_keymap() -->
-<!-- nvim_get_keymap() -->
-<!-- nvim_del_keymap() -->
-<!-- nvim_buf_set_keymap() -->
-<!-- nvim_buf_get_keymap() -->
-<!-- nvim_buf_del_keymap() -->
+Neovim provides a list of API functions to set, get and delete mappings:
+
+- Global mappings:
+    - `vim.api.nvim_set_keymap()`
+    - `vim.api.nvim_get_keymap()`
+    - `vim.api.nvim_del_keymap()`
+- Buffer-local mappings:
+    - `vim.api.nvim_buf_set_keymap()`
+    - `vim.api.nvim_buf_get_keymap()`
+    - `vim.api.nvim_buf_del_keymap()`
+
+Let's start with `vim.api.nvim_set_keymap()` and `vim.api.nvim_buf_set_keymap()`
+
+The first argument passed to the function is a string containing the name of the mode for which the mapping will take effect:
+
+| String value           | Help page     | Affected modes                           | Vimscript equivalent |
+| ---------------------- | ------------- | ---------------------------------------- | -------------------- |
+| `''` (an empty string) | `mapmode-nvo` | Normal, Visual, Select, Operator-pending | `:map`               |
+| `'n'`                  | `mapmode-n`   | Normal                                   | `:nmap`              |
+| `'v'`                  | `mapmode-v`   | Visual and Select                        | `:vmap`              |
+| `'s'`                  | `mapmode-s`   | Select                                   | `:smap`              |
+| `'x'`                  | `mapmode-x`   | Visual                                   | `:xmap`              |
+| `'o'`                  | `mapmode-o`   | Operator-pending                         | `:omap`              |
+| `'!'`                  | `mapmode-ic`  | Insert and Command-line                  | `:map!`              |
+| `'i'`                  | `mapmode-i`   | Insert                                   | `:imap`              |
+| `'l'`                  | `mapmode-l`   | Insert, Command-line, Lang-Arg           | `:lmap`              |
+| `'c'`                  | `mapmode-c`   | Command-line                             | `:cmap`              |
+| `'t'`                  | `mapmode-t`   | Terminal                                 | `:tmap`              |
+
+The second argument is a string containing the left-hand side of the mapping (the key or set of keys that trigger the command defined in the mapping). An empty string is equivalent to `<Nop>`, which disables a key.
+
+The third argument is a string containing the right-hand side of the mapping (the command to execute).
+
+The final argument is a table containing boolean options for the mapping as defined in `:help :map-arguments` (including `noremap` and excluding `buffer`).
+
+Buffer-local mappings also take a buffer number as their first argument (`0` sets the mapping for the current buffer).
+
+```lua
+vim.api.nvim_set_keymap('n', '<leader><Space>', ':set hlsearch!<CR>', { noremap = true, silent = true })
+-- :nnoremap <silent> <leader><Space> :set hlsearch<CR>
+
+vim.api.nvim_buf_set_keymap(0, '', 'cc', 'line(".") == 1 ? "cc" : "ggcc"', { noremap = true, expr = true })
+-- :noremap <buffer> <expr> cc line('.') == 1 ? 'cc' : 'ggcc'
+```
 
 ## Defining user commands
 
