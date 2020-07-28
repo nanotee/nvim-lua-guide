@@ -779,9 +779,11 @@ The syntax API is still a work in progress. Here are a couple of pointers:
 ## General tips and recommendations
 
 **TODO**:
-- vim.validate()?
+- Hot-reloading of modules
+- `vim.validate()`?
 - Add stuff about unit tests? I know Neovim uses the [busted](https://olivinelabs.com/busted/) framework, but I don't know how to use it for plugins
 - Best practices? I'm not a Lua wizard so I wouldn't know
+- How to use LuaRocks packages ([wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)?)
 
 ## Miscellaneous
 
