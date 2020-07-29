@@ -785,6 +785,7 @@ The syntax API is still a work in progress. Here are a couple of pointers:
 - Best practices? I'm not a Lua wizard so I wouldn't know
 - How to use LuaRocks packages ([wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)?)
 - Companion plugins like [bfredl/nvim-luadev](https://github.com/bfredl/nvim-luadev) and [rafcamlet/nvim-luapad](https://github.com/rafcamlet/nvim-luapad)
+- This plugin: [tjdevries/nlua.nvim](https://github.com/tjdevries/nlua.nvim)
 
 ## Miscellaneous
 
