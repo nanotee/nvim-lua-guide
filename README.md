@@ -677,6 +677,24 @@ See also:
 
 Neovim has an extensive library of powerful built-in functions that are very useful for plugins. See `:help vim-function` for an alphabetical list and `:help function-list` for a list of functions grouped by topic.
 
+#### Caveats
+
+Some Vim functions that should return a boolean return `1` or `0` instead. This isn't a problem in Vimscript as `1` is truthy and `0` falsy, enabling constructs like these:
+
+```vim
+if has('nvim')
+    " do something...
+endif
+```
+
+In Lua however, only `false` and `nil` are considered falsy, numbers always evaluate to `true` no matter their value. You have to explicitly check for `1` or `0`:
+
+```lua
+if vim.fn.has('nvim') == 1 then
+    -- do something...
+end
+```
+
 ## Defining mappings
 
 Neovim provides a list of API functions to set, get and delete mappings:
