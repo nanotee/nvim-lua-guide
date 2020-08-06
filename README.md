@@ -319,7 +319,7 @@ dump({1, 2, 3})
 ```
 
 
-Additionally, you may find that built-in Lua functions (such as `math.max()` or `string.rep()`) are sometimes lacking compared to what you would find in other languages (for example `os.clock()` only returns a value in seconds, not milliseconds). Be sure to look at the Neovim stdlib (and `vim.fn`, more on that later), it probably has what you're looking for.
+Additionally, you may find that built-in Lua functions are sometimes lacking compared to what you would find in other languages (for example `os.clock()` only returns a value in seconds, not milliseconds). Be sure to look at the Neovim stdlib (and `vim.fn`, more on that later), it probably has what you're looking for.
 
 ## Using Vimscript from Lua
 
@@ -351,19 +351,20 @@ This function evaluates a chunk of Vimscript code. It takes in a string containi
 ```lua
 local result = vim.api.nvim_exec(
 [[
-let text = 'hello world'
-echo text
+let mytext = 'hello world'
 
-function! MyFunction()
-    " do something inside this function
+function! MyFunction(text)
+    echo a:text
 endfunction
 
-call MyFunction()
+call MyFunction(mytext)
 ]],
 true)
 
 print(result) -- 'hello world'
 ```
+
+**TODO**: The docs say that script-scope (`s:`) is supported, but running this snippet with a script-scoped variable throws an error. Why?
 
 ### vim.api.nvim_command()
 
