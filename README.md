@@ -198,6 +198,10 @@ echo LuaMathPow(2, 2)
 " 4
 let LuaModuleFunction = luaeval('require("mymodule").myfunction')
 call LuaModuleFunction()
+
+" It is also possible to pass Lua functions as values to Vim functions
+lua X = function(k, v) return string.format("%s:%s", k, v) end
+echo map([1, 2, 3], luaeval("X"))
 ```
 
 `luaeval()` takes an optional second argument that allows you to pass data to the expression. You can then access that data from Lua using the magic global `_A`:
