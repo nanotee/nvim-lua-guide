@@ -160,6 +160,25 @@ See also:
 
 - `:help :luafile`
 
+#### luafile vs require():
+
+You might be wondering what the difference between `lua require()` and `luafile` is and whether you should use one over the other. They have different use cases:
+
+- `require()`:
+    - is a built-in Lua function. It allows you to take advantage of Lua's module system
+    - searches for modules using the `package.path` variable (as noted earlier, you can `require()` Lua scripts located inside the `lua/` folder in your `runtimepath`)
+    - keeps track of what modules have been loaded and prevents a script from being parsed and executed a second time. If you change the file containing the code for a module and try to `require()` it a second time while Neovim is running, the module will not actually update
+- `:luafile`:
+    - is an Ex command. It does not support modules
+    - takes a path that is either absolute or relative to the working directory of the current window
+    - executes the contents of a script regardless of whether it has been executed before
+
+`:luafile` can also be useful if you want run a Lua file you are working on:
+
+```vim
+:luafile %
+```
+
 ### luaeval()
 
 This built-in Vimscript function evaluates a Lua expression string and returns its value. Lua data types are automatically converted to Vimscript types (and vice versa).
