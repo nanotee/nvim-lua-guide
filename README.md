@@ -844,7 +844,7 @@ See also:
 
 ### vim.lsp
 
-`vim.lsp` is the module that controls the built-in LSP client. The [neovim/nvim-lsp](https://github.com/neovim/nvim-lsp/) repository contains default configurations for popular language servers.
+`vim.lsp` is the module that controls the built-in LSP client. The [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/) repository contains default configurations for popular language servers.
 
 You may also want to take a look at plugins built around the LSP client:
 - [nvim-lua/completion-nvim](https://github.com/nvim-lua/completion-nvim)
