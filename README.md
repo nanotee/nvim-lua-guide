@@ -400,7 +400,7 @@ vim.api.nvim_command('set nonumber')
 vim.api.nvim_command('%s/foo/bar/g')
 ```
 
-Note: `vim.cmd` is a shorter alias for this function (currently not documented in `:help`)
+Note: `vim.cmd` is a shorter alias for this function
 
 ```lua
 vim.cmd('buffers')
