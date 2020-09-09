@@ -34,7 +34,7 @@ Lua files are typically found inside a `lua/` folder in your `runtimepath` (for 
 
 Let's take the following folder structure as an example:
 
-```
+```text
 📂 ~/.config/nvim
 ├── 📁 after
 ├── 📁 ftplugin
