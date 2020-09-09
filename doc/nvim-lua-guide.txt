@@ -905,32 +905,19 @@ Let's start with `vim.api.nvim_set_keymap()` and
 The first argument passed to the function is a string containing the
 name of the mode for which the mapping will take effect:
 
-| String value		 | Help page	 | Affected modes
-| Vimscript equivalent |
-| ---------------------- | ------------- |
----------------------------------------- | -------------------- |
-| `''` (an empty string) | `mapmode-nvo` | Normal, Visual, Select,
-Operator-pending | `:map`		|
-| `'n'`			 | `mapmode-n`	 | Normal
-| `:nmap`	       |
-| `'v'`			 | `mapmode-v`	 | Visual and Select
-| `:vmap`	       |
-| `'s'`			 | `mapmode-s`	 | Select
-| `:smap`	       |
-| `'x'`			 | `mapmode-x`	 | Visual
-| `:xmap`	       |
-| `'o'`			 | `mapmode-o`	 | Operator-pending
-| `:omap`	       |
-| `'!'`			 | `mapmode-ic`  | Insert and Command-line
-| `:map!`	       |
-| `'i'`			 | `mapmode-i`	 | Insert
-| `:imap`	       |
-| `'l'`			 | `mapmode-l`	 | Insert, Command-line, Lang-Arg
-| `:lmap`	       |
-| `'c'`			 | `mapmode-c`	 | Command-line
-| `:cmap`	       |
-| `'t'`			 | `mapmode-t`	 | Terminal
-| `:tmap`	       |
+| String value           | Help page     | Affected modes                           | Vimscript equivalent |
+| ---------------------- | ------------- | ---------------------------------------- | -------------------- |
+| `''` (an empty string) | `mapmode-nvo` | Normal, Visual, Select, Operator-pending | `:map`               |
+| `'n'`                  | `mapmode-n`   | Normal                                   | `:nmap`              |
+| `'v'`                  | `mapmode-v`   | Visual and Select                        | `:vmap`              |
+| `'s'`                  | `mapmode-s`   | Select                                   | `:smap`              |
+| `'x'`                  | `mapmode-x`   | Visual                                   | `:xmap`              |
+| `'o'`                  | `mapmode-o`   | Operator-pending                         | `:omap`              |
+| `'!'`                  | `mapmode-ic`  | Insert and Command-line                  | `:map!`              |
+| `'i'`                  | `mapmode-i`   | Insert                                   | `:imap`              |
+| `'l'`                  | `mapmode-l`   | Insert, Command-line, Lang-Arg           | `:lmap`              |
+| `'c'`                  | `mapmode-c`   | Command-line                             | `:cmap`              |
+| `'t'`                  | `mapmode-t`   | Terminal                                 | `:tmap`              |
 
 The second argument is a string containing the left-hand side of the
 mapping (the key or set of keys that trigger the command defined in the
