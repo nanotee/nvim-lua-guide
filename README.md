@@ -33,6 +33,11 @@ A few tutorials have already been written to help people write plugins in Lua. S
 - [Vimpeccable](https://github.com/svermeulen/vimpeccable) - Plugin to help write your .vimrc in Lua
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) - All the lua functions I don't want to write twice
 - [popup.nvim](https://github.com/nvim-lua/popup.nvim) - An implementation of the Popup API from vim in Neovim
+- [nvim_utils](https://github.com/norcalli/nvim_utils)
+- [nvim-luadev](https://github.com/bfredl/nvim-luadev) - REPL/debug console for nvim lua plugins 
+- [nvim-luapad](https://github.com/rafcamlet/nvim-luapad) - Interactive real time neovim scratchpad for embedded lua engine
+- [nlua.nvim](https://github.com/tjdevries/nlua.nvim) - Lua Development for Neovim 
+- [BetterLua.vim](https://github.com/euclidianAce/BetterLua.vim) - Better Lua syntax highlighting in Vim/NeoVim 
 
 ## Where to put Lua files
 
@@ -832,8 +837,6 @@ The syntax API is still a work in progress. Here are a couple of pointers:
 - Add stuff about unit tests? I know Neovim uses the [busted](https://olivinelabs.com/busted/) framework, but I don't know how to use it for plugins
 - Best practices? I'm not a Lua wizard so I wouldn't know
 - How to use LuaRocks packages ([wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)?)
-- Companion plugins like [bfredl/nvim-luadev](https://github.com/bfredl/nvim-luadev) and [rafcamlet/nvim-luapad](https://github.com/rafcamlet/nvim-luapad)
-- This plugin: [tjdevries/nlua.nvim](https://github.com/tjdevries/nlua.nvim)
 
 ## Miscellaneous
 

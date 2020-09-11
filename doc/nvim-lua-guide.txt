@@ -53,6 +53,24 @@ https://www.2n.pl/blog/how-to-make-ui-for-neovim-plugins-in-lua
 -  ms-jpq - Neovim Async Tutorial:
 https://ms-jpq.github.io/neovim-async-tutorial/
 
+Companion plugins~
+
+-  Vimpeccable: https://github.com/svermeulen/vimpeccable  - Plugin to
+help write your .vimrc in Lua
+-  plenary.nvim: https://github.com/nvim-lua/plenary.nvim  - All the
+lua functions I don't want to write twice
+-  popup.nvim: https://github.com/nvim-lua/popup.nvim  - An implementation
+of the Popup API from vim in Neovim
+-  nvim_utils: https://github.com/norcalli/nvim_utils
+-  nvim-luadev: https://github.com/bfredl/nvim-luadev  - REPL/debug
+console for nvim lua plugins
+-  nvim-luapad: https://github.com/rafcamlet/nvim-luapad  - Interactive
+real time neovim scratchpad for embedded lua engine
+-  nlua.nvim: https://github.com/tjdevries/nlua.nvim  - Lua Development
+for Neovim
+-  BetterLua.vim: https://github.com/euclidianAce/BetterLua.vim  -
+Better Lua syntax highlighting in Vim/NeoVim
+
 ==============================================================================
 WHERE TO PUT LUA FILES
                                                *luaguide-where-to-put-lua-files*
@@ -498,8 +516,7 @@ the command to execute.
     vim.api.nvim_command('%s/foo/bar/g')
 <
 
-Note: `vim.cmd` is a shorter alias for this function (currently not
-documented in `:help`)
+Note: `vim.cmd` is a shorter alias for this function
 
     >
     vim.cmd('buffers')
@@ -1025,11 +1042,6 @@ it for plugins
 - Best practices? I'm not a Lua wizard so I wouldn't know
 - How to use LuaRocks packages	 wbthomason/packer.nvim:
 https://github.com/wbthomason/packer.nvim ?
-- Companion plugins like  bfredl/nvim-luadev:
-https://github.com/bfredl/nvim-luadev  and  rafcamlet/nvim-luapad:
-https://github.com/rafcamlet/nvim-luapad
-- This plugin:	tjdevries/nlua.nvim:
-https://github.com/tjdevries/nlua.nvim
 
 ==============================================================================
 MISCELLANEOUS
