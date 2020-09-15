@@ -117,7 +117,7 @@ Similarly, loading `other_modules/anothermodule.lua` is done like so:
 Path separators are denoted by either a dot `.` or a slash `/`.
 
 A folder containing an `init.lua` file can be required directly, without
-have to specify the name of the file.
+having to specify the name of the file.
 
     >
     require('other_modules') -- loads other_modules/init.lua
