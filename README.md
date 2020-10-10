@@ -122,6 +122,10 @@ lua require('bar')
 
 Appending `!` to `packadd` means Neovim will put the package in the `runtimepath` without sourcing any scripts in its `plugin` or `ftdetect` directory.
 
+See also:
+- `:help :packadd`
+- [Issue #11409](https://github.com/neovim/neovim/issues/11409)
+
 ## Using Lua from Vimscript
 
 ### :lua
