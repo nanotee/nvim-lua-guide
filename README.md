@@ -1,5 +1,5 @@
 # Getting started using Lua in Neovim
-
+[🇨🇳 Chinese version](https://github.com/glepnir/nvim-lua-guide-zh)
 ## Table of Contents
 
 * [Introduction](#introduction)
