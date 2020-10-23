@@ -1,6 +1,70 @@
 *nvim-lua-guide.txt*  Getting started using Lua in Neovim
 
 ==============================================================================
+TRANSLATIONS
+                                                         *luaguide-translations*
+
+-  🇨🇳 Chinese version: https://github.com/glepnir/nvim-lua-guide-zh
+-  🇧🇷 Portuguese version:
+https://github.com/npxbr/nvim-lua-guide/blob/master/README.pt-br.md
+
+==============================================================================
+TABLE OF CONTENTS
+                                                    *luaguide-table-of-contents*
+
+* [Introduction](#introduction)
+   * [Learning Lua](#learning-lua)
+   * [Existing tutorials for writing Lua in
+   Neovim](#existing-tutorials-for-writing-lua-in-neovim)
+   * [Companion plugins](#companion-plugins)
+* [Where to put Lua files](#where-to-put-lua-files)
+      * [Caveats](#caveats)
+      * [Tips](#tips)
+      * [A note about packages](#a-note-about-packages)
+* [Using Lua from Vimscript](#using-lua-from-vimscript)
+   * [:lua](#lua)
+   * [:luado](#luado)
+   * [:luafile](#luafile)
+      * [luafile vs require():](#luafile-vs-require)
+   * [luaeval()](#luaeval)
+   * [v:lua](#vlua)
+      * [Caveats](#caveats-1)
+   * [Tips](#tips-1)
+* [The vim namespace](#the-vim-namespace)
+      * [Tips](#tips-2)
+* [Using Vimscript from Lua](#using-vimscript-from-lua)
+   * [vim.api.nvim_eval()](#vimapinvim_eval)
+      * [Caveats](#caveats-2)
+   * [vim.api.nvim_exec()](#vimapinvim_exec)
+   * [vim.api.nvim_command()](#vimapinvim_command)
+      * [Tips](#tips-3)
+* [Managing vim options](#managing-vim-options)
+   * [Using api functions](#using-api-functions)
+   * [Using meta-accessors](#using-meta-accessors)
+      * [Caveats](#caveats-3)
+* [Managing vim internal variables](#managing-vim-internal-variables)
+   * [Using api functions](#using-api-functions-1)
+   * [Using meta-accessors](#using-meta-accessors-1)
+      * [Caveats](#caveats-4)
+* [Calling Vimscript functions](#calling-vimscript-functions)
+   * [vim.call()](#vimcall)
+   * [vim.fn.{function}()](#vimfnfunction)
+      * [Tips](#tips-4)
+      * [Caveats](#caveats-5)
+* [Defining mappings](#defining-mappings)
+* [Defining user commands](#defining-user-commands)
+* [Defining autocommands](#defining-autocommands)
+* [Defining syntax/highlights](#defining-syntaxhighlights)
+* [General tips and recommendations](#general-tips-and-recommendations)
+* [Miscellaneous](#miscellaneous)
+   * [vim.loop](#vimloop)
+   * [vim.lsp](#vimlsp)
+   * [vim.treesitter](#vimtreesitter)
+   * [Transpilers](#transpilers)
+
+Created by  gh-md-toc: https://github.com/ekalinin/github-markdown-toc
+
+==============================================================================
 INTRODUCTION
                                                          *luaguide-introduction*
 
@@ -217,12 +281,6 @@ See also:
 - |:lua|
 - |:lua-heredoc|
 
-Caveats~
-
-You don't get correct syntax highlighting when writing Lua in a .vim
-file. It might be more convenient to use the `:lua` command as an entry
-point for requiring external Lua files.
-
 :luado~
 
 This command executes a chunk of Lua code that acts on a range of lines
@@ -427,6 +485,12 @@ always throw an error:
     " Using a function as a value doesn't work
     echo map([1, 2, 3], v:lua.global_callback)
 <
+
+Tips~
+
+You can get Lua syntax highlighting inside .vim files by putting
+`let g:vimsyn_embed = 'l'` in your configuration file. See `:help
+g:vimsyn_embed` for more on this option.
 
 ==============================================================================
 THE VIM NAMESPACE
@@ -959,19 +1023,32 @@ Let's start with `vim.api.nvim_set_keymap()` and
 The first argument passed to the function is a string containing the
 name of the mode for which the mapping will take effect:
 
-| String value           | Help page     | Affected modes                           | Vimscript equivalent |
-| ---------------------- | ------------- | ---------------------------------------- | -------------------- |
-| `''` (an empty string) | `mapmode-nvo` | Normal, Visual, Select, Operator-pending | `:map`               |
-| `'n'`                  | `mapmode-n`   | Normal                                   | `:nmap`              |
-| `'v'`                  | `mapmode-v`   | Visual and Select                        | `:vmap`              |
-| `'s'`                  | `mapmode-s`   | Select                                   | `:smap`              |
-| `'x'`                  | `mapmode-x`   | Visual                                   | `:xmap`              |
-| `'o'`                  | `mapmode-o`   | Operator-pending                         | `:omap`              |
-| `'!'`                  | `mapmode-ic`  | Insert and Command-line                  | `:map!`              |
-| `'i'`                  | `mapmode-i`   | Insert                                   | `:imap`              |
-| `'l'`                  | `mapmode-l`   | Insert, Command-line, Lang-Arg           | `:lmap`              |
-| `'c'`                  | `mapmode-c`   | Command-line                             | `:cmap`              |
-| `'t'`                  | `mapmode-t`   | Terminal                                 | `:tmap`              |
+| String value		 | Help page	 | Affected modes
+| Vimscript equivalent |
+| ---------------------- | ------------- |
+---------------------------------------- | -------------------- |
+| `''` (an empty string) | `mapmode-nvo` | Normal, Visual, Select,
+Operator-pending | `:map`		|
+| `'n'`			 | `mapmode-n`	 | Normal
+| `:nmap`	       |
+| `'v'`			 | `mapmode-v`	 | Visual and Select
+| `:vmap`	       |
+| `'s'`			 | `mapmode-s`	 | Select
+| `:smap`	       |
+| `'x'`			 | `mapmode-x`	 | Visual
+| `:xmap`	       |
+| `'o'`			 | `mapmode-o`	 | Operator-pending
+| `:omap`	       |
+| `'!'`			 | `mapmode-ic`  | Insert and Command-line
+| `:map!`	       |
+| `'i'`			 | `mapmode-i`	 | Insert
+| `:imap`	       |
+| `'l'`			 | `mapmode-l`	 | Insert, Command-line, Lang-Arg
+| `:lmap`	       |
+| `'c'`			 | `mapmode-c`	 | Command-line
+| `:cmap`	       |
+| `'t'`			 | `mapmode-t`	 | Terminal
+| `:tmap`	       |
 
 The second argument is a string containing the left-hand side of the
 mapping (the key or set of keys that trigger the command defined in the
