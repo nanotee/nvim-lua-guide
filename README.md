@@ -3,7 +3,7 @@
 ## Translations
 
 - [🇨🇳 Chinese version](https://github.com/glepnir/nvim-lua-guide-zh)
-- [Portuguese version](https://github.com/npxbr/nvim-lua-guide/blob/master/README.pt-br.md)
+- [🇧🇷 Portuguese version](https://github.com/npxbr/nvim-lua-guide/blob/master/README.pt-br.md)
 
 ## Table of Contents
 
