@@ -216,10 +216,6 @@ See also:
 - `:help :lua`
 - `:help :lua-heredoc`
 
-#### Caveats
-
-You don't get correct syntax highlighting when writing Lua in a .vim file. It might be more convenient to use the `:lua` command as an entry point for requiring external Lua files.
-
 ### :luado
 
 This command executes a chunk of Lua code that acts on a range of lines in the current buffer. If no range is specified, the whole buffer is used instead. Whatever string is `return`ed from the chunk is used to determine what each line should be replaced with.
@@ -398,6 +394,10 @@ echo v:lua.some_global_dict['key']
 " Using a function as a value doesn't work
 echo map([1, 2, 3], v:lua.global_callback)
 ```
+
+### Tips
+
+You can get Lua syntax highlighting inside .vim files by putting `let g:vimsyn_embed = 'l'` in your configuration file. See `:help g:vimsyn_embed` for more on this option.
 
 ## The vim namespace
 
