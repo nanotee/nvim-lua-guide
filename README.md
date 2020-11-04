@@ -161,6 +161,8 @@ It might be a good idea to namespace your config or your plugin with a top-level
 
 #### A note about packages
 
+**UPDATE**: if you're using the latest nightly build, this is [no longer an issue](https://github.com/neovim/neovim/pull/13119) and you can safely skip this section.
+
 If you're a user of the `packages` feature or a plugin manager based on it (such as [packer.nvim](https://github.com/wbthomason/packer.nvim), [minpac](https://github.com/k-takata/minpac) or [vim-packager](https://github.com/kristijanhusak/vim-packager/)), there are things to be aware of when using Lua plugins.
 
 Packages in the `start` folder are only loaded after sourcing your `init.vim`. This means that a package isn't added to the `runtimepath` until after Neovim has finished processing the file. This can cause issues if a plugin expects you to `require` a Lua module or call an autoloaded function.
