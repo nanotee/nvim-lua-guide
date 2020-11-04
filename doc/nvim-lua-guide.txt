@@ -148,6 +148,10 @@ top-level folder, like so: `lua/plugin_name/main.lua`
 
 A note about packages~
 
+**UPDATE**: if you're using the latest nightly build, this is  no longer
+an issue: https://github.com/neovim/neovim/pull/13119  and you can safely
+skip this section.
+
 If you're a user of the `packages` feature or a plugin manager based on
 it  such as  packer.nvim: https://github.com/wbthomason/packer.nvim
 ,  minpac: https://github.com/k-takata/minpac  or  vim-packager:
