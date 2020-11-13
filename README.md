@@ -940,9 +940,14 @@ See also:
 
 `vim.lsp` is the module that controls the built-in LSP client. The [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/) repository contains default configurations for popular language servers.
 
+The behavior of the client can be configured using "lsp-handlers". For more information:
+- `:help lsp-handler`
+- [neovim/neovim#12655](https://github.com/neovim/neovim/pull/12655)
+- [How to migrate from diagnostic-nvim](https://github.com/nvim-lua/diagnostic-nvim/issues/73#issue-737897078)
+
 You may also want to take a look at plugins built around the LSP client:
 - [nvim-lua/completion-nvim](https://github.com/nvim-lua/completion-nvim)
-- [nvim-lua/diagnostic-nvim](https://github.com/nvim-lua/diagnostic-nvim)
+- [RishabhRD/nvim-lsputils](https://github.com/RishabhRD/nvim-lsputils)
 
 See also:
 - `:help lsp`
