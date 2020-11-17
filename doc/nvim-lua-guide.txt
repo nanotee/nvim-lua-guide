@@ -1131,6 +1131,11 @@ LSP client implementations :
     }
 <
 
+For more information on how to configure  sumneko/lua-language-server:
+https://github.com/sumneko/lua-language-server/
+see  "Setting without VSCode":
+https://github.com/sumneko/lua-language-server/wiki/Setting-without-VSCode
+
 coc.nvim~
 
 The  rafcamlet/coc-nvim-lua: https://github.com/rafcamlet/coc-nvim-lua/
