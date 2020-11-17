@@ -4,6 +4,7 @@
 
 - [🇨🇳 Chinese version](https://github.com/glepnir/nvim-lua-guide-zh)
 - [🇧🇷 Portuguese version](https://github.com/npxbr/nvim-lua-guide/blob/master/README.pt-br.md)
+- [🇯🇵 Japanesese version](https://github.com/willelz/nvim-lua-guide-ja/blob/master/README.ja.md)
 
 ## Table of Contents
 
