@@ -945,6 +945,8 @@ require'lspconfig'.sumneko_lua.setup {
             runtime = {
                 -- Get the language server to recognize LuaJIT globals like `jit` and `bit`
                 version = 'LuaJIT',
+                -- Setup your lua path
+                path = vim.split(package.path, ';'),
             },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
