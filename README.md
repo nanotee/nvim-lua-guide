@@ -51,6 +51,10 @@
 * [Defining autocommands](#defining-autocommands)
 * [Defining syntax/highlights](#defining-syntaxhighlights)
 * [General tips and recommendations](#general-tips-and-recommendations)
+  * [Setting up linters/language servers](#setting-up-linterslanguage-servers)
+    * [luacheck](#luacheck)
+    * [sumneko/lua-language-server](#sumnekolua-language-server)
+    * [coc.nvim](#cocnvim)
 * [Miscellaneous](#miscellaneous)
   * [vim.loop](#vimloop)
   * [vim.lsp](#vimlsp)
@@ -916,6 +920,60 @@ The syntax API is still a work in progress. Here are a couple of pointers:
 - `:help lua-treesitter`
 
 ## General tips and recommendations
+
+### Setting up linters/language servers
+
+If you're using linters and/or language servers to get diagnostics and autocompletion for Lua projects, you may have to configure Neovim-specific settings for them. Here are a few recommended settings for popular tools:
+
+#### luacheck
+
+You can get [luacheck](https://github.com/mpeterv/luacheck/) to recognize the `vim` global by putting this configuration in `~/.luacheckrc` (or `$XDG_CONFIG_HOME/luacheck/.luacheckrc`):
+
+```lua
+globals = {
+    "vim",
+}
+```
+
+The [Alloyed/lua-lsp](https://github.com/Alloyed/lua-lsp/) language server uses `luacheck` to provide linting and reads the same file.
+
+For more information on how to configure `luacheck`, please refer to its [documentation](https://luacheck.readthedocs.io/en/stable/config.html)
+
+#### sumneko/lua-language-server
+
+Example configuration for [sumneko/lua-language-server](https://github.com/sumneko/lua-language-server/) (the example uses the built-in LSP client but the configuration should be identical for other LSP client implementations):
+
+```lua
+require'lspconfig'.sumneko_lua.setup {
+    settings = {
+        Lua = {
+            runtime = {
+                -- Get the language server to recognize LuaJIT globals like `jit` and `bit`
+                version = 'LuaJIT',
+                -- Setup your lua path
+                path = vim.split(package.path, ';'),
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = {'vim'},
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = {
+                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+                },
+            },
+        },
+    },
+}
+```
+
+For more information on how to configure [sumneko/lua-language-server](https://github.com/sumneko/lua-language-server/) see ["Setting without VSCode"](https://github.com/sumneko/lua-language-server/wiki/Setting-without-VSCode)
+
+#### coc.nvim
+
+The [rafcamlet/coc-nvim-lua](https://github.com/rafcamlet/coc-nvim-lua/) completion source for [coc.nvim](https://github.com/neoclide/coc.nvim/) provides completion items for the Neovim stdlib.
 
 **TODO**:
 - Hot-reloading of modules
