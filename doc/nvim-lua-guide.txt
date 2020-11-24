@@ -216,6 +216,16 @@ Multi-line scripts are possible using heredoc syntax:
     EOF
 <
 
+Note: each `:lua` command has its own scope and variables declared with
+the `local` keyword are not accessible outside of the command. This
+won't work:
+
+    >
+    :lua local foo = 1
+    :lua print(foo)
+    " prints 'nil' instead of '1'
+<
+
 See also:
 
 - |:lua|
