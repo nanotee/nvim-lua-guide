@@ -218,6 +218,14 @@ print(tbl)
 EOF
 ```
 
+Note: each `:lua` command has its own scope and variables declared with the `local` keyword are not accessible outside of the command. This won't work:
+
+```vim
+:lua local foo = 1
+:lua print(foo)
+" prints 'nil' instead of '1'
+```
+
 See also:
 
 - `:help :lua`
