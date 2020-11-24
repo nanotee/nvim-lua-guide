@@ -597,63 +597,11 @@ See also:
 
 #### Caveats
 
-**WARNING**: The following section is based on a few experiments I did. The docs don't seem to mention this behavior and I haven't checked the source code to verify my claims.  
-**TODO**: Can anyone confirm this?
-
-If you've only ever dealt with options using the `:set` command, the behavior of some options might surprise you.
-
-Essentially, options can either be global, local to a buffer/window, or have both a global **and** a local value.
-
-The `:setglobal` command sets the global value of an option.
-The `:setlocal` command sets the local value of an option.
-The `:set` command sets the global **and** local value of an option.
-
-Here's a handy table from `:help :setglobal`:
-
-|                 Command | global value | local value |
-| ----------------------: | :----------: | :---------: |
-|       :set option=value |     set      |     set     |
-|  :setlocal option=value |      -       |     set     |
-| :setglobal option=value |     set      |      -      |
-
 There is no equivalent to the `:set` command in Lua, you either set an option globally or locally.
-
-You might expect the `number` option to be global, but the documentation describes it as being "local to window". Such options are actually "sticky": their value is copied over from the current window when you open a new one.
-
-So if you were to set the option from your `init.lua`, you would do it like so:
-
-```lua
-vim.wo.number = true
-```
-
-Options that are "local to buffer" like `shiftwidth`, `expandtab` or `undofile`  are even more confusing. Let's say your `init.lua` contains the following code:
-
-```lua
-vim.bo.expandtab = true
-```
-
-When you launch Neovim and start editing, everything is fine: pressing `<Tab>` inserts spaces instead of a tab character. Open another buffer and you're suddenly back to tabs...
-
-Setting it globally has the opposite problem:
-
-```lua
-vim.o.expandtab = true
-```
-
-This time, you insert tabs when you first launch Neovim. Open another buffer and pressing `<Tab>` does what you expect.
-
-In short, options that are "local to buffer" have to be set like this if you want the correct behavior:
-
-```lua
-vim.bo.expandtab = true
-vim.o.expandtab = true
-```
 
 See also:
 - `:help :setglobal`
 - `:help global-local`
-
-**TODO**: Why does this happen? Do all buffer-local options behave this way? Might be related to [neovim/neovim#7658](https://github.com/neovim/neovim/issues/7658) and [vim/vim#2390](https://github.com/vim/vim/issues/2390). Also for window-local options: [neovim/neovim#11525](https://github.com/neovim/neovim/issues/11525) and [vim/vim#4945](https://github.com/vim/vim/issues/4945)
 
 ## Managing vim internal variables
 
