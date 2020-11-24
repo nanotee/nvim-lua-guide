@@ -104,7 +104,7 @@ A few tutorials have already been written to help people write plugins in Lua. S
 
 ## Where to put Lua files
 
-Lua files are typically found inside a `lua/` folder in your `runtimepath` (for most users, this will mean `~/.config/nvim/lua` on *nix systems and `~/AppData/Local/nvim/lua` on Windows). The `package.path` and `package.cpath` globals are automatically adjusted to include Lua files in this folder. This means you can `require()` these files as Lua modules.
+Lua files are typically found inside a `lua/` folder in your `runtimepath` (for most users, this will mean `~/.config/nvim/lua` on *nix systems and `~/AppData/Local/nvim/lua` on Windows). You can `require()` these files as Lua modules.
 
 Let's take the following folder structure as an example:
 
@@ -263,7 +263,7 @@ You might be wondering what the difference between `lua require()` and `luafile`
 
 - `require()`:
     - is a built-in Lua function. It allows you to take advantage of Lua's module system
-    - searches for modules using the `package.path` variable (as noted earlier, you can `require()` Lua scripts located inside the `lua/` folder in your `runtimepath`)
+    - searches for modules in `lua` folders in your `runtimepath`
     - keeps track of what modules have been loaded and prevents a script from being parsed and executed a second time. If you change the file containing the code for a module and try to `require()` it a second time while Neovim is running, the module will not actually update
 - `:luafile`:
     - is an Ex command. It does not support modules
