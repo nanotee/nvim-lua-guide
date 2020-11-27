@@ -226,6 +226,8 @@ Note: each `:lua` command has its own scope and variables declared with the `loc
 " prints 'nil' instead of '1'
 ```
 
+Note 2: the `print()` function in Lua behaves similarly to the `:echomsg` command. Its output is saved in the message-history and can be suppressed by the `:silent` command.
+
 See also:
 
 - `:help :lua`
