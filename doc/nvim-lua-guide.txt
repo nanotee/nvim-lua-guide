@@ -75,6 +75,16 @@ Better Lua syntax highlighting in Vim/NeoVim
 WHERE TO PUT LUA FILES
                                                *luaguide-where-to-put-lua-files*
 
+init.lua~
+
+Neovim supports loading an `init.lua` file for configuration instead of
+the usual `init.vim`.
+
+See also:
+- |config|
+
+Other Lua files~
+
 Lua files are typically found inside a `lua/` folder in your `runtimepath`
 (for most users, this will mean `~/.config/nvim/lua` on *nix systems and
 `~/AppData/Local/nvim/lua` on Windows). You can `require()` these files
@@ -127,12 +137,11 @@ For more information: `:help lua-require`
 Caveats~
 
 Unlike .vim files, .lua files are not automatically sourced from
-directories in your `runtimepath`. Instead, you have to source/require
-them from Vimscript. There are plans to add the option to load an
-`init.lua` file as an alternative to `init.vim`:
+special directories in your `runtimepath`. For example, Neovim can load
+`plugin/foo.vim` automatically but not `plugin/foo.lua`.
 
--  Issue #7895: https://github.com/neovim/neovim/issues/7895
--  Corresponding pull request: https://github.com/neovim/neovim/pull/12235
+See also:
+-  Issue #12670: https://github.com/neovim/neovim/issues/12670
 
 Tips~
 
