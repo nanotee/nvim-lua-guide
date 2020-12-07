@@ -918,7 +918,7 @@ require'lspconfig'.sumneko_lua.setup {
     settings = {
         Lua = {
             runtime = {
-                -- Get the language server to recognize LuaJIT globals like `jit` and `bit`
+                -- Tell the language server which version of Lua you're using (LuaJIT in the case of Neovim)
                 version = 'LuaJIT',
                 -- Setup your lua path
                 path = vim.split(package.path, ';'),
