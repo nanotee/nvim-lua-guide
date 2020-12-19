@@ -357,7 +357,7 @@ See also:
 
 ### v:lua
 
-This global Vim variable allows you to call global Lua functions directly from Vimscript. Again, Vim data types are converted to Lua types and vice versa.
+This global Vim variable allows you to call Lua functions in the global namespace ([`_G`](https://www.lua.org/manual/5.1/manual.html#pdf-_G)) directly from Vimscript. Again, Vim data types are converted to Lua types and vice versa.
 
 ```vim
 call v:lua.print('Hello from Lua!')
