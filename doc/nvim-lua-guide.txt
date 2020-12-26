@@ -414,18 +414,15 @@ types and vice versa.
     " Also works in expression mappings
     lua << EOF
     function _G.check_back_space()
-        local col = vim.fn.col('.') - 1
-        if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-            return true
-        else
-            return false
-        end
+        local col = vim.api.nvim_win_get_cursor(0)[2]
+        return (col == 0 or vim.api.nvim_get_current_line():sub(col,
+        col):match('%s')) and true
     end
     EOF
 
     inoremap <silent> <expr> <Tab>
-        \ pumvisible() ? '\<C-n>' :
-        \ v:lua.check_back_space() ? '\<Tab>' :
+        \ pumvisible() ? "\<C-n>" :
+        \ v:lua.check_back_space() ? "\<Tab>" :
         \ completion#trigger_completion()
 <
 
