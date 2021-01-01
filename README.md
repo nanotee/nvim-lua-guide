@@ -854,6 +854,35 @@ The syntax API is still a work in progress. Here are a couple of pointers:
 
 ## General tips and recommendations
 
+### Notes about Vimscript <-> Lua type conversion
+
+- Converting a variable creates a copy:
+    You can't directly interact with the reference to a Vim object from Lua or a Lua object from Vimscript.  
+    For example, the `map()` function in Vimscript modifies a variable in place:
+
+    ```vim
+    let s:list = [1, 2, 3]
+    let s:newlist = map(s:list, {_, v -> v * 2})
+
+    echo s:list
+    " [2, 4, 6]
+    echo s:newlist
+    " [2, 4, 6]
+    ```
+
+    Using this function from Lua creates a copy instead:
+
+    ```lua
+    local tbl = {1, 2, 3}
+    local newtbl = vim.fn.map(tbl, function(_, v) return v * 2 end)
+
+    print(vim.inspect(tbl)) -- { 1, 2, 3 }
+    print(vim.inspect(newtbl)) -- { 2, 4, 6 }
+    ```
+
+- Conversion is not always possible
+    
+
 ### Setting up linters/language servers
 
 If you're using linters and/or language servers to get diagnostics and autocompletion for Lua projects, you may have to configure Neovim-specific settings for them. Here are a few recommended settings for popular tools:
