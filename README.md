@@ -36,6 +36,7 @@
   * [vim.api.nvim_exec()](#vimapinvim_exec)
   * [vim.api.nvim_command()](#vimapinvim_command)
     * [Tips](#tips-3)
+  * [vim.api.nvim_replace_termcodes()](#vimapinvim_replace_termcodes)
 * [Managing vim options](#managing-vim-options)
   * [Using api functions](#using-api-functions)
   * [Using meta-accessors](#using-meta-accessors)
@@ -539,6 +540,69 @@ Literal strings are easier to use as they do not require escaping characters:
 ```lua
 vim.cmd([[%s/\Vfoo/bar/g]])
 ```
+
+### vim.api.nvim_replace_termcodes()
+
+This API function allows you to escape terminal codes and Vim keycodes.
+
+You may have come across mappings like this one:
+
+```vim
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+```
+
+Trying to do the same in Lua can prove to be a challenge. You might be tempted to do it like this:
+
+```lua
+function _G.smart_tab()
+    return vim.fn.pumvisible() == 1 and [[\<C-n>]] or [[\<Tab>]]
+end
+
+vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.smart_tab()', {expr = true, noremap = true})
+```
+
+only to find out that the mapping inserts `\<Tab>` and `\<C-n>` literally...
+
+Being able to escape keycodes is actually a Vimscript feature. Aside from the usual escape sequences like `\r`, `\42` or `\x10` that are common to many programming languages, Vimscript `expr-quotes` (strings surrounded with double quotes) allow you to escape the human-readable representation of Vim keycodes.
+
+Lua doesn't have such a feature built-in. Fortunately, Neovim has an API function for escaping terminal codes and keycodes: `nvim_replace_termcodes()`
+
+```lua
+print(vim.api.nvim_replace_termcodes('<Tab>', true, true, true))
+```
+
+This is a little verbose. Making a reusable wrapper can help:
+
+```lua
+-- The function is called `t` for `termcodes`.
+-- You don't have to call it that, but I find the terseness convenient
+local function t(str)
+    -- Adjust boolean arguments as needed
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+print(t'<Tab>')
+```
+
+Coming back to our earlier example, this should now work as expected:
+
+```lua
+local function t(str)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+function _G.smart_tab()
+    return vim.fn.pumvisible() == 1 and t'<C-n>' or t'<Tab>'
+end
+
+vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.smart_tab()', {expr = true, noremap = true})
+```
+
+See also:
+
+- `:help keycodes`
+- `:help expr-quote`
+- `:help nvim_replace_termcodes()`
 
 ## Managing vim options
 
