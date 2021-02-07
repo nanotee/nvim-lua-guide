@@ -893,10 +893,10 @@ The final argument is a table containing boolean options for the mapping as defi
 Buffer-local mappings also take a buffer number as their first argument (`0` sets the mapping for the current buffer).
 
 ```lua
-vim.api.nvim_set_keymap('n', '<leader><Space>', ':set hlsearch!<CR>', { noremap = true, silent = true })
--- :nnoremap <silent> <leader><Space> :set hlsearch<CR>
-vim.api.nvim_set_keymap('n', '<leader>tegf',  [[<Cmd>lua require('telescope.builtin').git_files()<CR>]], { noremap = true, silent = true })
--- :nnoremap <silent> <leader>tegf <Cmd>lua require('telescope.builtin').git_files()<CR>
+vim.api.nvim_set_keymap('n', '<Leader><Space>', ':set hlsearch!<CR>', { noremap = true, silent = true })
+-- :nnoremap <silent> <Leader><Space> :set hlsearch<CR>
+vim.api.nvim_set_keymap('n', '<Leader>tegf',  [[<Cmd>lua require('telescope.builtin').git_files()<CR>]], { noremap = true, silent = true })
+-- :nnoremap <silent> <Leader>tegf <Cmd>lua require('telescope.builtin').git_files()<CR>
 
 vim.api.nvim_buf_set_keymap(0, '', 'cc', 'line(".") == 1 ? "cc" : "ggcc"', { noremap = true, expr = true })
 -- :noremap <buffer> <expr> cc line('.') == 1 ? 'cc' : 'ggcc'
@@ -919,8 +919,8 @@ print(vim.inspect(vim.api.nvim_buf_get_keymap(0, 'i')))
 `vim.api.nvim_del_keymap()` takes a mode and the left-hand side of a mapping.
 
 ```lua
-vim.api.nvim_del_keymap('n', '<leader><Space>')
--- :nunmap <leader><Space>
+vim.api.nvim_del_keymap('n', '<Leader><Space>')
+-- :nunmap <Leader><Space>
 ```
 
 Again, `vim.api.nvim_buf_del_keymap()`, takes a buffer number as its first argument, with `0` representing the current buffer.
