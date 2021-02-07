@@ -740,6 +740,8 @@ you to manipulate options as if they were variables:
     >
     vim.o.smarttab = false
     print(vim.o.smarttab) -- false
+    vim.o.isfname = vim.o.isfname .. ',@-@' -- on Linux: set isfname+=@-@
+    print(vim.o.listchars) -- '@,48-57,/,.,-,_,+,,,#,$,%,~,=,@-@'
 
     vim.bo.shiftwidth = 4
     print(vim.bo.shiftwidth) -- 4
@@ -1013,9 +1015,14 @@ Buffer-local mappings also take a buffer number as their first argument
 (`0` sets the mapping for the current buffer).
 
     >
-    vim.api.nvim_set_keymap('n', '<leader><Space>', ':set hlsearch!<CR>',
+    vim.api.nvim_set_keymap('n', '<Leader><Space>', ':set hlsearch!<CR>',
     { noremap = true, silent = true })
-    -- :nnoremap <silent> <leader><Space> :set hlsearch<CR>
+    -- :nnoremap <silent> <Leader><Space> :set hlsearch<CR>
+    vim.api.nvim_set_keymap('n', '<Leader>tegf',  [[<Cmd>lua
+    require('telescope.builtin').git_files()<CR>]], { noremap = true,
+    silent = true })
+    -- :nnoremap <silent> <Leader>tegf <Cmd>lua
+    require('telescope.builtin').git_files()<CR>
 
     vim.api.nvim_buf_set_keymap(0, '', 'cc', 'line(".") == 1 ? "cc" :
     "ggcc"', { noremap = true, expr = true })
@@ -1043,8 +1050,8 @@ its first argument (`0` will get mapppings for the current bufffer)
 a mapping.
 
     >
-    vim.api.nvim_del_keymap('n', '<leader><Space>')
-    -- :nunmap <leader><Space>
+    vim.api.nvim_del_keymap('n', '<Leader><Space>')
+    -- :nunmap <Leader><Space>
 <
 
 Again, `vim.api.nvim_buf_del_keymap()`, takes a buffer number as its
