@@ -102,10 +102,10 @@ A few tutorials have already been written to help people write plugins in Lua. S
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) - All the lua functions I don't want to write twice
 - [popup.nvim](https://github.com/nvim-lua/popup.nvim) - An implementation of the Popup API from vim in Neovim
 - [nvim_utils](https://github.com/norcalli/nvim_utils)
-- [nvim-luadev](https://github.com/bfredl/nvim-luadev) - REPL/debug console for nvim lua plugins 
+- [nvim-luadev](https://github.com/bfredl/nvim-luadev) - REPL/debug console for nvim lua plugins
 - [nvim-luapad](https://github.com/rafcamlet/nvim-luapad) - Interactive real time neovim scratchpad for embedded lua engine
-- [nlua.nvim](https://github.com/tjdevries/nlua.nvim) - Lua Development for Neovim 
-- [BetterLua.vim](https://github.com/euclidianAce/BetterLua.vim) - Better Lua syntax highlighting in Vim/NeoVim 
+- [nlua.nvim](https://github.com/tjdevries/nlua.nvim) - Lua Development for Neovim
+- [BetterLua.vim](https://github.com/euclidianAce/BetterLua.vim) - Better Lua syntax highlighting in Vim/NeoVim
 
 ## Where to put Lua files
 
@@ -663,6 +663,8 @@ A few meta-accessors are available if you want to set options in a more "idiomat
 ```lua
 vim.o.smarttab = false
 print(vim.o.smarttab) -- false
+vim.o.isfname = vim.o.isfname .. ',@-@' -- on Linux: set isfname+=@-@
+print(vim.o.listchars) -- '@,48-57,/,.,-,_,+,,,#,$,%,~,=,@-@'
 
 vim.bo.shiftwidth = 4
 print(vim.bo.shiftwidth) -- 4
@@ -893,6 +895,8 @@ Buffer-local mappings also take a buffer number as their first argument (`0` set
 ```lua
 vim.api.nvim_set_keymap('n', '<leader><Space>', ':set hlsearch!<CR>', { noremap = true, silent = true })
 -- :nnoremap <silent> <leader><Space> :set hlsearch<CR>
+vim.api.nvim_set_keymap('n', '<leader>tegf',  [[<Cmd>lua require('telescope.builtin').git_files()<CR>]], { noremap = true, silent = true })
+-- :nnoremap <silent> <leader>tegf <Cmd>lua require('telescope.builtin').git_files()<CR>
 
 vim.api.nvim_buf_set_keymap(0, '', 'cc', 'line(".") == 1 ? "cc" : "ggcc"', { noremap = true, expr = true })
 -- :noremap <buffer> <expr> cc line('.') == 1 ? 'cc' : 'ggcc'
