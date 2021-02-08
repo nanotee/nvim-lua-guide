@@ -754,33 +754,10 @@ This is a known issue:
 
 ## Calling Vimscript functions
 
-### vim.call()
-
-`vim.call()` calls a Vimscript function. This can either be a built-in Vim function or a user function. Again, data types are converted back and forth from Lua to Vimscript.
-
-It takes in the name of the function followed by the arguments you want to pass to that function:
-
-```lua
-print(vim.call('printf', 'Hello from %s', 'Lua'))
-
-local reversed_list = vim.call('reverse', { 'a', 'b', 'c' })
-print(vim.inspect(reversed_list)) -- { "c", "b", "a" }
-
-local function print_stdout(chan_id, data, name)
-    print(data[1])
-end
-
-vim.call('jobstart', 'ls', { on_stdout = print_stdout })
-
-vim.call('my#autoload#function')
-```
-
-See also:
-- `:help vim.call()`
-
 ### vim.fn.{function}()
 
-`vim.fn` does the exact same thing as `vim.call()`, but looks more like a native Lua function call:
+`vim.fn` is for calling a Vimscript function.
+The Vimscript function can either be a built-in Vim function or a user function. Data types are converted back and forth from Lua to Vimscript.
 
 ```lua
 print(vim.fn.printf('Hello from %s', 'Lua'))
@@ -795,7 +772,8 @@ end
 vim.fn.jobstart('ls', { on_stdout = print_stdout })
 ```
 
-Hashes `#` aren't valid characters for indentifiers in Lua, so autoload functions have to be called with this syntax:
+Strings with invalid Lua names can be used with `vim.fn[variable]`.
+For example, hashes (`#`) are no valid characters for indentifiers in Lua, so autoload functions have to be called with this syntax:
 
 ```lua
 vim.fn['my#autoload#function']()
