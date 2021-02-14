@@ -45,7 +45,6 @@
   * [Using meta-accessors](#using-meta-accessors-1)
     * [Caveats](#caveats-4)
 * [Calling Vimscript functions](#calling-vimscript-functions)
-  * [vim.call()](#vimcall)
   * [vim.fn.{function}()](#vimfnfunction)
     * [Tips](#tips-4)
     * [Caveats](#caveats-5)
@@ -774,7 +773,7 @@ vim.fn.jobstart('ls', { on_stdout = print_stdout })
 ```
 
 Strings with invalid Lua names can be used with `vim.fn[variable]`.
-For example, hashes (`#`) are no valid characters for indentifiers in Lua, so autoload functions have to be called with this syntax:
+For example, hashes (`#`) are not valid characters for indentifiers in Lua, so autoload functions have to be called with this syntax:
 
 ```lua
 vim.fn['my#autoload#function']()
