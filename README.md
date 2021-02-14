@@ -78,6 +78,7 @@ This guide assumes you are using the latest [nightly build](https://github.com/n
 If you are not already familiar with the language, there are plenty of resources to get started:
 
 - The [Learn X in Y minutes page about Lua](https://learnxinyminutes.com/docs/lua/) should give you a quick overview of the basics
+- [This guide](https://github.com/medwatt/Notes/blob/main/Lua/Lua_Quick_Guide.ipynb) is also a good resource for getting started quickly
 - If videos are more to your liking, Derek Banas has a [1-hour tutorial on the language](https://www.youtube.com/watch?v=iMacxZQMPXs)
 - The [lua-users wiki](http://lua-users.org/wiki/LuaDirectory) is full of useful information on all kinds of Lua-related topics
 - The [official reference manual for Lua](https://www.lua.org/manual/5.1/) should give you the most comprehensive tour of the language
