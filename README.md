@@ -786,6 +786,8 @@ See also:
 
 Neovim has an extensive library of powerful built-in functions that are very useful for plugins. See `:help vim-function` for an alphabetical list and `:help function-list` for a list of functions grouped by topic.
 
+Neovim API functions should be used directly through `vim.api.{..}`. For example, use `vim.api.nvim_list_uis()` instead of `vim.fn.nvim_list_uis`. See `:help api` for information.
+
 #### Caveats
 
 Some Vim functions that should return a boolean return `1` or `0` instead. This isn't a problem in Vimscript as `1` is truthy and `0` falsy, enabling constructs like these:
