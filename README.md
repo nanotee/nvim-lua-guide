@@ -779,12 +779,16 @@ For example, hashes (`#`) are not valid characters for indentifiers in Lua, so a
 vim.fn['my#autoload#function']()
 ```
 
+The functionality of `vim.fn` is identical to `vim.call`, but allows a more Lua-like syntax.
+
 See also:
 - `:help vim.fn`
 
 #### Tips
 
 Neovim has an extensive library of powerful built-in functions that are very useful for plugins. See `:help vim-function` for an alphabetical list and `:help function-list` for a list of functions grouped by topic.
+
+Neovim API functions should be used directly through `vim.api.{..}`. For example, use `vim.api.nvim_list_uis()` instead of `vim.fn.nvim_list_uis`. See `:help api` for information.
 
 #### Caveats
 
