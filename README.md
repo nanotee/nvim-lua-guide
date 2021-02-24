@@ -651,7 +651,7 @@ vim.wo.number = true -- same as vim.api.nvim_win_set_option(0, 'number', true)
 ```
 
 See also:
-- `:help lua-vim-internal-options`
+- `:help lua-vim-options`
 
 #### Caveats
 
@@ -735,6 +735,9 @@ To delete one of these variables, simply assign `nil` to it:
 ```lua
 vim.g.some_global_variable = nil
 ```
+
+See also:
+- `:help lua-vim-variables`
 
 #### Caveats
 

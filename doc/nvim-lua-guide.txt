@@ -720,7 +720,7 @@ no number is given, the current buffer/window is used:
 <
 
 See also:
-- |lua-vim-internal-options|
+- |lua-vim-options|
 
 Caveats~
 
@@ -820,6 +820,9 @@ To delete one of these variables, simply assign `nil` to it:
     >
     vim.g.some_global_variable = nil
 <
+
+See also:
+- |lua-vim-variables|
 
 Caveats~
 
