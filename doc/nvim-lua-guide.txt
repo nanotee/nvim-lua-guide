@@ -803,6 +803,7 @@ meta-accessors:
 - `vim.w.{name}`: window variables
 - `vim.t.{name}`: tabpage variables
 - `vim.v.{name}`: predefined Vim variables
+- `vim.env.{name}`: environment variables
 
     >
     vim.g.some_global_variable = {

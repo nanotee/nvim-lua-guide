@@ -719,6 +719,7 @@ Internal variables can be manipulated more intuitively using these meta-accessor
 - `vim.w.{name}`: window variables
 - `vim.t.{name}`: tabpage variables
 - `vim.v.{name}`: predefined Vim variables
+- `vim.env.{name}`: environment variables
 
 ```lua
 vim.g.some_global_variable = {
