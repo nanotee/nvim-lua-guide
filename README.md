@@ -84,7 +84,7 @@ If you are not already familiar with the language, there are plenty of resources
 
 It should also be noted that Lua is a very clean and simple language. It is easy to learn, especially if you have experience with similar scripting languages like JavaScript. You may already know more Lua than you realise!
 
-Note: the version of Lua that Neovim embeds is LuaJIT 2.1.0, which maintains compatibility with Lua 5.1 (with a few 5.2 extensions).
+Note: the version of Lua that Neovim embeds is [LuaJIT](https://staff.fnwi.uva.nl/h.vandermeer/docs/lua/luajit/luajit_intro.html) 2.1.0, which maintains compatibility with Lua 5.1 (with a few 5.2 extensions).
 
 ### Existing tutorials for writing Lua in Neovim
 
