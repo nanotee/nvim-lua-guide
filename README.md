@@ -760,8 +760,7 @@ This is a known issue:
 
 ### vim.fn.{function}()
 
-`vim.fn` is for calling a Vimscript function.
-The Vimscript function can either be a built-in Vim function or a user function. Data types are converted back and forth from Lua to Vimscript.
+`vim.fn` can be used to call a Vimscript function. Data types are converted back and forth from Lua to Vimscript.
 
 ```lua
 print(vim.fn.printf('Hello from %s', 'Lua'))
@@ -792,7 +791,7 @@ See also:
 
 Neovim has an extensive library of powerful built-in functions that are very useful for plugins. See `:help vim-function` for an alphabetical list and `:help function-list` for a list of functions grouped by topic.
 
-Neovim API functions should be used directly through `vim.api.{..}`. For example, use `vim.api.nvim_list_uis()` instead of `vim.fn.nvim_list_uis`. See `:help api` for information.
+Neovim API functions can be used directly through `vim.api.{..}`. See `:help api` for information.
 
 #### Caveats
 
