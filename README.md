@@ -655,11 +655,12 @@ See also:
 
 #### Caveats
 
-There is no equivalent to the `:set` command in Lua, you either set an option globally or locally.
+There is no equivalent to the `:set` command in Lua, you either set an option globally or locally. If you're setting options from your `init.lua`, some of them will require you to set both `vim.o.{option}` and `vim.{wo/bo}.{option}` to work properly.
 
 See also:
 - `:help :setglobal`
 - `:help global-local`
+- [Pull request #13479](https://github.com/neovim/neovim/pull/13479)
 
 ## Managing vim internal variables
 
