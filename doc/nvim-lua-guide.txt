@@ -728,12 +728,15 @@ See also:
 
 Caveats~
 
-There is no equivalent to the `:set` command in Lua, you either set an
-option globally or locally.
+There is no equivalent to the `:set` command in Lua, you either set
+an option globally or locally. If you're setting options from your
+`init.lua`, some of them will require you to set both `vim.o.{option}`
+and `vim.{wo/bo}.{option}` to work properly.
 
 See also:
 - |:setglobal|
 - |global-local|
+-  Pull request #13479: https://github.com/neovim/neovim/pull/13479
 
 ==============================================================================
 MANAGING VIM INTERNAL VARIABLES
@@ -854,9 +857,8 @@ CALLING VIMSCRIPT FUNCTIONS
 
 vim.fn.{function}()~
 
-`vim.fn` is for calling a Vimscript function.
-The Vimscript function can either be a built-in Vim function or a user
-function. Data types are converted back and forth from Lua to Vimscript.
+`vim.fn` can be used to call a Vimscript function. Data types are
+converted back and forth from Lua to Vimscript.
 
     >
     print(vim.fn.printf('Hello from %s', 'Lua'))
@@ -891,9 +893,8 @@ Neovim has an extensive library of powerful built-in functions that are
 very useful for plugins. See `:help vim-function` for an alphabetical
 list and `:help function-list` for a list of functions grouped by topic.
 
-Neovim API functions should be used directly through
-`vim.api.{..}`. For example, use `vim.api.nvim_list_uis()` instead of
-`vim.fn.nvim_list_uis`. See `:help api` for information.
+Neovim API functions can be used directly through `vim.api.{..}`. See
+`:help api` for information.
 
 Caveats~
 
