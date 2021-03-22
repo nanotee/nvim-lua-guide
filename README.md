@@ -782,6 +782,8 @@ vim.fn['my#autoload#function']()
 
 The functionality of `vim.fn` is identical to `vim.call`, but allows a more Lua-like syntax.
 
+It is distinct from `vim.api.nvim_call_function` in that converting Vim/Lua objects is automatic: `vim.api.nvim_call_function` returns a table for floating point numbers and does not accept Lua closures while `vim.fn` handles these types transparently.
+
 See also:
 - `:help vim.fn`
 
