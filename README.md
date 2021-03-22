@@ -342,9 +342,6 @@ let scream = v:lua.string.rep('A', 10)
 echo scream
 " 'AAAAAAAAAA'
 
-" Requiring modules works
-call v:lua.require('mymodule').myfunction()
-
 " How about a nice statusline?
 lua << EOF
 function _G.statusline()

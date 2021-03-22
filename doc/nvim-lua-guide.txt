@@ -357,9 +357,6 @@ types and vice versa.
     echo scream
     " 'AAAAAAAAAA'
 
-    " Requiring modules works
-    call v:lua.require('mymodule').myfunction()
-
     " How about a nice statusline?
     lua << EOF
     function _G.statusline()
