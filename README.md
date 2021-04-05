@@ -881,7 +881,7 @@ print(vim.inspect(newtbl)) -- { 2, 4, 6 }
 ```
 
 #### Conversion is not always possible
-This affects complex types like functions and tables:
+This mostly affects functions and tables:
 
 Lua tables that are a mix between a List and a Dictionary can't be converted:
 
