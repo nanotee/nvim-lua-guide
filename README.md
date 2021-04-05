@@ -856,6 +856,89 @@ The syntax API is still a work in progress. Here are a couple of pointers:
 
 ## General tips and recommendations
 
+### Notes about Vimscript <-> Lua type conversion
+
+#### Converting a variable creates a copy:
+You can't directly interact with the reference to a Vim object from Lua or a Lua object from Vimscript.  
+For example, the `map()` function in Vimscript modifies a variable in place:
+
+```vim
+let s:list = [1, 2, 3]
+let s:newlist = map(s:list, {_, v -> v * 2})
+
+echo s:list
+" [2, 4, 6]
+echo s:newlist
+" [2, 4, 6]
+```
+
+Using this function from Lua creates a copy instead:
+
+```lua
+local tbl = {1, 2, 3}
+local newtbl = vim.fn.map(tbl, function(_, v) return v * 2 end)
+
+print(vim.inspect(tbl)) -- { 1, 2, 3 }
+print(vim.inspect(newtbl)) -- { 2, 4, 6 }
+```
+
+#### Conversion is not always possible
+This mostly affects functions and tables:
+
+Lua tables that are a mix between a List and a Dictionary can't be converted:
+
+```lua
+print(vim.fn.count({1, 1, number = 1}, 1))
+-- E5100: Cannot convert given lua table: table should either have a sequence of positive integer keys or contain only string keys
+```
+
+While you can call Vim functions in Lua with `vim.fn`, you can't hold references to them. This can cause surprising behaviors:
+
+```lua
+local FugitiveHead = vim.fn.funcref('FugitiveHead')
+print(FugitiveHead) -- vim.NIL
+
+vim.cmd("let g:test_dict = {'test_lambda': {-> 1}}")
+print(vim.g.test_dict.test_lambda) -- nil
+print(vim.inspect(vim.g.test_dict)) -- {}
+```
+
+Passing Lua functions to Vim functions is OK, storing them in Vim variables is not:
+
+```lua
+-- This works:
+vim.fn.jobstart({'ls'}, {
+    on_stdout = function(chan_id, data, name)
+        print(vim.inspect(data))
+    end
+})
+
+-- This doesn't:
+vim.g.test_dict = {test_lambda = function() return 1 end} -- Error: Cannot convert given lua type
+```
+
+Note however that doing the same from Vimscript with `luaeval()` **does** work:
+
+```vim
+let g:test_dict = {'test_lambda': luaeval('function() return 1 end')}
+echo g:test_dict
+" {'test_lambda': function('<lambda>4714')}
+```
+
+#### Vim booleans
+A common pattern in Vim scripts is to use `1` or `0` instead of proper booleans. Indeed, Vim did not have a separate boolean type until version 7.4.1154.
+
+Lua booleans are converted to actual booleans in Vimscript, not numbers:
+
+```vim
+lua vim.g.lua_true = true
+echo g:lua_true
+" v:true
+lua vim.g.lua_false = false
+echo g:lua_false
+" v:false
+```
+
 ### Setting up linters/language servers
 
 If you're using linters and/or language servers to get diagnostics and autocompletion for Lua projects, you may have to configure Neovim-specific settings for them. Here are a few recommended settings for popular tools:
