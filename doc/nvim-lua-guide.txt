@@ -1196,6 +1196,18 @@ The  rafcamlet/coc-nvim-lua: https://github.com/rafcamlet/coc-nvim-lua/
 completion source for  coc.nvim: https://github.com/neoclide/coc.nvim/
 provides completion items for the Neovim stdlib.
 
+Debugging Lua code~
+
+You can debug Lua code running in a separate Neovim
+instance with  jbyuki/one-small-step-for-vimkind:
+https://github.com/jbyuki/one-small-step-for-vimkind
+
+The plugin uses the  Debug Adapter Protocol:
+https://microsoft.github.io/debug-adapter-protocol/ . Connecting to
+a debug adapter requires a DAP client like  mfussenegger/nvim-dap:
+https://github.com/mfussenegger/nvim-dap/  or  puremourning/vimspector:
+https://github.com/puremourning/vimspector/ .
+
 ==============================================================================
 MISCELLANEOUS
                                                         *luaguide-miscellaneous*
