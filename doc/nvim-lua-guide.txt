@@ -1218,7 +1218,8 @@ vim.loop~
 
 -  Official documentation for LibUV: https://docs.libuv.org/en/v1.x/
 -  Luv documentation: https://github.com/luvit/luv/blob/master/docs.md
--  teukka.tech - Using LibUV in Neovim: https://teukka.tech/vimloop.html
+-  teukka.tech - Using LibUV in Neovim:
+https://teukka.tech/posts/2020-01-07-vimloop/
 
 See also:
 - |vim.loop|
