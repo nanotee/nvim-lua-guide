@@ -986,6 +986,11 @@ You can debug Lua code running in a separate Neovim instance with [jbyuki/one-sm
 
 The plugin uses the [Debug Adapter Protocol](https://microsoft.github.io/debug-adapter-protocol/). Connecting to a debug adapter requires a DAP client like [mfussenegger/nvim-dap](https://github.com/mfussenegger/nvim-dap/) or [puremourning/vimspector](https://github.com/puremourning/vimspector/).
 
+### Testing Lua code
+
+- [plenary.nvim: test harness](https://github.com/nvim-lua/plenary.nvim/#plenarytest_harness)
+- [notomo/vusted](https://github.com/notomo/vusted)
+
 ## Miscellaneous
 
 ### vim.loop
