@@ -944,19 +944,32 @@ Let's start with `vim.api.nvim_set_keymap()` and
 The first argument passed to the function is a string containing the
 name of the mode for which the mapping will take effect:
 
-| String value           | Help page     | Affected modes                           | Vimscript equivalent |
-| ---------------------- | ------------- | ---------------------------------------- | -------------------- |
-| `''` (an empty string) | `mapmode-nvo` | Normal, Visual, Select, Operator-pending | `:map`               |
-| `'n'`                  | `mapmode-n`   | Normal                                   | `:nmap`              |
-| `'v'`                  | `mapmode-v`   | Visual and Select                        | `:vmap`              |
-| `'s'`                  | `mapmode-s`   | Select                                   | `:smap`              |
-| `'x'`                  | `mapmode-x`   | Visual                                   | `:xmap`              |
-| `'o'`                  | `mapmode-o`   | Operator-pending                         | `:omap`              |
-| `'!'`                  | `mapmode-ic`  | Insert and Command-line                  | `:map!`              |
-| `'i'`                  | `mapmode-i`   | Insert                                   | `:imap`              |
-| `'l'`                  | `mapmode-l`   | Insert, Command-line, Lang-Arg           | `:lmap`              |
-| `'c'`                  | `mapmode-c`   | Command-line                             | `:cmap`              |
-| `'t'`                  | `mapmode-t`   | Terminal                                 | `:tmap`              |
+| String value		 | Help page	 | Affected modes
+| Vimscript equivalent |
+| ---------------------- | ------------- |
+---------------------------------------- | -------------------- |
+| `''` (an empty string) | `mapmode-nvo` | Normal, Visual, Select,
+Operator-pending | `:map`		|
+| `'n'`			 | `mapmode-n`	 | Normal
+| `:nmap`	       |
+| `'v'`			 | `mapmode-v`	 | Visual and Select
+| `:vmap`	       |
+| `'s'`			 | `mapmode-s`	 | Select
+| `:smap`	       |
+| `'x'`			 | `mapmode-x`	 | Visual
+| `:xmap`	       |
+| `'o'`			 | `mapmode-o`	 | Operator-pending
+| `:omap`	       |
+| `'!'`			 | `mapmode-ic`  | Insert and Command-line
+| `:map!`	       |
+| `'i'`			 | `mapmode-i`	 | Insert
+| `:imap`	       |
+| `'l'`			 | `mapmode-l`	 | Insert, Command-line, Lang-Arg
+| `:lmap`	       |
+| `'c'`			 | `mapmode-c`	 | Command-line
+| `:cmap`	       |
+| `'t'`			 | `mapmode-t`	 | Terminal
+| `:tmap`	       |
 
 The second argument is a string containing the left-hand side of the
 mapping (the key or set of keys that trigger the command defined in the
@@ -1059,6 +1072,25 @@ https://github.com/tjdevries/colorbuddy.vim
 ==============================================================================
 GENERAL TIPS AND RECOMMENDATIONS
                                      *luaguide-general-tips-and-recommendations*
+
+Reloading cached modules~
+
+In Lua, the `require()` function caches modules. This is a good thing
+for performance, but it can make working on plugins a bit cumbersome
+because modules are not updated on subsequent `require()` calls.
+
+If you'd like to refresh the cache for a particular module, you have to
+modify the `packer.loaded` global table:
+
+    >
+    package.loaded['modname'] = nil
+    require('modname') -- loads an updated version of module 'modname'
+<
+
+The  nvim-lua/plenary.nvim:
+https://github.com/nvim-lua/plenary.nvim  plugin has a	custom function:
+https://github.com/nvim-lua/plenary.nvim/blob/master/lua/plenary/reload.lua
+that does this for you.
 
 Notes about Vimscript <-> Lua type conversion~
 

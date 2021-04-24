@@ -856,6 +856,19 @@ The syntax API is still a work in progress. Here are a couple of pointers:
 
 ## General tips and recommendations
 
+### Reloading cached modules
+
+In Lua, the `require()` function caches modules. This is a good thing for performance, but it can make working on plugins a bit cumbersome because modules are not updated on subsequent `require()` calls.
+
+If you'd like to refresh the cache for a particular module, you have to modify the `packer.loaded` global table:
+
+```lua
+package.loaded['modname'] = nil
+require('modname') -- loads an updated version of module 'modname'
+```
+
+The [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim) plugin has a [custom function](https://github.com/nvim-lua/plenary.nvim/blob/master/lua/plenary/reload.lua) that does this for you.
+
 ### Notes about Vimscript <-> Lua type conversion
 
 #### Converting a variable creates a copy:
