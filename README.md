@@ -991,6 +991,10 @@ The plugin uses the [Debug Adapter Protocol](https://microsoft.github.io/debug-a
 - [plenary.nvim: test harness](https://github.com/nvim-lua/plenary.nvim/#plenarytest_harness)
 - [notomo/vusted](https://github.com/notomo/vusted)
 
+### Using Luarocks packages
+
+[wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim) supports Luarocks packages. Instructions for how to set this up are available in the [README](https://github.com/wbthomason/packer.nvim/#luarocks-support)
+
 ## Miscellaneous
 
 ### vim.loop
