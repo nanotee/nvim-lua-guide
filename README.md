@@ -12,7 +12,7 @@
 * [Defining mappings](#defining-mappings)
 * [Defining user commands](#defining-user-commands)
 * [Defining autocommands](#defining-autocommands)
-* [Defining syntax/highlights](#defining-syntax/highlights)
+* [Defining syntax/highlights](#defining-syntaxhighlights)
 * [General tips and recommendations](#general-tips-and-recommendations)
 * [Miscellaneous](#miscellaneous)
 
