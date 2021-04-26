@@ -1,5 +1,21 @@
 # Getting started using Lua in Neovim
 
+* [Translations](#translations)
+* [Introduction](#introduction)
+* [Where to put Lua files](#where-to-put-lua-files)
+* [Using Lua from Vimscript](#using-lua-from-vimscript)
+* [The vim namespace](#the-vim-namespace)
+* [Using Vimscript from Lua](#using-vimscript-from-Lua)
+* [Managing vim options](#managing-vim-options)
+* [Managing vim internal variables](#managing-vim-internal-variables)
+* [Calling Vimscript functions](#calling-vimscript-functions)
+* [Defining mappings](#defining-mappings)
+* [Defining user commands](#defining-user-commands)
+* [Defining autocommands](#defining-autocommands)
+* [Defining syntax/highlights](#defining-syntax/highlights)
+* [General tips and recommendations](#general-tips-and-recommendations)
+* [Miscellaneous](#miscellaneous)
+
 ## Translations
 
 - [🇨🇳 Chinese version](https://github.com/glepnir/nvim-lua-guide-zh)
