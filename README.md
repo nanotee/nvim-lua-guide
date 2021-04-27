@@ -433,10 +433,19 @@ vim.api.nvim_command('set nonumber')
 vim.api.nvim_command('%s/foo/bar/g')
 ```
 
-Note: `vim.cmd` is a shorter alias for this function
+### vim.cmd()
+
+Alias for `vim.api.nvim_exec()`. Only the command argument is needed, `output` is always set to `false`.
 
 ```lua
 vim.cmd('buffers')
+vim.cmd([[
+let g:multiline =<< EOF
+foo
+bar
+baz
+EOF
+]])
 ```
 
 #### Tips
