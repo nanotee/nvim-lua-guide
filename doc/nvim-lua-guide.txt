@@ -92,6 +92,11 @@ init.lua~
 Neovim supports loading an `init.lua` file for configuration instead of
 the usual `init.vim`.
 
+Note: `init.lua` is of course *completely* optional. Support
+for `init.vim` is not going away and is still a valid option for
+configuration. Do keep in mind that some features are not 100% exposed
+to Lua yet.
+
 See also:
 - |config|
 
