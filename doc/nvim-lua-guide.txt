@@ -739,6 +739,43 @@ no number is given, the current buffer/window is used:
     'number', true)
 <
 
+These wrappers also have more sophisticated `vim.opt*` variants that
+provide convenient mechanisms for setting options in Lua. They're similar
+to what you might be used to in your `init.vim`:
+
+- `vim.opt.{option}`: behaves like `:set`
+- `vim.opt_global.{option}`: behaves like `:setglobal`
+- `vim.opt_local.{option}`: behaves like `:setlocal`
+
+    >
+    vim.opt.smarttab = false
+    print(vim.opt.smarttab:get()) -- false
+<
+
+Some options can be set using Lua tables:
+
+    >
+    vim.opt.completeopt = {'menuone', 'noselect'}
+    print(vim.inspect(vim.opt.completeopt:get())) -- { "menuone",
+    "noselect" }
+<
+
+Wrappers for list-like, map-like and set-like options also come with
+methods and metamethods that work similarly to their `:set+=`, `:set^=`
+and `:set-=` counterparts in Vimscript.
+
+    >
+    vim.opt.shortmess:append({ I = true })
+    -- alternative form:
+    vim.opt.shortmess = vim.opt.shortmess + { I = true }
+
+    vim.opt.whichwrap:remove({ 'b', 's' })
+    -- alternative form:
+    vim.opt.whichwrap = vim.opt.whichwrap - { 'b', 's' }
+<
+
+Be sure to look at `:help vim.opt` for more information.
+
 See also:
 - |lua-vim-options|
 
