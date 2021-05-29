@@ -714,15 +714,16 @@ A few meta-accessors are available if you want to set options in a more
 "idiomatic" way. They essentially wrap the above API functions and allow
 you to manipulate options as if they were variables:
 
-- `vim.o.{option}`: global options
-- `vim.bo.{option}`: buffer-local options
-- `vim.wo.{option}`: window-local options
+- `vim.o.{option}`: behaves like `:set`
+- `vim.go.{option}`: behaves like `:setglobal`
+- `vim.bo.{option}`: behaves like `:setlocal` for buffer-local options
+- `vim.wo.{option}`: behaves like `:setlocal` for window-local options
 
     >
     vim.o.smarttab = false
     print(vim.o.smarttab) -- false
     vim.o.isfname = vim.o.isfname .. ',@-@' -- on Linux: set isfname+=@-@
-    print(vim.o.listchars) -- '@,48-57,/,.,-,_,+,,,#,$,%,~,=,@-@'
+    print(vim.o.isfname) -- '@,48-57,/,.,-,_,+,,,#,$,%,~,=,@-@'
 
     vim.bo.shiftwidth = 4
     print(vim.bo.shiftwidth) -- 4
@@ -740,18 +741,6 @@ no number is given, the current buffer/window is used:
 
 See also:
 - |lua-vim-options|
-
-Caveats~
-
-There is no equivalent to the `:set` command in Lua, you either set
-an option globally or locally. If you're setting options from your
-`init.lua`, some of them will require you to set both `vim.o.{option}`
-and `vim.{wo/bo}.{option}` to work properly.
-
-See also:
-- |:setglobal|
-- |global-local|
--  Pull request #13479: https://github.com/neovim/neovim/pull/13479
 
 ==============================================================================
 MANAGING VIM INTERNAL VARIABLES
