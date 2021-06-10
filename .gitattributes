@@ -1,1 +1,4 @@
-*.md linguist-detectable
+*.md linguist-detectable=true
+*.md linguist-language=Markdown
+README.md linguist-detectable=true
+README.md linguist-language=Markdown
