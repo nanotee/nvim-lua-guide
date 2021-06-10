@@ -705,6 +705,8 @@ vim.g.some_global_variable = {
 print(vim.inspect(vim.g.some_global_variable)) -- { key1 = "value", key2 = 300 }
 ```
 
+Some variable names may contain characters that cannot be used for identifiers in Lua. You can still manipulate these variables by using this syntax: `vim.g['my#variable']`.
+
 To delete one of these variables, simply assign `nil` to it:
 
 ```lua
@@ -750,8 +752,7 @@ end
 vim.fn.jobstart('ls', { on_stdout = print_stdout })
 ```
 
-Strings with invalid Lua names can be used with `vim.fn[variable]`.
-For example, hashes (`#`) are not valid characters for indentifiers in Lua, so autoload functions have to be called with this syntax:
+Hashes (`#`) are not valid characters for indentifiers in Lua, so autoload functions have to be called with this syntax:
 
 ```lua
 vim.fn['my#autoload#function']()
