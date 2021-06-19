@@ -62,7 +62,7 @@ See also:
 
 ### Modules
 
-Lua modules are found inside a `lua/` folder in your `runtimepath` (for most users, this will mean `~/.config/nvim/lua` on *nix systems and `~/AppData/Local/nvim/lua` on Windows). You can `require()` files in this folder as Lua modules.
+Lua modules are found inside a `lua/` folder in your `'runtimepath'` (for most users, this will mean `~/.config/nvim/lua` on \*nix systems and `~/AppData/Local/nvim/lua` on Windows). You can `require()` files in this folder as Lua modules.
 
 Let's take the following folder structure as an example:
 
@@ -105,7 +105,16 @@ A folder containing an `init.lua` file can be required directly, without having 
 require('other_modules') -- loads other_modules/init.lua
 ```
 
-For more information: `:help lua-require`
+See also:
+- `:help lua-require`
+
+#### Tips
+
+Several Lua plugins might have identical filenames in their `lua/` folder. This could lead to namespace clashes.
+
+If two different plugins have a `lua/main.lua` file, then doing `require('main')` is ambiguous: which file do we want to source?
+
+It might be a good idea to namespace your config or your plugin with a top-level folder, like so: `lua/plugin_name/main.lua`
 
 ### Runtime files
 
@@ -119,16 +128,15 @@ Much like Vimscript files, Lua files can be loaded automatically from special fo
 - `plugin/`
 - `syntax/`
 
+Note: in a runtime directory, all `*.vim` files are sourced before `*.lua` files.
+
 See also:
 - `:help 'runtimepath'`
+- `:help load-plugins`
 
 #### Tips
 
-Several Lua plugins might have identical filenames in their `lua/` folder. This could lead to namespace clashes.
-
-If two different plugins have a `lua/main.lua` file, then doing `require('main')` is ambiguous: which file do we want to source?
-
-It might be a good idea to namespace your config or your plugin with a top-level folder, like so: `lua/plugin_name/main.lua`
+Since runtime files aren't based on the Lua module system, two plugins can have a `plugin/main.lua` file without it being an issue.
 
 ## Using Lua from Vimscript
 
@@ -192,38 +200,52 @@ See also:
 
 - `:help :luado`
 
-### :luafile
+### Sourcing Lua files
 
-This command sources a Lua file.
+Neovim provides 3 Ex commands to source Lua files
+
+- `:luafile`
+- `:source`
+- `:runtime`
+
+`:luafile` and `:source` are very similar:
 
 ```vim
 :luafile ~/foo/bar/baz/myluafile.lua
+:luafile %
+:source ~/foo/bar/baz/myluafile.lua
+:source %
 ```
 
-It is analogous to the `:source` command for .vim files or the built-in `dofile()` function in Lua.
+`:source` also supports ranges, which can be useful to only execute part of a script:
+
+```vim
+:1,10source
+```
+
+`:runtime` is a little different: it uses the `'runtimepath'` option to determine which files to source. See `:help :runtime` for more details
 
 See also:
 
 - `:help :luafile`
+- `:help :source`
+- `:help :runtime`
 
-#### luafile vs require():
+#### Sourcing a lua file vs calling require():
 
-You might be wondering what the difference between `lua require()` and `luafile` is and whether you should use one over the other. They have different use cases:
+You might be wondering what the difference between calling the `require()` function and sourcing a Lua file is and whether you should prefer one way over the other. They have different use cases:
 
 - `require()`:
     - is a built-in Lua function. It allows you to take advantage of Lua's module system
-    - searches for modules in `lua` folders in your `runtimepath`
+    - searches for modules in `lua/` folders in your `'runtimepath'`
     - keeps track of what modules have been loaded and prevents a script from being parsed and executed a second time. If you change the file containing the code for a module and try to `require()` it a second time while Neovim is running, the module will not actually update
-- `:luafile`:
-    - is an Ex command. It does not support modules
-    - takes a path that is either absolute or relative to the working directory of the current window
-    - executes the contents of a script regardless of whether it has been executed before
+- `:luafile`, `:source` and `:runtime`:
+    - are Ex commands. They do not support modules
+    - execute the contents of a script regardless of whether it has been executed before
+    - `:luafile` and `:source` take a path that is either absolute or relative to the working directory of the current window
+    - `:runtime` uses the `'runtimepath'` option to find files
 
-`:luafile` can also be useful if you want run a Lua file you are working on:
-
-```vim
-:luafile %
-```
+Files sourced via `:source`, `:runtime` or automatically from runtime directories will also show up in `:scriptnames` and `--startuptime`
 
 ### luaeval()
 
