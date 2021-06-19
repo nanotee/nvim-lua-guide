@@ -1,3 +1,5 @@
 #!/usr/bin/env sh
 
-./to_vimdoc.sed ../README.md | fmt -s | ./sections_tags.awk > ../doc/nvim-lua-guide.txt
+SCRIPT_ROOT="$(dirname "$0")"
+
+"$SCRIPT_ROOT"/to_vimdoc.sed "$SCRIPT_ROOT"/../README.md | fmt -s | "$SCRIPT_ROOT"/sections_tags.awk > "$SCRIPT_ROOT"/../doc/nvim-lua-guide.txt
