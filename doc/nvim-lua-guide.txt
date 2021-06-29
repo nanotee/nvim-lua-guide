@@ -45,8 +45,7 @@ languages like JavaScript. You may already know more Lua than you realise!
 
 Note: the version of Lua that Neovim embeds is  LuaJIT:
 https://staff.fnwi.uva.nl/h.vandermeer/docs/lua/luajit/luajit_intro.html
-2.1.0, which maintains compatibility with Lua 5.1  with a few 5.2
-extensions .
+2.1.0, which maintains compatibility with Lua 5.1.
 
 Existing tutorials for writing Lua in Neovim~
 
