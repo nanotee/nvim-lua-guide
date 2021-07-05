@@ -759,6 +759,19 @@ echo g:variable
 " {}
 ```
 
+You can use a temporary variable as a workaround:
+
+```vim
+let g:variable = {}
+lua << EOF
+local tmp = vim.g.variable
+tmp.key = 'a'
+vim.g.variable = tmp
+EOF
+echo g:variable
+" {'key': 'a'}
+```
+
 This is a known issue:
 
 - [Issue #12544](https://github.com/neovim/neovim/issues/12544)
