@@ -394,6 +394,7 @@ Writing `print(vim.inspect(x))` every time you want to inspect the contents of a
 function _G.dump(...)
     local objects = vim.tbl_map(vim.inspect, {...})
     print(unpack(objects))
+    return ...
 end
 ```
 
