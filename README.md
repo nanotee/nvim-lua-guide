@@ -953,7 +953,7 @@ The [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim) plugin has
 ### Notes about Vimscript <-> Lua type conversion
 
 #### Converting a variable creates a copy:
-You can't directly interact with the reference to a Vim object from Lua or a Lua object from Vimscript.  
+You can't directly interact with the reference to a Vim object from Lua or a Lua object from Vimscript.
 For example, the `map()` function in Vimscript modifies a variable in place:
 
 ```vim
@@ -1031,6 +1031,19 @@ echo g:lua_true
 lua vim.g.lua_false = false
 echo g:lua_false
 " v:false
+```
+
+### Variable Arguments
+
+Variable arguments `...`  do not work as expected with `nil` values. In general, DO NOT use `ipairs({...})` unless you are 100% certain there are no `nil` values. Iterating with `{...}` stops at first `nil` value. Proper way:
+
+```lua
+local function foo(...)
+    for i = 1, select('#', ...), 1 do
+        local arg = select(i, ...)
+        -- do something with arg  which is not a hidden keyword in neovim's lua
+    end
+end
 ```
 
 ### Setting up linters/language servers
