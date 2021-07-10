@@ -1155,7 +1155,7 @@ for performance, but it can make working on plugins a bit cumbersome
 because modules are not updated on subsequent `require()` calls.
 
 If you'd like to refresh the cache for a particular module, you have to
-modify the `packer.loaded` global table:
+modify the `package.loaded` global table:
 
     >
     package.loaded['modname'] = nil
