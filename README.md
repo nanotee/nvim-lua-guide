@@ -941,7 +941,7 @@ The syntax API is still a work in progress. Here are a couple of pointers:
 
 In Lua, the `require()` function caches modules. This is a good thing for performance, but it can make working on plugins a bit cumbersome because modules are not updated on subsequent `require()` calls.
 
-If you'd like to refresh the cache for a particular module, you have to modify the `packer.loaded` global table:
+If you'd like to refresh the cache for a particular module, you have to modify the `package.loaded` global table:
 
 ```lua
 package.loaded['modname'] = nil
