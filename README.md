@@ -106,6 +106,16 @@ A folder containing an `init.lua` file can be required directly, without having 
 require('other_modules') -- loads other_modules/init.lua
 ```
 
+Require an inexisted module or a module which contains syntax errors will crash all the configurations.
+Require a module with `pcall` may be used to prevent the collapse.
+
+```lua
+local ok, _ = pcall(require, 'module_with_error')
+if not ok then
+  -- not loaded
+end
+```
+
 See also:
 - `:help lua-require`
 
