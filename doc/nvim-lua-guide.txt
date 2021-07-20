@@ -146,6 +146,17 @@ having to specify the name of the file.
     require('other_modules') -- loads other_modules/init.lua
 <
 
+Requiring a nonexistent module or a module which contains syntax errors
+aborts the currently executing script.
+`pcall()` may be used to prevent errors.
+
+    >
+    local ok, _ = pcall(require, 'module_with_error')
+    if not ok then
+      -- not loaded
+    end
+<
+
 See also:
 - |lua-require|
 
