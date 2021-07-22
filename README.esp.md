@@ -175,7 +175,7 @@ También ve:
 Dado que los archivos en tiempo de ejecución no se basan en el sistema de módulos de Lua, dos 
 plugins pueden tener un archivo `plugin/main.lua` sin que ello suponga un problema.
 
-## Uusando Lua desde Vimscript
+## Usando Lua desde Vimscript
 
 ### :lua
 
@@ -400,7 +400,7 @@ inoremap <silent> <expr> <Tab>
     \ completion#trigger_completion()
 ```
 
-Tambien ve:
+También ve:
 - `:help v:lua`
 - `:help v:lua-call`
 
