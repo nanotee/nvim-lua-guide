@@ -60,7 +60,7 @@ Neovim supports loading an `init.lua` file for configuration instead of the usua
 Note: `init.lua` is of course *completely* optional. Support for `init.vim` is not going away and is still a valid option for configuration. Do keep in mind that some features are not 100% exposed to Lua yet.
 
 See also:
-- `:help config`
+- [`:help config`](https://neovim.io/doc/user/starting.html#config)
 
 ### Modules
 
@@ -118,7 +118,7 @@ end
 ```
 
 See also:
-- `:help lua-require`
+- [`:help lua-require`](https://neovim.io/doc/user/lua.html#lua-require)
 
 #### Tips
 
@@ -143,8 +143,8 @@ Much like Vimscript files, Lua files can be loaded automatically from special fo
 Note: in a runtime directory, all `*.vim` files are sourced before `*.lua` files.
 
 See also:
-- `:help 'runtimepath'`
-- `:help load-plugins`
+- [`:help 'runtimepath'`](https://neovim.io/doc/user/options.html#'runtimepath')
+- [`:help load-plugins`](https://neovim.io/doc/user/starting.html#load-plugins)
 
 #### Tips
 
@@ -189,8 +189,8 @@ Note 2: the `print()` function in Lua behaves similarly to the `:echomsg` comman
 
 See also:
 
-- `:help :lua`
-- `:help :lua-heredoc`
+- [`:help :lua`](https://neovim.io/doc/user/lua.html#Lua)
+- [`:help :lua-heredoc`](https://neovim.io/doc/user/lua.html#:lua-heredoc)
 
 ### :luado
 
@@ -210,7 +210,7 @@ Two implicit `line` and `linenr` variables are also provided. `line` is the text
 
 See also:
 
-- `:help :luado`
+- [`:help :luado`](https://neovim.io/doc/user/lua.html#:luado)
 
 ### Sourcing Lua files
 
@@ -235,13 +235,13 @@ Neovim provides 3 Ex commands to source Lua files
 :1,10source
 ```
 
-`:runtime` is a little different: it uses the `'runtimepath'` option to determine which files to source. See `:help :runtime` for more details
+`:runtime` is a little different: it uses the `'runtimepath'` option to determine which files to source. See [`:help :runtime`](https://neovim.io/doc/user/repeat.html#:runtime) for more details.
 
 See also:
 
-- `:help :luafile`
-- `:help :source`
-- `:help :runtime`
+- [`:help :luafile`](https://neovim.io/doc/user/lua.html#:luafile)
+- [`:help :source`](https://neovim.io/doc/user/repeat.html#:source)
+- [`:help :runtime`](https://neovim.io/doc/user/repeat.html#:runtime)
 
 #### Sourcing a lua file vs calling require():
 
@@ -314,7 +314,7 @@ echo luaeval('string.format("Lua is %s", _A)', 'awesome')
 ```
 
 See also:
-- `:help luaeval()`
+- [`:help luaeval()`](https://neovim.io/doc/user/lua.html#luaeval())
 
 ### v:lua
 
@@ -360,8 +360,8 @@ inoremap <silent> <expr> <Tab>
 ```
 
 See also:
-- `:help v:lua`
-- `:help v:lua-call`
+- [`:help v:lua`](https://neovim.io/doc/user/eval.html#v:lua)
+- [`:help v:lua-call`](https://neovim.io/doc/user/lua.html#v:lua-call)
 
 #### Caveats
 
@@ -380,7 +380,7 @@ echo map([1, 2, 3], v:lua.global_callback)
 
 ### Tips
 
-You can get Lua syntax highlighting inside .vim files by putting `let g:vimsyn_embed = 'l'` in your configuration file. See `:help g:vimsyn_embed` for more on this option.
+You can get Lua syntax highlighting inside .vim files by putting `let g:vimsyn_embed = 'l'` in your configuration file. See [`:help g:vimsyn_embed`](https://neovim.io/doc/user/syntax.html#g:vimsyn_embed) for more on this option.
 
 ## The vim namespace
 
@@ -395,7 +395,7 @@ Some notable functions and modules include:
 - `vim.lsp`: module that controls the built-in LSP client
 - `vim.treesitter`: module that exposes the functionality of the tree-sitter library
 
-This list is by no means comprehensive. If you wish to know more about what's made available by the `vim` variable, `:help lua-stdlib` and `:help lua-vim` are the way to go. Alternatively, you can do `:lua print(vim.inspect(vim))` to get a list of every module.
+This list is by no means comprehensive. If you wish to know more about what's made available by the `vim` variable, [`:help lua-stdlib`](https://neovim.io/doc/user/lua.html#lua-stdlib) and [`:help lua-vim`](https://neovim.io/doc/user/lua.html#lua-vim) are the way to go. Alternatively, you can do `:lua print(vim.inspect(vim))` to get a list of every module.
 
 #### Tips
 
@@ -566,9 +566,9 @@ vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.smart_tab()', {expr = true, noremap
 
 See also:
 
-- `:help keycodes`
-- `:help expr-quote`
-- `:help nvim_replace_termcodes()`
+- [`:help keycodes`](https://neovim.io/doc/user/intro.html#keycodes)
+- [`:help expr-quote`](https://neovim.io/doc/user/eval.html#expr-quote)
+- [`:help nvim_replace_termcodes()`](https://neovim.io/doc/user/api.html#nvim_replace_termcodes())
 
 ## Managing vim options
 
@@ -577,14 +577,14 @@ See also:
 Neovim provides a set of API functions to either set an option or get its current value:
 
 - Global options:
-    - `vim.api.nvim_set_option()`
-    - `vim.api.nvim_get_option()`
+    - [`vim.api.nvim_set_option()`](https://neovim.io/doc/user/api.html#nvim_set_option())
+    - [`vim.api.nvim_get_option()`](https://neovim.io/doc/user/api.html#nvim_get_option())
 - Buffer-local options:
-    - `vim.api.nvim_buf_set_option()`
-    - `vim.api.nvim_buf_get_option()`
+    - [`vim.api.nvim_buf_set_option()`](https://neovim.io/doc/user/api.html#nvim_buf_set_option())
+    - [`vim.api.nvim_buf_get_option()`](https://neovim.io/doc/user/api.html#nvim_buf_get_option())
 - Window-local options:
-    - `vim.api.nvim_win_set_option()`
-    - `vim.api.nvim_win_get_option()`
+    - [`vim.api.nvim_win_set_option()`](https://neovim.io/doc/user/api.html#nvim_win_set_option())
+    - [`vim.api.nvim_win_get_option()`](https://neovim.io/doc/user/api.html#nvim_win_get_option())
 
 They take a string containing the name of the option to set/get as well as the value you want to set it to.
 
@@ -622,10 +622,10 @@ print(vim.api.nvim_buf_get_option(10, 'shiftwidth')) -- 4
 
 A few meta-accessors are available if you want to set options in a more "idiomatic" way. They essentially wrap the above API functions and allow you to manipulate options as if they were variables:
 
-- `vim.o.{option}`: behaves like `:set`
-- `vim.go.{option}`: behaves like `:setglobal`
-- `vim.bo.{option}`: behaves like `:setlocal` for buffer-local options
-- `vim.wo.{option}`: behaves like `:setlocal` for window-local options
+- [`vim.o.{option}`](https://neovim.io/doc/user/lua.html#vim.o): behaves like `:set`
+- [`vim.go.{option}`](https://neovim.io/doc/user/lua.html#vim.go): behaves like `:setglobal`
+- [`vim.bo.{option}`](https://neovim.io/doc/user/lua.html#vim.bo): behaves like `:setlocal` for buffer-local options
+- [`vim.wo.{option}`](https://neovim.io/doc/user/lua.html#vim.wo): behaves like `:setlocal` for window-local options
 
 ```lua
 vim.o.smarttab = false
@@ -674,10 +674,10 @@ vim.opt.whichwrap:remove({ 'b', 's' })
 vim.opt.whichwrap = vim.opt.whichwrap - { 'b', 's' }
 ```
 
-Be sure to look at `:help vim.opt` for more information.
+Be sure to look at [`:help vim.opt`](https://neovim.io/doc/user/lua.html#vim.opt) for more information.
 
 See also:
-- `:help lua-vim-options`
+- [`:help lua-vim-options`](https://neovim.io/doc/user/lua.html#lua-vim-options)
 
 ## Managing vim internal variables
 
@@ -686,28 +686,28 @@ See also:
 Much like options, internal variables have their own set of API functions:
 
 - Global variables (`g:`):
-    - `vim.api.nvim_set_var()`
-    - `vim.api.nvim_get_var()`
-    - `vim.api.nvim_del_var()`
+    - [`vim.api.nvim_set_var()`](https://neovim.io/doc/user/api.html#nvim_set_var())
+    - [`vim.api.nvim_get_var()`](https://neovim.io/doc/user/api.html#nvim_get_var())
+    - [`vim.api.nvim_del_var()`](https://neovim.io/doc/user/api.html#nvim_del_var())
 - Buffer variables (`b:`):
-    - `vim.api.nvim_buf_set_var()`
-    - `vim.api.nvim_buf_get_var()`
-    - `vim.api.nvim_buf_del_var()`
+    - [`vim.api.nvim_buf_set_var()`](https://neovim.io/doc/user/api.html#nvim_buf_set_var())
+    - [`vim.api.nvim_buf_get_var()`](https://neovim.io/doc/user/api.html#nvim_buf_get_var())
+    - [`vim.api.nvim_buf_del_var()`](https://neovim.io/doc/user/api.html#nvim_buf_del_var())
 - Window variables (`w:`):
-    - `vim.api.nvim_win_set_var()`
-    - `vim.api.nvim_win_get_var()`
-    - `vim.api.nvim_win_del_var()`
+    - [`vim.api.nvim_win_set_var()`](https://neovim.io/doc/user/api.html#nvim_win_set_var())
+    - [`vim.api.nvim_win_get_var()`](https://neovim.io/doc/user/api.html#nvim_win_get_var())
+    - [`vim.api.nvim_win_del_var()`](https://neovim.io/doc/user/api.html#nvim_win_del_var())
 - Tabpage variables (`t:`):
-    - `vim.api.nvim_tabpage_set_var()`
-    - `vim.api.nvim_tabpage_get_var()`
-    - `vim.api.nvim_tabpage_del_var()`
+    - [`vim.api.nvim_tabpage_set_var()`](https://neovim.io/doc/user/api.html#nvim_tabpage_set_var())
+    - [`vim.api.nvim_tabpage_get_var()`](https://neovim.io/doc/user/api.html#nvim_tabpage_get_var())
+    - [`vim.api.nvim_tabpage_del_var()`](https://neovim.io/doc/user/api.html#nvim_tabpage_del_var())
 - Predefined Vim variables (`v:`):
-    - `vim.api.nvim_set_vvar()`
-    - `vim.api.nvim_get_vvar()`
+    - [`vim.api.nvim_set_vvar()`](https://neovim.io/doc/user/api.html#nvim_set_vvar())
+    - [`vim.api.nvim_get_vvar()`](https://neovim.io/doc/user/api.html#nvim_get_vvar())
 
 With the exception of predefined Vim variables, they can also be deleted (the `:unlet` command is the equivalent in Vimscript). Local variables (`l:`), script variables (`s:`) and function arguments (`a:`) cannot be manipulated as they only make sense in the context of a Vim script, Lua has its own scoping rules.
 
-If you are unfamiliar with what these variables do, `:help internal-variables` describes them in detail.
+If you are unfamiliar with what these variables do, [`:help internal-variables`](https://neovim.io/doc/user/eval.html#internal-variables) describes them in detail.
 
 These functions take a string containing the name of the variable to set/get/delete as well as the value you want to set it to.
 
@@ -732,12 +732,12 @@ vim.api.nvim_buf_del_var(3, 'some_tabpage_variable')
 
 Internal variables can be manipulated more intuitively using these meta-accessors:
 
-- `vim.g.{name}`: global variables
-- `vim.b.{name}`: buffer variables
-- `vim.w.{name}`: window variables
-- `vim.t.{name}`: tabpage variables
-- `vim.v.{name}`: predefined Vim variables
-- `vim.env.{name}`: environment variables
+- [`vim.g.{name}`](https://neovim.io/doc/user/lua.html#vim.g): global variables
+- [`vim.b.{name}`](https://neovim.io/doc/user/lua.html#vim.b): buffer variables
+- [`vim.w.{name}`](https://neovim.io/doc/user/lua.html#vim.w): window variables
+- [`vim.t.{name}`](https://neovim.io/doc/user/lua.html#vim.t): tabpage variables
+- [`vim.v.{name}`](https://neovim.io/doc/user/lua.html#vim.v): predefined Vim variables
+- [`vim.env.{name}`](https://neovim.io/doc/user/lua.html#vim.env): environment variables
 
 ```lua
 vim.g.some_global_variable = {
@@ -757,7 +757,7 @@ vim.g.some_global_variable = nil
 ```
 
 See also:
-- `:help lua-vim-variables`
+- [`:help lua-vim-variables`](https://neovim.io/doc/user/lua.html#lua-vim-variables)
 
 #### Caveats
 
@@ -819,13 +819,13 @@ The functionality of `vim.fn` is identical to `vim.call`, but allows a more Lua-
 It is distinct from `vim.api.nvim_call_function` in that converting Vim/Lua objects is automatic: `vim.api.nvim_call_function` returns a table for floating point numbers and does not accept Lua closures while `vim.fn` handles these types transparently.
 
 See also:
-- `:help vim.fn`
+- [`:help vim.fn`](https://neovim.io/doc/user/lua.html#vim.fn)
 
 #### Tips
 
-Neovim has an extensive library of powerful built-in functions that are very useful for plugins. See `:help vim-function` for an alphabetical list and `:help function-list` for a list of functions grouped by topic.
+Neovim has an extensive library of powerful built-in functions that are very useful for plugins. See [`:help vim-function`](https://neovim.io/doc/user/eval.html#vim-function) for an alphabetical list and [`:help function-list`](https://neovim.io/doc/user/usr_41.html#function-list) for a list of functions grouped by topic.
 
-Neovim API functions can be used directly through `vim.api.{..}`. See `:help api` for information.
+Neovim API functions can be used directly through `vim.api.{..}`. See [`:help api`](https://neovim.io/doc/user/api.html#API) for information.
 
 #### Caveats
 
@@ -850,13 +850,13 @@ end
 Neovim provides a list of API functions to set, get and delete mappings:
 
 - Global mappings:
-    - `vim.api.nvim_set_keymap()`
-    - `vim.api.nvim_get_keymap()`
-    - `vim.api.nvim_del_keymap()`
+    - [`vim.api.nvim_set_keymap()`](https://neovim.io/doc/user/api.html#nvim_set_keymap())
+    - [`vim.api.nvim_get_keymap()`](https://neovim.io/doc/user/api.html#nvim_get_keymap())
+    - [`vim.api.nvim_del_keymap()`](https://neovim.io/doc/user/api.html#nvim_del_keymap())
 - Buffer-local mappings:
-    - `vim.api.nvim_buf_set_keymap()`
-    - `vim.api.nvim_buf_get_keymap()`
-    - `vim.api.nvim_buf_del_keymap()`
+    - [`vim.api.nvim_buf_set_keymap()`](https://neovim.io/doc/user/api.html#nvim_buf_set_keymap())
+    - [`vim.api.nvim_buf_get_keymap()`](https://neovim.io/doc/user/api.html#nvim_buf_get_keymap())
+    - [`vim.api.nvim_buf_del_keymap()`](https://neovim.io/doc/user/api.html#nvim_buf_del_keymap())
 
 Let's start with `vim.api.nvim_set_keymap()` and `vim.api.nvim_buf_set_keymap()`
 
@@ -880,7 +880,7 @@ The second argument is a string containing the left-hand side of the mapping (th
 
 The third argument is a string containing the right-hand side of the mapping (the command to execute).
 
-The final argument is a table containing boolean options for the mapping as defined in `:help :map-arguments` (including `noremap` and excluding `buffer`).
+The final argument is a table containing boolean options for the mapping as defined in [`:help :map-arguments`](https://neovim.io/doc/user/map.html#:map-arguments) (including `noremap` and excluding `buffer`).
 
 Buffer-local mappings also take a buffer number as their first argument (`0` sets the mapping for the current buffer).
 
@@ -935,6 +935,7 @@ For the time being, you're probably better off creating commands in Vimscript.
 Augroups and autocommands do not have an interface yet but it is being worked on:
 
 - [Pull request #12378](https://github.com/neovim/neovim/pull/12378)
+- [Pull request #14661](https://github.com/neovim/neovim/pull/14661) (lua: autocmds take 2)
 
 In the meantime, you can either create autocommands in Vimscript or use [this wrapper from norcalli/nvim_utils](https://github.com/norcalli/nvim_utils/blob/master/lua/nvim_utils.lua#L554-L567)
 
@@ -944,7 +945,7 @@ The syntax API is still a work in progress. Here are a couple of pointers:
 
 - [Issue #9876](https://github.com/neovim/neovim/issues/9876)
 - [tjdevries/colorbuddy.vim, a library for creating colorschemes in Lua](https://github.com/tjdevries/colorbuddy.vim)
-- `:help lua-treesitter`
+- [`:help lua-treesitter`](https://neovim.io/doc/user/treesitter.html#lua-treesitter)
 
 ## General tips and recommendations
 
@@ -1098,14 +1099,14 @@ The plugin uses the [Debug Adapter Protocol](https://microsoft.github.io/debug-a
 - [teukka.tech - Using LibUV in Neovim](https://teukka.tech/posts/2020-01-07-vimloop/)
 
 See also:
-- `:help vim.loop`
+- [`:help vim.loop`](https://neovim.io/doc/user/lua.html#vim.loop)
 
 ### vim.lsp
 
 `vim.lsp` is the module that controls the built-in LSP client. The [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/) repository contains default configurations for popular language servers.
 
 The behavior of the client can be configured using "lsp-handlers". For more information:
-- `:help lsp-handler`
+- [`:help lsp-handler`](https://neovim.io/doc/user/lsp.html#lsp-handler)
 - [neovim/neovim#12655](https://github.com/neovim/neovim/pull/12655)
 - [How to migrate from diagnostic-nvim](https://github.com/nvim-lua/diagnostic-nvim/issues/73#issue-737897078)
 
@@ -1114,7 +1115,7 @@ You may also want to take a look at plugins built around the LSP client:
 - [RishabhRD/nvim-lsputils](https://github.com/RishabhRD/nvim-lsputils)
 
 See also:
-- `:help lsp`
+- [`:help lsp`](https://neovim.io/doc/user/lsp.html#LSP)
 
 ### vim.treesitter
 
@@ -1123,7 +1124,7 @@ See also:
 The [nvim-treesitter](https://github.com/nvim-treesitter/) organisation hosts various plugins taking advantage of the library.
 
 See also:
-- `:help lua-treesitter`
+- [`:help lua-treesitter`](https://neovim.io/doc/user/treesitter.html#lua-treesitter)
 
 ### Transpilers
 
@@ -1135,7 +1136,7 @@ Probably one of the most well-known transpilers for Lua. Adds a lots of convenie
 
 - [Fennel](https://fennel-lang.org/)
 
-A lisp that compiles to Lua. You can write configuration and plugins for Neovim in Fennel with the [Olical/aniseed](https://github.com/Olical/aniseed) plugin. Additionally, the [Olical/conjure](https://github.com/Olical/conjure) plugin provides an interactive development environment that supports Fennel (among other languages).
+A lisp that compiles to Lua. You can write configuration and plugins for Neovim in Fennel with the [Olical/aniseed](https://github.com/Olical/aniseed) or the [Hotpot](https://github.com/rktjmp/hotpot.nvim) plugin. Additionally, the [Olical/conjure](https://github.com/Olical/conjure) plugin provides an interactive development environment that supports Fennel (among other languages).
 
 Other interesting projects:
 - [TypeScriptToLua/TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua)
