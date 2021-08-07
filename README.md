@@ -1110,9 +1110,7 @@ The behavior of the client can be configured using "lsp-handlers". For more info
 - [neovim/neovim#12655](https://github.com/neovim/neovim/pull/12655)
 - [How to migrate from diagnostic-nvim](https://github.com/nvim-lua/diagnostic-nvim/issues/73#issue-737897078)
 
-You may also want to take a look at plugins built around the LSP client:
-- [nvim-lua/completion-nvim](https://github.com/nvim-lua/completion-nvim)
-- [RishabhRD/nvim-lsputils](https://github.com/RishabhRD/nvim-lsputils)
+You may also want to take a look at [plugins built around the LSP client](https://github.com/rockerBOO/awesome-neovim#lsp)
 
 See also:
 - [`:help lsp`](https://neovim.io/doc/user/lsp.html#LSP)
