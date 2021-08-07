@@ -622,10 +622,10 @@ print(vim.api.nvim_buf_get_option(10, 'shiftwidth')) -- 4
 
 A few meta-accessors are available if you want to set options in a more "idiomatic" way. They essentially wrap the above API functions and allow you to manipulate options as if they were variables:
 
-- [`vim.o.{option}`](https://neovim.io/doc/user/lua.html#vim.o): behaves like `:set`
-- [`vim.go.{option}`](https://neovim.io/doc/user/lua.html#vim.go): behaves like `:setglobal`
-- [`vim.bo.{option}`](https://neovim.io/doc/user/lua.html#vim.bo): behaves like `:setlocal` for buffer-local options
-- [`vim.wo.{option}`](https://neovim.io/doc/user/lua.html#vim.wo): behaves like `:setlocal` for window-local options
+- [`vim.o`](https://neovim.io/doc/user/lua.html#vim.o): behaves like `:set`
+- [`vim.go`](https://neovim.io/doc/user/lua.html#vim.go): behaves like `:setglobal`
+- [`vim.bo`](https://neovim.io/doc/user/lua.html#vim.bo): behaves like `:setlocal` for buffer-local options
+- [`vim.wo`](https://neovim.io/doc/user/lua.html#vim.wo): behaves like `:setlocal` for window-local options
 
 ```lua
 vim.o.smarttab = false
@@ -646,9 +646,9 @@ vim.wo.number = true -- same as vim.api.nvim_win_set_option(0, 'number', true)
 
 These wrappers also have more sophisticated `vim.opt*` variants that provide convenient mechanisms for setting options in Lua. They're similar to what you might be used to in your `init.vim`:
 
-- `vim.opt.{option}`: behaves like `:set`
-- `vim.opt_global.{option}`: behaves like `:setglobal`
-- `vim.opt_local.{option}`: behaves like `:setlocal`
+- `vim.opt`: behaves like `:set`
+- `vim.opt_global`: behaves like `:setglobal`
+- `vim.opt_local`: behaves like `:setlocal`
 
 ```lua
 vim.opt.smarttab = false
@@ -732,12 +732,12 @@ vim.api.nvim_buf_del_var(3, 'some_tabpage_variable')
 
 Internal variables can be manipulated more intuitively using these meta-accessors:
 
-- [`vim.g.{name}`](https://neovim.io/doc/user/lua.html#vim.g): global variables
-- [`vim.b.{name}`](https://neovim.io/doc/user/lua.html#vim.b): buffer variables
-- [`vim.w.{name}`](https://neovim.io/doc/user/lua.html#vim.w): window variables
-- [`vim.t.{name}`](https://neovim.io/doc/user/lua.html#vim.t): tabpage variables
-- [`vim.v.{name}`](https://neovim.io/doc/user/lua.html#vim.v): predefined Vim variables
-- [`vim.env.{name}`](https://neovim.io/doc/user/lua.html#vim.env): environment variables
+- [`vim.g`](https://neovim.io/doc/user/lua.html#vim.g): global variables
+- [`vim.b`](https://neovim.io/doc/user/lua.html#vim.b): buffer variables
+- [`vim.w`](https://neovim.io/doc/user/lua.html#vim.w): window variables
+- [`vim.t`](https://neovim.io/doc/user/lua.html#vim.t): tabpage variables
+- [`vim.v`](https://neovim.io/doc/user/lua.html#vim.v): predefined Vim variables
+- [`vim.env`](https://neovim.io/doc/user/lua.html#vim.env): environment variables
 
 ```lua
 vim.g.some_global_variable = {

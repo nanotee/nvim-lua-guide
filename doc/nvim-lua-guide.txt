@@ -297,7 +297,7 @@ of a script:
 <
 
 `:runtime` is a little different: it uses the `'runtimepath'` option to
-determine which files to source. See `:help :runtime` for more details
+determine which files to source. See |:runtime| for more details.
 
 See also:
 
@@ -460,9 +460,9 @@ always throw an error:
 
 Tips~
 
-You can get Lua syntax highlighting inside .vim files by putting
-`let g:vimsyn_embed = 'l'` in your configuration file. See `:help
-g:vimsyn_embed` for more on this option.
+You can get Lua syntax highlighting inside .vim files by putting `let
+g:vimsyn_embed = 'l'` in your configuration file. See |g:vimsyn_embed|
+for more on this option.
 
 ==============================================================================
 THE VIM NAMESPACE
@@ -484,10 +484,9 @@ remote plugins)
 - `vim.treesitter`: module that exposes the functionality of the
 tree-sitter library
 
-This list is by no means comprehensive. If you wish to know more about
-what's made available by the `vim` variable, `:help lua-stdlib` and
-`:help lua-vim` are the way to go. Alternatively, you can do `:lua
-print(vim.inspect(vim))` to get a list of every module.
+This list is by no means comprehensive. If you wish to know more about what's
+made available by the `vim` variable, |lua-stdlib| and |lua-vim| to get a list
+of every module.
 
 Tips~
 
@@ -705,14 +704,14 @@ Neovim provides a set of API functions to either set an option or get
 its current value:
 
 - Global options:
-    - `vim.api.nvim_set_option()`
-    - `vim.api.nvim_get_option()`
+    - |nvim_set_option()|
+    - |nvim_get_option()|
 - Buffer-local options:
-    - `vim.api.nvim_buf_set_option()`
-    - `vim.api.nvim_buf_get_option()`
+    - |nvim_buf_set_option()|
+    - |nvim_buf_get_option()|
 - Window-local options:
-    - `vim.api.nvim_win_set_option()`
-    - `vim.api.nvim_win_get_option()`
+    - |nvim_win_set_option()|
+    - |nvim_win_get_option()|
 
 They take a string containing the name of the option to set/get as well
 as the value you want to set it to.
@@ -756,10 +755,10 @@ A few meta-accessors are available if you want to set options in a more
 "idiomatic" way. They essentially wrap the above API functions and allow
 you to manipulate options as if they were variables:
 
-- `vim.o.{option}`: behaves like `:set`
-- `vim.go.{option}`: behaves like `:setglobal`
-- `vim.bo.{option}`: behaves like `:setlocal` for buffer-local options
-- `vim.wo.{option}`: behaves like `:setlocal` for window-local options
+- |vim.o|: behaves like `:set`
+- |vim.go|: behaves like `:setglobal`
+- |vim.bo|: behaves like `:setlocal` for buffer-local options
+- |vim.wo|: behaves like `:setlocal` for window-local options
 
     >
     vim.o.smarttab = false
@@ -785,9 +784,9 @@ These wrappers also have more sophisticated `vim.opt*` variants that
 provide convenient mechanisms for setting options in Lua. They're similar
 to what you might be used to in your `init.vim`:
 
-- `vim.opt.{option}`: behaves like `:set`
-- `vim.opt_global.{option}`: behaves like `:setglobal`
-- `vim.opt_local.{option}`: behaves like `:setlocal`
+- `vim.opt`: behaves like `:set`
+- `vim.opt_global`: behaves like `:setglobal`
+- `vim.opt_local`: behaves like `:setlocal`
 
     >
     vim.opt.smarttab = false
@@ -816,7 +815,7 @@ and `:set-=` counterparts in Vimscript.
     vim.opt.whichwrap = vim.opt.whichwrap - { 'b', 's' }
 <
 
-Be sure to look at `:help vim.opt` for more information.
+Be sure to look at |vim.opt| for more information.
 
 See also:
 - |lua-vim-options|
@@ -830,24 +829,24 @@ Using api functions~
 Much like options, internal variables have their own set of API functions:
 
 - Global variables (`g:`):
-    - `vim.api.nvim_set_var()`
-    - `vim.api.nvim_get_var()`
-    - `vim.api.nvim_del_var()`
+    - |nvim_set_var()|
+    - |nvim_get_var()|
+    - |nvim_del_var()|
 - Buffer variables (`b:`):
-    - `vim.api.nvim_buf_set_var()`
-    - `vim.api.nvim_buf_get_var()`
-    - `vim.api.nvim_buf_del_var()`
+    - |nvim_buf_set_var()|
+    - |nvim_buf_get_var()|
+    - |nvim_buf_del_var()|
 - Window variables (`w:`):
-    - `vim.api.nvim_win_set_var()`
-    - `vim.api.nvim_win_get_var()`
-    - `vim.api.nvim_win_del_var()`
+    - |nvim_win_set_var()|
+    - |nvim_win_get_var()|
+    - |nvim_win_del_var()|
 - Tabpage variables (`t:`):
-    - `vim.api.nvim_tabpage_set_var()`
-    - `vim.api.nvim_tabpage_get_var()`
-    - `vim.api.nvim_tabpage_del_var()`
+    - |nvim_tabpage_set_var()|
+    - |nvim_tabpage_get_var()|
+    - |nvim_tabpage_del_var()|
 - Predefined Vim variables (`v:`):
-    - `vim.api.nvim_set_vvar()`
-    - `vim.api.nvim_get_vvar()`
+    - |nvim_set_vvar()|
+    - |nvim_get_vvar()|
 
 With the exception of predefined Vim variables, they can also be deleted
 (the `:unlet` command is the equivalent in Vimscript). Local variables
@@ -855,8 +854,8 @@ With the exception of predefined Vim variables, they can also be deleted
 be manipulated as they only make sense in the context of a Vim script,
 Lua has its own scoping rules.
 
-If you are unfamiliar with what these variables do, `:help
-internal-variables` describes them in detail.
+If you are unfamiliar with what these variables do, |internal-variables|
+describes them in detail.
 
 These functions take a string containing the name of the variable to
 set/get/delete as well as the value you want to set it to.
@@ -888,12 +887,12 @@ Using meta-accessors~
 Internal variables can be manipulated more intuitively using these
 meta-accessors:
 
-- `vim.g.{name}`: global variables
-- `vim.b.{name}`: buffer variables
-- `vim.w.{name}`: window variables
-- `vim.t.{name}`: tabpage variables
-- `vim.v.{name}`: predefined Vim variables
-- `vim.env.{name}`: environment variables
+- |vim.g|: global variables
+- |vim.b|: buffer variables
+- |vim.w|: window variables
+- |vim.t|: tabpage variables
+- |vim.v|: predefined Vim variables
+- |vim.env|: environment variables
 
     >
     vim.g.some_global_variable = {
@@ -993,12 +992,12 @@ See also:
 
 Tips~
 
-Neovim has an extensive library of powerful built-in functions that are
-very useful for plugins. See `:help vim-function` for an alphabetical
-list and `:help function-list` for a list of functions grouped by topic.
+Neovim has an extensive library of powerful built-in functions that are very
+useful for plugins. See |vim-function| for an alphabetical list and
+|function-list| for a list of functions grouped by topic.
 
 Neovim API functions can be used directly through `vim.api.{..}`. See
-`:help api` for information.
+|api| for information.
 
 Caveats~
 
@@ -1029,13 +1028,13 @@ DEFINING MAPPINGS
 Neovim provides a list of API functions to set, get and delete mappings:
 
 - Global mappings:
-    - `vim.api.nvim_set_keymap()`
-    - `vim.api.nvim_get_keymap()`
-    - `vim.api.nvim_del_keymap()`
+    - |nvim_set_keymap()|
+    - |nvim_get_keymap()|
+    - |nvim_del_keymap()|
 - Buffer-local mappings:
-    - `vim.api.nvim_buf_set_keymap()`
-    - `vim.api.nvim_buf_get_keymap()`
-    - `vim.api.nvim_buf_del_keymap()`
+    - |nvim_buf_set_keymap()|
+    - |nvim_buf_get_keymap()|
+    - |nvim_buf_del_keymap()|
 
 Let's start with `vim.api.nvim_set_keymap()` and
 `vim.api.nvim_buf_set_keymap()`
@@ -1065,8 +1064,7 @@ The third argument is a string containing the right-hand side of the
 mapping (the command to execute).
 
 The final argument is a table containing boolean options for the mapping
-as defined in `:help :map-arguments` (including `noremap` and excluding
-`buffer`).
+as defined in |:map-arguments|.
 
 Buffer-local mappings also take a buffer number as their first argument
 (`0` sets the mapping for the current buffer).
@@ -1139,6 +1137,8 @@ Augroups and autocommands do not have an interface yet but it is being
 worked on:
 
 -  Pull request #12378: https://github.com/neovim/neovim/pull/12378
+-  Pull request #14661: https://github.com/neovim/neovim/pull/14661   lua:
+autocmds take 2
 
 In the meantime, you can either create autocommands in
 Vimscript or use  this wrapper from norcalli/nvim_utils:
@@ -1406,7 +1406,8 @@ Neovim plugins and configuration directly in Moonscript.
 
 A lisp that compiles to Lua. You can write configuration
 and plugins for Neovim in Fennel with the  Olical/aniseed:
-https://github.com/Olical/aniseed  plugin. Additionally, the
+https://github.com/Olical/aniseed  or the  Hotpot:
+https://github.com/rktjmp/hotpot.nvim  plugin. Additionally, the
 Olical/conjure: https://github.com/Olical/conjure  plugin provides an
 interactive development environment that supports Fennel  among other
 languages .

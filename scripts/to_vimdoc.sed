@@ -18,6 +18,11 @@
     s/.*/&~/
 }
 
+# Help links
+s/\[`vim\.api\.\(.*\)`\](.*)/|\1|/
+s/\[`:help \(.*\)`\](.*)/|\1|/
+s/\[`\(.*\)`\](.*)/|\1|/
+
 # Markdown links
 /\[.*\](http.*)/ {
     y/[]()/ :  /
@@ -35,9 +40,6 @@ s/\*\*\(WARNING\)\*\*/\1/
     s/```.\+/>/
     s/\s*```$/</
 }
-
-# Help links
-s/- `:help \(.*\)`/- |\1|/
 
 # Trim trailing whitespace
 s/\s\+$//
