@@ -492,7 +492,7 @@ tree-sitter library
 This list is by no means comprehensive. If you wish to know more about what's
 made available by the `vim` variable, |lua-stdlib| and |lua-vim| are the way
 to go. Alternatively, you can do `:lua print(vim.inspect(vim))` to get a list
-of every module.
+of every module. API functions are documented under |api-global|.
 
 Tips~
 
