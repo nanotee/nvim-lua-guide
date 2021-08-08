@@ -8,6 +8,65 @@
 - [🇯🇵 Japanese version](https://github.com/willelz/nvim-lua-guide-ja/blob/master/README.ja.md)
 - [🇷🇺 Russian version](https://github.com/kuator/nvim-lua-guide-ru)
 
+---
+
+<!-- Recreate TOC with `doctoc --maxlevel 3 README.md` -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Getting started using Lua in Neovim](#getting-started-using-lua-in-neovim)
+  - [Translations](#translations)
+  - [Introduction](#introduction)
+    - [Learning Lua](#learning-lua)
+    - [Existing tutorials for writing Lua in Neovim](#existing-tutorials-for-writing-lua-in-neovim)
+    - [Companion plugins](#companion-plugins)
+  - [Where to put Lua files](#where-to-put-lua-files)
+    - [init.lua](#initlua)
+    - [Modules](#modules)
+    - [Runtime files](#runtime-files)
+  - [Using Lua from Vimscript](#using-lua-from-vimscript)
+    - [:lua](#lua)
+    - [:luado](#luado)
+    - [Sourcing Lua files](#sourcing-lua-files)
+    - [luaeval()](#luaeval)
+    - [v:lua](#vlua)
+    - [Tips](#tips)
+  - [The vim namespace](#the-vim-namespace)
+  - [Using Vimscript from Lua](#using-vimscript-from-lua)
+    - [vim.api.nvim_eval()](#vimapinvim_eval)
+    - [vim.api.nvim_exec()](#vimapinvim_exec)
+    - [vim.api.nvim_command()](#vimapinvim_command)
+    - [vim.cmd()](#vimcmd)
+    - [vim.api.nvim_replace_termcodes()](#vimapinvim_replace_termcodes)
+  - [Managing vim options](#managing-vim-options)
+    - [Using api functions](#using-api-functions)
+    - [Using meta-accessors](#using-meta-accessors)
+  - [Managing vim internal variables](#managing-vim-internal-variables)
+    - [Using api functions](#using-api-functions-1)
+    - [Using meta-accessors](#using-meta-accessors-1)
+  - [Calling Vimscript functions](#calling-vimscript-functions)
+    - [vim.fn.{function}()](#vimfnfunction)
+  - [Defining mappings](#defining-mappings)
+  - [Defining user commands](#defining-user-commands)
+  - [Defining autocommands](#defining-autocommands)
+  - [Defining syntax/highlights](#defining-syntaxhighlights)
+  - [General tips and recommendations](#general-tips-and-recommendations)
+    - [Reloading cached modules](#reloading-cached-modules)
+    - [Notes about Vimscript <-> Lua type conversion](#notes-about-vimscript---lua-type-conversion)
+    - [Setting up linters/language servers](#setting-up-linterslanguage-servers)
+    - [Debugging Lua code](#debugging-lua-code)
+    - [Testing Lua code](#testing-lua-code)
+    - [Using Luarocks packages](#using-luarocks-packages)
+  - [Miscellaneous](#miscellaneous)
+    - [vim.loop](#vimloop)
+    - [vim.lsp](#vimlsp)
+    - [vim.treesitter](#vimtreesitter)
+    - [Transpilers](#transpilers)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+
 ## Introduction
 
 The [integration of Lua](https://www.youtube.com/watch?v=IP3J56sKtn0) as a [first-class language inside Neovim](https://github.com/neovim/neovim/wiki/FAQ#why-embed-lua-instead-of-x) is shaping up to be one of its killer features.
