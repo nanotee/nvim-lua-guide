@@ -408,9 +408,14 @@ Writing `print(vim.inspect(x))` every time you want to inspect the contents of a
 
 ```lua
 function _G.dump(...)
-    local objects = vim.tbl_map(vim.inspect, {...})
-    print(unpack(objects))
-    return ...
+  local objects, v = {}, nil
+  for i = 1, select('#', ...) do
+    v = select(i, ...)
+    table.insert(objects, vim.inspect(v))
+  end
+
+  print(table.concat(objects, '\n'))
+  return ...
 end
 ```
 
