@@ -407,10 +407,10 @@ This list is by no means comprehensive. If you wish to know more about what's ma
 Writing `print(vim.inspect(x))` every time you want to inspect the contents of an object can get pretty tedious. It might be worthwhile to have a global wrapper function somewhere in your configuration:
 
 ```lua
-function _G.dump(...)
-  local objects, v = {}, nil
+function _G.put(...)
+  local objects = {}
   for i = 1, select('#', ...) do
-    v = select(i, ...)
+    local v = select(i, ...)
     table.insert(objects, vim.inspect(v))
   end
 
@@ -422,11 +422,11 @@ end
 You can then inspect the contents of an object very quickly in your code or from the command-line:
 
 ```lua
-dump({1, 2, 3})
+put({1, 2, 3})
 ```
 
 ```vim
-:lua dump(vim.loop)
+:lua put(vim.loop)
 ```
 
 
