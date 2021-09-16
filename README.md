@@ -511,7 +511,7 @@ Since you have to pass strings to these functions, you often end up having to es
 vim.cmd('%s/\\Vfoo/bar/g')
 ```
 
-Literal strings are easier to use as they do not require escaping characters:
+Double bracketed strings are easier to use as they do not require escaping characters:
 
 ```lua
 vim.cmd([[%s/\Vfoo/bar/g]])

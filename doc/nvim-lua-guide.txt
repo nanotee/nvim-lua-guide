@@ -620,8 +620,8 @@ having to escape backslashes:
     vim.cmd('%s/\\Vfoo/bar/g')
 <
 
-Literal strings are easier to use as they do not require escaping
-characters:
+Double bracketed strings are easier to use as they do not require
+escaping characters:
 
     >
     vim.cmd([[%s/\Vfoo/bar/g]])
