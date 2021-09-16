@@ -1184,6 +1184,20 @@ https://github.com/nvim-lua/plenary.nvim  plugin has a	custom function:
 https://github.com/nvim-lua/plenary.nvim/blob/master/lua/plenary/reload.lua
 that does this for you.
 
+Don't pad Lua strings!~
+
+When using double bracketed strings, resist the temptation to pad
+them! While it is fine to do in contexts where spaces are ignored,
+it can cause hard to debug issues when whitespace is significant:
+
+    >
+    vim.api.nvim_set_keymap('n', '<Leader>f', [[ <Cmd>call foo()<CR>
+    ]], {noremap = true})
+<
+
+In the above example, `<Leader>f` is mapped to `<Space><Cmd>call
+foo()<CR><Space>` instead of `<Cmd>call foo()<CR>`.
+
 Notes about Vimscript <-> Lua type conversion~
 
 Converting a variable creates a copy:~
