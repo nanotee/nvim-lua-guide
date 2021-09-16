@@ -62,7 +62,7 @@ A few tutorials have already been written to help people write plugins in Lua. S
 
 Neovim supports loading an `init.lua` file for configuration instead of the usual `init.vim`.
 
-Note: `init.lua` is of course *completely* optional. Support for `init.vim` is not going away and is still a valid option for configuration. Do keep in mind that some features are not 100% exposed to Lua yet.
+Note: `init.lua` is of course _completely_ optional. Support for `init.vim` is not going away and is still a valid option for configuration. Do keep in mind that some features are not 100% exposed to Lua yet.
 
 See also:
 - [`:help config`](https://neovim.io/doc/user/starting.html#config)
@@ -475,7 +475,7 @@ true)
 print(result) -- 'hello world'
 ```
 
-**TODO**: The docs say that script-scope (`s:`) is supported, but running this snippet with a script-scoped variable throws an error. Why?
+**TODO**: the docs say that script-scope (`s:`) is supported, but running this snippet with a script-scoped variable throws an error. Why?
 
 ### vim.api.nvim_command()
 

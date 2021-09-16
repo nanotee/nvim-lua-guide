@@ -29,7 +29,7 @@ s/\[`\(.*\)`\](.*)/|\1|/
 }
 
 # Todos
-s/\*\*TODO\*\*:/\t*Todo\ttasks:/g
+s/\*\*TODO\*\*: /\t*Todo\t/g
 
 # Warnings
 s/\*\*\(WARNING\)\*\*/\1/
