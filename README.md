@@ -495,11 +495,13 @@ Alias for `vim.api.nvim_exec()`. Only the command argument is needed, `output` i
 ```lua
 vim.cmd('buffers')
 vim.cmd([[
-let g:multiline =<< EOF
-foo
-bar
-baz
-EOF
+let g:multiline_list = [
+            \ 1,
+            \ 2,
+            \ 3,
+            \ ]
+
+echo g:multiline_list
 ]])
 ```
 
