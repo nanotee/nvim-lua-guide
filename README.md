@@ -495,11 +495,9 @@ Alias for `vim.api.nvim_exec()`. Only the command argument is needed, `output` i
 ```lua
 vim.cmd('buffers')
 vim.cmd([[
-let g:multiline =<< EOF
 foo
 bar
 baz
-EOF
 ]])
 ```
 

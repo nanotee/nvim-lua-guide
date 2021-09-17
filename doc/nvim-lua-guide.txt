@@ -603,11 +603,9 @@ Alias for `vim.api.nvim_exec()`. Only the command argument is needed,
     >
     vim.cmd('buffers')
     vim.cmd([[
-    let g:multiline =<< EOF
     foo
     bar
     baz
-    EOF
     ]])
 <
 
