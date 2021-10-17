@@ -553,9 +553,6 @@ It is the Lua equivalent of the `luaeval()` function in Vimscript
     print(vim.api.nvim_eval('v:null')) -- nil
 <
 
-	*Todo	is it possible for `vim.api.nvim_eval()` to return a
-	`funcref`?
-
 Caveats~
 
 Unlike `luaeval()`, `vim.api.nvim_eval()` does not provide an implicit
@@ -571,22 +568,18 @@ store the output in a variable, for example).
     >
     local result = vim.api.nvim_exec(
     [[
-    let mytext = 'hello world'
+    let s:mytext = 'hello world'
 
-    function! MyFunction(text)
+    function! s:MyFunction(text)
 	echo a:text
     endfunction
 
-    call MyFunction(mytext)
+    call s:MyFunction(s:mytext)
     ]],
     true)
 
     print(result) -- 'hello world'
 <
-
-	*Todo	the docs say that script-scope (`s:`) is supported,
-	but running this snippet with a script-scoped variable throws
-	an error. Why?
 
 vim.api.nvim_command()~
 

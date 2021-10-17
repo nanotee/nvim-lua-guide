@@ -449,8 +449,6 @@ print(vim.api.nvim_eval('v:true')) -- true
 print(vim.api.nvim_eval('v:null')) -- nil
 ```
 
-**TODO**: is it possible for `vim.api.nvim_eval()` to return a `funcref`?
-
 #### Caveats
 
 Unlike `luaeval()`, `vim.api.nvim_eval()` does not provide an implicit `_A` variable to pass data to the expression.
@@ -462,20 +460,18 @@ This function evaluates a chunk of Vimscript code. It takes in a string containi
 ```lua
 local result = vim.api.nvim_exec(
 [[
-let mytext = 'hello world'
+let s:mytext = 'hello world'
 
-function! MyFunction(text)
+function! s:MyFunction(text)
     echo a:text
 endfunction
 
-call MyFunction(mytext)
+call s:MyFunction(s:mytext)
 ]],
 true)
 
 print(result) -- 'hello world'
 ```
-
-**TODO**: the docs say that script-scope (`s:`) is supported, but running this snippet with a script-scoped variable throws an error. Why?
 
 ### vim.api.nvim_command()
 
