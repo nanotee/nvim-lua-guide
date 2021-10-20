@@ -754,6 +754,9 @@ vim.g.some_global_variable = {
 }
 
 print(vim.inspect(vim.g.some_global_variable)) -- { key1 = "value", key2 = 300 }
+
+-- target a specific buffer/window/tabpage (Neovim 0.6+)
+vim.b[2].myvar = 1
 ```
 
 Some variable names may contain characters that cannot be used for identifiers in Lua. You can still manipulate these variables by using this syntax: `vim.g['my#variable']`.
@@ -769,9 +772,7 @@ See also:
 
 #### Caveats
 
-Unlike options meta-accessors, you cannot specify a number for buffer/window/tabpage-scoped variables.
-
-Additionally, you cannot add/update/delete keys from a dictionary stored in one of these variables. For example, this snippet of Vimscript code does not work as expected:
+You cannot add/update/delete keys from a dictionary stored in one of these variables. For example, this snippet of Vimscript code does not work as expected:
 
 ```vim
 let g:variable = {}
