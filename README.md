@@ -362,6 +362,9 @@ inoremap <silent> <expr> <Tab>
     \ pumvisible() ? "\<C-n>" :
     \ v:lua.check_back_space() ? "\<Tab>" :
     \ completion#trigger_completion()
+
+" Call a function from a Lua module by using single quotes and omitting parentheses:
+call v:lua.require'module'.foo()
 ```
 
 See also:
