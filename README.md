@@ -1089,7 +1089,7 @@ For more information on how to configure `luacheck`, please refer to its [docume
 
 The [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/) repository contains [instructions to configure sumneko/lua-language-server](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#sumneko_lua) (the example uses the built-in LSP client but the configuration should be identical for other LSP client implementations).
 
-For more information on how to configure [sumneko/lua-language-server](https://github.com/sumneko/lua-language-server/) see ["Setting without VSCode"](https://github.com/sumneko/lua-language-server/wiki/Setting-without-VSCode)
+For more information on how to configure [sumneko/lua-language-server](https://github.com/sumneko/lua-language-server/) see ["Setting"](https://github.com/sumneko/lua-language-server/wiki/Setting)
 
 #### coc.nvim
 
