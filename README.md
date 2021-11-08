@@ -476,6 +476,10 @@ true)
 print(result) -- 'hello world'
 ```
 
+#### Caveats
+
+`nvim_exec` does not support script-local variables (`s:`) prior to Neovim 0.6.0
+
 ### vim.api.nvim_command()
 
 This function executes an ex command. It takes in a string containing the command to execute.
