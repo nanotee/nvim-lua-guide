@@ -575,7 +575,7 @@ store the output in a variable, for example).
     let s:mytext = 'hello world'
 
     function! s:MyFunction(text)
-	echo a:text
+        echo a:text
     endfunction
 
     call s:MyFunction(s:mytext)
@@ -611,10 +611,10 @@ Alias for `vim.api.nvim_exec()`. Only the command argument is needed,
     vim.cmd('buffers')
     vim.cmd([[
     let g:multiline_list = [
-		\ 1,
-		\ 2,
-		\ 3,
-		\ ]
+                \ 1,
+                \ 2,
+                \ 3,
+                \ ]
 
     echo g:multiline_list
     ]])
@@ -651,7 +651,7 @@ tempted to do it like this:
 
     >
     function _G.smart_tab()
-	return vim.fn.pumvisible() == 1 and [[\<C-n>]] or [[\<Tab>]]
+        return vim.fn.pumvisible() == 1 and [[\<C-n>]] or [[\<Tab>]]
     end
 
     vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.smart_tab()', {expr =
@@ -681,8 +681,8 @@ This is a little verbose. Making a reusable wrapper can help:
     -- The function is called `t` for `termcodes`.
     -- You don't have to call it that, but I find the terseness convenient
     local function t(str)
-	-- Adjust boolean arguments as needed
-	return vim.api.nvim_replace_termcodes(str, true, true, true)
+        -- Adjust boolean arguments as needed
+        return vim.api.nvim_replace_termcodes(str, true, true, true)
     end
 
     print(t'<Tab>')
@@ -692,11 +692,11 @@ Coming back to our earlier example, this should now work as expected:
 
     >
     local function t(str)
-	return vim.api.nvim_replace_termcodes(str, true, true, true)
+        return vim.api.nvim_replace_termcodes(str, true, true, true)
     end
 
     function _G.smart_tab()
-	return vim.fn.pumvisible() == 1 and t'<C-n>' or t'<Tab>'
+        return vim.fn.pumvisible() == 1 and t'<C-n>' or t'<Tab>'
     end
 
     vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.smart_tab()', {expr =
@@ -911,8 +911,8 @@ meta-accessors:
 
     >
     vim.g.some_global_variable = {
-	key1 = 'value',
-	key2 = 300
+        key1 = 'value',
+        key2 = 300
     }
 
     print(vim.inspect(vim.g.some_global_variable)) -- { key1 = "value",
@@ -981,7 +981,7 @@ converted back and forth from Lua to Vimscript.
     print(vim.inspect(reversed_list)) -- { "c", "b", "a" }
 
     local function print_stdout(chan_id, data, name)
-	print(data[1])
+        print(data[1])
     end
 
     vim.fn.jobstart('ls', { on_stdout = print_stdout })
@@ -1022,7 +1022,7 @@ falsy, enabling constructs like these:
 
     >
     if has('nvim')
-	" do something...
+        " do something...
     endif
 <
 
@@ -1032,7 +1032,7 @@ check for `1` or `0`:
 
     >
     if vim.fn.has('nvim') == 1 then
-	-- do something...
+        -- do something...
     end
 <
 
@@ -1189,7 +1189,7 @@ modify the `package.loaded` global table:
 <
 
 The  nvim-lua/plenary.nvim:
-https://github.com/nvim-lua/plenary.nvim  plugin has a	custom function:
+https://github.com/nvim-lua/plenary.nvim  plugin has a  custom function:
 https://github.com/nvim-lua/plenary.nvim/blob/master/lua/plenary/reload.lua
 that does this for you.
 
@@ -1265,9 +1265,9 @@ variables is not:
     >
     -- This works:
     vim.fn.jobstart({'ls'}, {
-	on_stdout = function(chan_id, data, name)
-	    print(vim.inspect(data))
-	end
+        on_stdout = function(chan_id, data, name)
+            print(vim.inspect(data))
+        end
     })
 
     -- This doesn't:
@@ -1314,7 +1314,7 @@ the `vim` global by putting this configuration in `~/.luacheckrc`  or
 
     >
     globals = {
-	"vim",
+        "vim",
     }
 <
 
@@ -1326,9 +1326,9 @@ its  documentation: https://luacheck.readthedocs.io/en/stable/config.html
 
 sumneko/lua-language-server~
 
-The  nvim-lspconfig: https://github.com/neovim/nvim-lspconfig/	repository
+The  nvim-lspconfig: https://github.com/neovim/nvim-lspconfig/  repository
 contains  instructions to configure sumneko/lua-language-server:
-https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#sumneko_lua
+https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
 the example uses the built-in LSP client but the configuration should
 be identical for other LSP client implementations .
 
