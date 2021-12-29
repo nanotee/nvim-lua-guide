@@ -1144,17 +1144,170 @@ first argument, with `0` representing the current buffer.
 DEFINING USER COMMANDS
                                                *luaguide-defining-user-commands*
 
-The interface to create user commands was implemented in the PR below
-and is currently available only in neovim 0.7+ (nightly):
+WARNING: The API functions discussed in this section are only available
+in Neovim 0.7.0+
 
--  Pull request #16752: https://github.com/neovim/neovim/pull/16752
+Neovim provides API functions for user-defined commands:
 
-- Global user command:
-  - |nvim_add_user_command()|
-  - |nvim_del_user_command()|
+- Global user commands:
+    - |nvim_add_user_command()|
+    - |nvim_del_user_command()|
 - Buffer-local user commands:
-  - |nvim_buf_add_user_command()|
-  - |nvim_buf_del_user_command()|
+    - |nvim_buf_add_user_command()|
+    - |nvim_buf_del_user_command()|
+
+Let's start with `vim.api.nvim_add_user_command()`
+
+The first argument passed to this function is the name of the command
+(which must start with an uppercase letter).
+
+The second argument is the code to execute when invoking said command. It
+can either be:
+
+A string (in which case it will be executed as Vimscript). You can use
+escape sequences like `<q-args>`, `<range>`, etc. like you would with
+`:command`
+    >
+    vim.api.nvim_add_user_command('Upper', 'echo toupper(<q-args>)', {
+    nargs = 1 })
+    -- :command! -nargs=1 Upper echo toupper(<q-args>)
+
+    vim.cmd('Upper hello world') -- prints "HELLO WORLD"
+<
+
+Or a Lua function. It receives a dictionary-like table that contains the
+data normally provided by escape sequences (see |nvim_add_user_command()|
+    >
+    vim.api.nvim_add_user_command(
+        'Upper',
+        function(opts)
+            print(string.upper(opts.args))
+        end,
+        { nargs = 1 }
+    )
+<
+
+The third argument lets you pass command attributes as a table (see
+|command-attributes|, `-buffer` is not a valid attribute.
+
+Two additional attributes are available:
+- `desc` allows you to control what gets displayed when you run `:command
+{cmd}` on a command defined as a Lua callback.
+- `force` is equivalent to calling `:command!` and replaces a command
+if one with the same name already exists. It is true by default, unlike
+its Vimscript equivalent.
+
+The `-complete` attribute can take a Lua function in addition to the
+attributes listed in |:command-complete|.
+
+    >
+    vim.api.nvim_add_user_command('Upper', function() end, {
+        nargs = 1,
+        complete = function(ArgLead, CmdLine, CursorPos)
+            -- return completion candidates as a list-like table
+            return { 'foo', 'bar', 'baz' }
+        end,
+    })
+<
+
+Buffer-local user commands also take a buffer number as their first
+argument. This is an advantage over `-buffer` which can only define a
+command for the current buffer.
+
+    >
+    vim.api.nvim_buf_add_user_command(4, 'Upper', function() end, {})
+<
+
+`vim.api.nvim_del_user_command()` takes a command name.
+
+    >
+    vim.api.nvim_del_user_command('Upper')
+    -- :delcommand Upper
+<
+
+Again, `vim.api.nvim_buf_del_user_command()`, takes a buffer number as
+its first argument, with `0` representing the current buffer.
+
+    >
+    vim.api.nvim_buf_del_user_command(4, 'Upper')
+<
+
+See also:
+- |nvim_add_user_command()|
+- |40.2|
+- |command-attributes|
+
+Caveats~
+
+The `<args>` and `<f-args>` escape sequences are not available when using
+a Lua function, the `args` key is always a string containing the arguments
+passed to the command. If you need to get each argument separately, the
+string has to be tokenized manually. Keep in mind that the behavior of
+`<f-args>` is subtly different depending on the `-nargs` attribute.
+
+    >
+    command! -nargs=1 Test1 echo [<f-args>]
+    command! -nargs=* Test2 echo [<f-args>]
+
+    Test1 this is    a\ test
+    " prints `['this is    a\ test']`
+    Test2 this is    a\ test
+    " prints `['this', 'is', 'a test']`
+<
+The `:Test1` command prints what was typed verbatim. `:Test2` separates
+each word and gets rid of whitespace except when preceded by a backslash
+`\`.
+
+When using a Lua function, the `nargs` attribute does not change the
+value of `args`:
+    >
+    vim.api.nvim_add_user_command('Test1', function(opts) print(opts.args)
+    end, { nargs = 1 })
+    vim.api.nvim_add_user_command('Test2', function(opts) print(opts.args)
+    end, { nargs = '*' })
+<
+    >
+    Test1 this is    a\ test
+    " prints `this is    a\ test`
+    Test2 this is    a\ test
+    " prints `this is    a\ test`
+<
+
+The `-complete=custom` attribute automatically filters completion
+candidates and has built-in wildcard (|wildcard| support:
+
+    >
+    function! s:completion_function(ArgLead, CmdLine, CursorPos) abort
+        return join([
+            \ 'strawberry',
+            \ 'star',
+            \ 'stellar',
+            \ ], "\n")
+    endfunction
+
+    command! -nargs=1 -complete=custom,s:completion_function Test echo
+    <q-args>
+    " Typing `:Test st[ae]<Tab>` returns "star" and "stellar"
+<
+
+Passing a Lua function to `complete` makes it behave like `customlist`
+which leaves filtering up to the user:
+
+    >
+    vim.api.nvim_add_user_command('Test', function() end, {
+        nargs = 1,
+        complete = function(ArgLead, CmdLine, CursorPos)
+            return {
+                'strawberry',
+                'star',
+                'stellar',
+            }
+        end,
+    })
+
+    -- Typing `:Test z<Tab>` returns all the completion results because
+    the list was not filtered
+<
 
 ==============================================================================
 DEFINING AUTOCOMMANDS
