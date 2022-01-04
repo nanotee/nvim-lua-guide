@@ -528,6 +528,11 @@ or from the command-line:
     :lua put(vim.loop)
 <
 
+Alternatively, you can use the `:lua` command to pretty-print a Lua
+expression by prefixing it with `=` (Neovim 0.7+ only):
+    >
+    :lua =vim.loop
+<
 
 Additionally, you may find that built-in Lua functions are sometimes
 lacking compared to what you would find in other languages (for example

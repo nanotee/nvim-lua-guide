@@ -432,6 +432,10 @@ put({1, 2, 3})
 :lua put(vim.loop)
 ```
 
+Alternatively, you can use the `:lua` command to pretty-print a Lua expression by prefixing it with `=` (Neovim 0.7+ only):
+```lua
+:lua =vim.loop
+```
 
 Additionally, you may find that built-in Lua functions are sometimes lacking compared to what you would find in other languages (for example `os.clock()` only returns a value in seconds, not milliseconds). Be sure to look at the Neovim stdlib (and `vim.fn`, more on that later), it probably has what you're looking for.
 
