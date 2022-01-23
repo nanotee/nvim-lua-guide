@@ -1228,6 +1228,8 @@ in place:
     " [2, 4, 6]
     echo s:newlist
     " [2, 4, 6]
+    echo s:list is# s:newlist
+    " 1
 <
 
 Using this function from Lua creates a copy instead:
@@ -1238,6 +1240,7 @@ Using this function from Lua creates a copy instead:
 
     print(vim.inspect(tbl)) -- { 1, 2, 3 }
     print(vim.inspect(newtbl)) -- { 2, 4, 6 }
+    print(tbl == newtbl) -- false
 <
 
 Conversion is not always possible~
@@ -1265,7 +1268,7 @@ references to them. This can cause surprising behaviors:
 <
 
 Passing Lua functions to Vim functions is OK, storing them in Vim
-variables is not:
+variables is not (fixed in Neovim 0.7.0+):
 
     >
     -- This works:

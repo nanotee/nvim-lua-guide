@@ -433,7 +433,7 @@ put({1, 2, 3})
 ```
 
 Alternatively, you can use the `:lua` command to pretty-print a Lua expression by prefixing it with `=` (Neovim 0.7+ only):
-```lua
+```vim
 :lua =vim.loop
 ```
 
@@ -1006,6 +1006,8 @@ echo s:list
 " [2, 4, 6]
 echo s:newlist
 " [2, 4, 6]
+echo s:list is# s:newlist
+" 1
 ```
 
 Using this function from Lua creates a copy instead:
@@ -1016,6 +1018,7 @@ local newtbl = vim.fn.map(tbl, function(_, v) return v * 2 end)
 
 print(vim.inspect(tbl)) -- { 1, 2, 3 }
 print(vim.inspect(newtbl)) -- { 2, 4, 6 }
+print(tbl == newtbl) -- false
 ```
 
 #### Conversion is not always possible
@@ -1039,7 +1042,7 @@ print(vim.g.test_dict.test_lambda) -- nil
 print(vim.inspect(vim.g.test_dict)) -- {}
 ```
 
-Passing Lua functions to Vim functions is OK, storing them in Vim variables is not:
+Passing Lua functions to Vim functions is OK, storing them in Vim variables is not (fixed in Neovim 0.7.0+):
 
 ```lua
 -- This works:
