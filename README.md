@@ -944,7 +944,7 @@ vim.api.nvim_buf_del_keymap(0, 'i', '<Tab>')
 
 ## Defining user commands
 
-The interface to create user commands was implemented on the PR below and is currently available only on neovim 0.7+ (nightly):
+The interface to create user commands was implemented in the PR below and is currently available only in neovim 0.7+ (nightly):
 
 - [Pull request #16752](https://github.com/neovim/neovim/pull/16752)
 
