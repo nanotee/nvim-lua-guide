@@ -26,7 +26,7 @@ If you are not already familiar with the language, there are plenty of resources
 - If videos are more to your liking, Derek Banas has a [1-hour tutorial on the language](https://www.youtube.com/watch?v=iMacxZQMPXs)
 - Want something a little more interactive with runnable examples? Try [the LuaScript tutorial](https://www.luascript.dev/learn)
 - The [lua-users wiki](http://lua-users.org/wiki/LuaDirectory) is full of useful information on all kinds of Lua-related topics
-- The [official reference manual for Lua](https://www.lua.org/manual/5.1/) should give you the most comprehensive tour of the language (exists as a Vimdoc plugin if you want to read it from the comfort of your editor: [wsdjeg/luarefvim](https://github.com/wsdjeg/luarefvim))
+- The [official reference manual for Lua](https://www.lua.org/manual/5.1/) should give you the most comprehensive tour of the language (exists as a Vimdoc plugin if you want to read it from the comfort of your editor: [milisims/nvim-luaref](https://github.com/milisims/nvim-luaref))
 
 It should also be noted that Lua is a very clean and simple language. It is easy to learn, especially if you have experience with similar scripting languages like JavaScript. You may already know more Lua than you realise!
 
