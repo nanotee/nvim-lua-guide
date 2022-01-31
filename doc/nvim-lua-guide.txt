@@ -35,7 +35,7 @@ of useful information on all kinds of Lua-related topics
 - The  official reference manual for Lua: https://www.lua.org/manual/5.1/
 should give you the most comprehensive tour of the language  exists as
 a Vimdoc plugin if you want to read it from the comfort of your editor:
-wsdjeg/luarefvim: https://github.com/wsdjeg/luarefvim
+milisims/nvim-luaref: https://github.com/milisims/nvim-luaref
 
 It should also be noted that Lua is a very clean and simple language. It
 is easy to learn, especially if you have experience with similar scripting
