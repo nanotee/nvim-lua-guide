@@ -501,8 +501,9 @@ of every module. API functions are documented under |api-global|.
 Tips~
 
 Writing `print(vim.inspect(x))` every time you want to inspect the
-contents of an object can get pretty tedious. It might be worthwhile to
-have a global wrapper function somewhere in your configuration:
+contents of an object can get pretty tedious. It might be worthwhile
+to have a global wrapper function somewhere in your configuration (in
+Neovim 0.7.0+, this function is built-in, see |vim.pretty_print()|):
 
     >
     function _G.put(...)
