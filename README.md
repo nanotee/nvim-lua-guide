@@ -359,7 +359,7 @@ end
 EOF
 
 inoremap <silent> <expr> <Tab>
-    \ pumvisible() ? "\<C-n>" :
+    \ pumvisible() ? "\<C-N>" :
     \ v:lua.check_back_space() ? "\<Tab>" :
     \ completion#trigger_completion()
 
@@ -534,20 +534,20 @@ This API function allows you to escape terminal codes and Vim keycodes.
 You may have come across mappings like this one:
 
 ```vim
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-N>" : "\<Tab>"
 ```
 
 Trying to do the same in Lua can prove to be a challenge. You might be tempted to do it like this:
 
 ```lua
 function _G.smart_tab()
-    return vim.fn.pumvisible() == 1 and [[\<C-n>]] or [[\<Tab>]]
+    return vim.fn.pumvisible() == 1 and [[\<C-N>]] or [[\<Tab>]]
 end
 
 vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.smart_tab()', {expr = true, noremap = true})
 ```
 
-only to find out that the mapping inserts `\<Tab>` and `\<C-n>` literally...
+only to find out that the mapping inserts `\<Tab>` and `\<C-N>` literally...
 
 Being able to escape keycodes is actually a Vimscript feature. Aside from the usual escape sequences like `\r`, `\42` or `\x10` that are common to many programming languages, Vimscript `expr-quotes` (strings surrounded with double quotes) allow you to escape the human-readable representation of Vim keycodes.
 
@@ -578,10 +578,18 @@ local function t(str)
 end
 
 function _G.smart_tab()
-    return vim.fn.pumvisible() == 1 and t'<C-n>' or t'<Tab>'
+    return vim.fn.pumvisible() == 1 and t'<C-N>' or t'<Tab>'
 end
 
 vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.smart_tab()', {expr = true, noremap = true})
+```
+
+This is not necessary with `vim.keymap.set()` as it automatically transforms vim keycodes returned by Lua functions in `expr` mappings by default:
+
+```lua
+vim.keymap.set('i', '<Tab>', function()
+    return vim.fn.pumvisible() == 1 and '<C-N>' or '<Tab>'
+end, {expr = true})
 ```
 
 See also:
@@ -868,6 +876,8 @@ end
 
 ## Defining mappings
 
+### API functions
+
 Neovim provides a list of API functions to set, get and delete mappings:
 
 - Global mappings:
@@ -901,7 +911,7 @@ The second argument is a string containing the left-hand side of the mapping (th
 
 The third argument is a string containing the right-hand side of the mapping (the command to execute).
 
-The final argument is a table containing boolean options for the mapping as defined in [`:help :map-arguments`](https://neovim.io/doc/user/map.html#:map-arguments) (including `noremap` and excluding `buffer`).
+The final argument is a table containing boolean options for the mapping as defined in [`:help :map-arguments`](https://neovim.io/doc/user/map.html#:map-arguments) (including `noremap` and excluding `buffer`). Since Neovim 0.7.0, you can also pass a `callback` option to invoke a Lua function instead of the right-hand side when executing the mapping.
 
 Buffer-local mappings also take a buffer number as their first argument (`0` sets the mapping for the current buffer).
 
@@ -913,6 +923,15 @@ vim.api.nvim_set_keymap('n', '<Leader>tegf',  [[<Cmd>lua require('telescope.buil
 
 vim.api.nvim_buf_set_keymap(0, '', 'cc', 'line(".") == 1 ? "cc" : "ggcc"', { noremap = true, expr = true })
 -- :noremap <buffer> <expr> cc line('.') == 1 ? 'cc' : 'ggcc'
+
+vim.api.nvim_set_keymap('n', '<Leader>ex', '', {
+    noremap = true,
+    callback = function()
+        print('My example')
+    end,
+    -- Since Lua function don't have a useful string representation, you can use the "desc" option to document your mapping
+    desc = 'Prints "My example" in the message area',
+})
 ```
 
 `vim.api.nvim_get_keymap()` takes a string containing the shortname of the mode for which you want the list of mappings (see table above). The return value is a table containing all global mappings for the mode.
@@ -941,6 +960,73 @@ Again, `vim.api.nvim_buf_del_keymap()`, takes a buffer number as its first argum
 ```lua
 vim.api.nvim_buf_del_keymap(0, 'i', '<Tab>')
 -- :iunmap <buffer> <Tab>
+```
+
+### vim.keymap
+
+:warning: The functions discussed in this section are only available in Neovim 0.7.0+
+
+Neovim provides two functions to set/del mappings:
+- [`vim.keymap.set()`](https://neovim.io/doc/user/lua.html#vim.keymap.set())
+- [`vim.keymap.del()`](https://neovim.io/doc/user/lua.html#vim.keymap.del())
+
+These are similar to the above API functions with added syntactic sugar.
+
+`vim.keymap.set()` takes a string as its first argument. It can also be a table of strings to define mappings for multiple modes at once:
+
+```lua
+vim.keymap.set('n', '<Leader>ex1', '<Cmd>lua vim.notify("Example 1")<CR>')
+vim.keymap.set({'n', 'c'}, '<Leader>ex2', '<Cmd>lua vim.notify("Example 2")<CR>')
+```
+
+The second argument is the left-hand side of the mapping.
+
+The third argument is the right-hand side of the mapping, which can either be a string or a Lua function:
+
+```lua
+vim.keymap.set('n', '<Leader>ex1', '<Cmd>echomsg "Example 1"<CR>')
+vim.keymap.set('n', '<Leader>ex2', function() print("Example 2") end)
+vim.keymap.set('n', '<Leader>pl1', require('plugin').plugin_action)
+-- To avoid the startup cost of requiring the module, you can wrap it in a function to require it lazily when invoking the mapping:
+vim.keymap.set('n', '<Leader>pl2', function() require('plugin').plugin_action() end)
+```
+
+The fourth (optional) argument is a table of options that correspond to the options passed to `vim.api.nvim_set_keymap()`, with a few additions (see [`:help vim.keymap.set()`](https://neovim.io/doc/user/lua.html#vim.keymap.set()) for the full list).
+
+```lua
+vim.keymap.set('n', '<Leader>ex1', '<Cmd>echomsg "Example 1"<CR>', {buffer = true})
+vim.keymap.set('n', '<Leader>ex2', function() print('Example 2') end, {desc = 'Prints "Example 2" to the message area'})
+```
+
+An interesting feature of this API is that it irons out some historical quirks of Vim mappings:
+- Mappings are `noremap` by default, except when the `rhs` is a `<Plug>` mapping. This means you rarely have to think about whether a mapping should be recursive or not:
+    ```lua
+    vim.keymap.set('n', '<Leader>test1', '<Cmd>echo "test"<CR>')
+    -- :nnoremap <Leader>test <Cmd>echo "test"<CR>
+
+    -- If you DO want the mapping to be recursive, set the "remap" option to "true"
+    vim.keymap.set('n', '>', ']', {remap = true})
+    -- :nmap > ]
+
+    -- <Plug> mappings don't work unless they're recursive, vim.keymap.set() handles that for you automatically
+    vim.keymap.set('n', '<Leader>plug', '<Plug>(plugin)')
+    -- :nmap <Leader>plug <Plug>(plugin)
+    ```
+- In `expr` mappings, `nvim_replace_termcodes()` is automatically applied to strings returned from Lua functions:
+    ```lua
+    vim.keymap.set('i', '<Tab>', function()
+        return vim.fn.pumvisible == 1 and '<C-N>' or '<Tab>'
+    end, {expr = true})
+    ```
+
+See also:
+- [`:help recursive_mapping`](https://neovim.io/doc/user/map.html#recursive_mapping)
+
+`vim.keymap.del()` works the same way but deletes mappings instead:
+
+```lua
+vim.keymap.del('n', '<Leader>ex1')
+vim.keymap.del({'n', 'c'}, '<Leader>ex2', {buffer = true})
 ```
 
 ## Defining user commands
