@@ -396,9 +396,10 @@ Neovim exposes a global `vim` variable which serves as an entry point to interac
 
 Some notable functions and modules include:
 
-- `vim.inspect`: pretty-print Lua objects (useful for inspecting tables)
+- `vim.inspect`: transform Lua objects into human-readable strings (useful for inspecting tables)
 - `vim.regex`: use Vim regexes from Lua
 - `vim.api`: module that exposes API functions (the same API used by remote plugins)
+- `vim.ui`: overridable UI functions that can be leveraged by plugins
 - `vim.loop`: module that exposes the functionality of Neovim's event-loop (using LibUV)
 - `vim.lsp`: module that controls the built-in LSP client
 - `vim.treesitter`: module that exposes the functionality of the tree-sitter library
