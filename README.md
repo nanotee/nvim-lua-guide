@@ -1084,12 +1084,7 @@ vim.api.nvim_add_user_command('Test', function() end, {
 
 ## Defining autocommands
 
-Augroups and autocommands do not have an interface yet but it is being worked on:
-
-- [Pull request #12378](https://github.com/neovim/neovim/pull/12378)
-- [Pull request #14661](https://github.com/neovim/neovim/pull/14661) (lua: autocmds take 2)
-
-In the meantime, you can either create autocommands in Vimscript or use [this wrapper from norcalli/nvim_utils](https://github.com/norcalli/nvim_utils/blob/master/lua/nvim_utils.lua#L554-L567)
+**TODO**
 
 ## Defining syntax/highlights
 
