@@ -1091,13 +1091,11 @@ Augroups and autocommands do not have an interface yet but it is being worked on
 
 In the meantime, you can either create autocommands in Vimscript or use [this wrapper from norcalli/nvim_utils](https://github.com/norcalli/nvim_utils/blob/master/lua/nvim_utils.lua#L554-L567)
 
-## Defining syntax/highlights
+## Defining highlights
 
-The syntax API is still a work in progress. Here are a couple of pointers:
+### API functions
 
-- [Issue #9876](https://github.com/neovim/neovim/issues/9876)
-- [tjdevries/colorbuddy.vim, a library for creating colorschemes in Lua](https://github.com/tjdevries/colorbuddy.vim)
-- [`:help lua-treesitter`](https://neovim.io/doc/user/treesitter.html#lua-treesitter)
+**TODO**: nvim_set_hl()/nvim_buf_set_hl()
 
 ## General tips and recommendations
 
