@@ -1084,20 +1084,21 @@ vim.api.nvim_add_user_command('Test', function() end, {
 
 ## Defining autocommands
 
-Augroups and autocommands do not have an interface yet but it is being worked on:
+(this section is a work in progress)
 
-- [Pull request #12378](https://github.com/neovim/neovim/pull/12378)
+Neovim 0.7.0 has API functions for autocommands. See `:help api-autocmd` for details
+
 - [Pull request #14661](https://github.com/neovim/neovim/pull/14661) (lua: autocmds take 2)
 
-In the meantime, you can either create autocommands in Vimscript or use [this wrapper from norcalli/nvim_utils](https://github.com/norcalli/nvim_utils/blob/master/lua/nvim_utils.lua#L554-L567)
+## Defining highlights
 
-## Defining syntax/highlights
+(this section is a work in progress)
 
-The syntax API is still a work in progress. Here are a couple of pointers:
+Neovim 0.7.0 has API functions for highlight groups. See also:
 
-- [Issue #9876](https://github.com/neovim/neovim/issues/9876)
-- [tjdevries/colorbuddy.vim, a library for creating colorschemes in Lua](https://github.com/tjdevries/colorbuddy.vim)
-- [`:help lua-treesitter`](https://neovim.io/doc/user/treesitter.html#lua-treesitter)
+- [`:help nvim_set_hl()`](https://neovim.io/doc/user/api.html#nvim_set_hl())
+- [`:help nvim_get_hl_by_id()`](https://neovim.io/doc/user/api.html#nvim_get_hl_by_id())
+- [`:help nvim_get_hl_by_name()`](https://neovim.io/doc/user/api.html#nvim_get_hl_by_name())
 
 ## General tips and recommendations
 
