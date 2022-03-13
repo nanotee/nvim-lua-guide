@@ -1239,40 +1239,6 @@ See also:
 
 Caveats~
 
-The `<args>` and `<f-args>` escape sequences are not available when using
-a Lua function, the `args` key is always a string containing the arguments
-passed to the command. If you need to get each argument separately, the
-string has to be tokenized manually. Keep in mind that the behavior of
-`<f-args>` is subtly different depending on the `-nargs` attribute.
-
-    >
-    command! -nargs=1 Test1 echo [<f-args>]
-    command! -nargs=* Test2 echo [<f-args>]
-
-    Test1 this is    a\ test
-    " prints `['this is    a\ test']`
-    Test2 this is    a\ test
-    " prints `['this', 'is', 'a test']`
-<
-The `:Test1` command prints what was typed verbatim. `:Test2` separates
-each word and gets rid of whitespace except when preceded by a backslash
-`\`.
-
-When using a Lua function, the `nargs` attribute does not change the
-value of `args`:
-    >
-    vim.api.nvim_add_user_command('Test1', function(opts) print(opts.args)
-    end, { nargs = 1 })
-    vim.api.nvim_add_user_command('Test2', function(opts) print(opts.args)
-    end, { nargs = '*' })
-<
-    >
-    Test1 this is    a\ test
-    " prints `this is    a\ test`
-    Test2 this is    a\ test
-    " prints `this is    a\ test`
-<
-
 The `-complete=custom` attribute automatically filters completion
 candidates and has built-in wildcard (|wildcard| support:
 
