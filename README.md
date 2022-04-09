@@ -1277,9 +1277,12 @@ Probably one of the most well-known transpilers for Lua. Adds a lots of convenie
 
 A lisp that compiles to Lua. You can write configuration and plugins for Neovim in Fennel with the [Olical/aniseed](https://github.com/Olical/aniseed) or the [Hotpot](https://github.com/rktjmp/hotpot.nvim) plugin. Additionally, the [Olical/conjure](https://github.com/Olical/conjure) plugin provides an interactive development environment that supports Fennel (among other languages).
 
+- [Teal](https://github.com/teal-language/tl)
+
+The name Teal comes from pronouncing TL (typed lua).  This is exactly what it tries to do - add strong typing to lua while otherwise remaining close to standard lua syntax.  The [nvim-teal-maker](https://github.com/svermeulen/nvim-teal-maker) plugin can be used to write Neovim plugins or configuration files directly in Teal
+
 Other interesting projects:
 - [TypeScriptToLua/TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua)
-- [teal-language/tl](https://github.com/teal-language/tl)
 - [Haxe](https://haxe.org/)
 - [SwadicalRag/wasm2lua](https://github.com/SwadicalRag/wasm2lua)
 - [hengestone/lua-languages](https://github.com/hengestone/lua-languages)
