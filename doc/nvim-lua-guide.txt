@@ -1150,13 +1150,13 @@ in Neovim 0.7.0+
 Neovim provides API functions for user-defined commands:
 
 - Global user commands:
-    - |nvim_add_user_command()|
+    - |nvim_create_user_command()|
     - |nvim_del_user_command()|
 - Buffer-local user commands:
-    - |nvim_buf_add_user_command()|
+    - |nvim_buf_create_user_command()|
     - |nvim_buf_del_user_command()|
 
-Let's start with `vim.api.nvim_add_user_command()`
+Let's start with `vim.api.nvim_create_user_command()`
 
 The first argument passed to this function is the name of the command
 (which must start with an uppercase letter).
@@ -1168,17 +1168,18 @@ A string (in which case it will be executed as Vimscript). You can use
 escape sequences like `<q-args>`, `<range>`, etc. like you would with
 `:command`
     >
-    vim.api.nvim_add_user_command('Upper', 'echo toupper(<q-args>)', {
-    nargs = 1 })
+    vim.api.nvim_create_user_command('Upper', 'echo toupper(<q-args>)',
+    { nargs = 1 })
     -- :command! -nargs=1 Upper echo toupper(<q-args>)
 
     vim.cmd('Upper hello world') -- prints "HELLO WORLD"
 <
 
-Or a Lua function. It receives a dictionary-like table that contains the
-data normally provided by escape sequences (see |nvim_add_user_command()|
+Or a Lua function. It receives a dictionary-like table that
+contains the data normally provided by escape sequences (see
+|nvim_create_user_command()|
     >
-    vim.api.nvim_add_user_command(
+    vim.api.nvim_create_user_command(
         'Upper',
         function(opts)
             print(string.upper(opts.args))
@@ -1188,7 +1189,8 @@ data normally provided by escape sequences (see |nvim_add_user_command()|
 <
 
 The third argument lets you pass command attributes as a table (see
-|command-attributes|, `-buffer` is not a valid attribute.
+|command-attributes|`. Since you can already define buffer-local user commands
+with |nvim_buf_create_user_command()|, `-buffer` is not a valid attribute.
 
 Two additional attributes are available:
 - `desc` allows you to control what gets displayed when you run `:command
@@ -1201,7 +1203,7 @@ The `-complete` attribute can take a Lua function in addition to the
 attributes listed in |:command-complete|.
 
     >
-    vim.api.nvim_add_user_command('Upper', function() end, {
+    vim.api.nvim_create_user_command('Upper', function() end, {
         nargs = 1,
         complete = function(ArgLead, CmdLine, CursorPos)
             -- return completion candidates as a list-like table
@@ -1215,7 +1217,7 @@ argument. This is an advantage over `-buffer` which can only define a
 command for the current buffer.
 
     >
-    vim.api.nvim_buf_add_user_command(4, 'Upper', function() end, {})
+    vim.api.nvim_buf_create_user_command(4, 'Upper', function() end, {})
 <
 
 `vim.api.nvim_del_user_command()` takes a command name.
@@ -1233,7 +1235,7 @@ its first argument, with `0` representing the current buffer.
 <
 
 See also:
-- |nvim_add_user_command()|
+- |nvim_create_user_command()|
 - |40.2|
 - |command-attributes|
 
@@ -1260,7 +1262,7 @@ Passing a Lua function to `complete` makes it behave like `customlist`
 which leaves filtering up to the user:
 
     >
-    vim.api.nvim_add_user_command('Test', function() end, {
+    vim.api.nvim_create_user_command('Test', function() end, {
         nargs = 1,
         complete = function(ArgLead, CmdLine, CursorPos)
             return {
@@ -1279,27 +1281,25 @@ which leaves filtering up to the user:
 DEFINING AUTOCOMMANDS
                                                 *luaguide-defining-autocommands*
 
-Augroups and autocommands do not have an interface yet but it is being
-worked on:
+(this section is a work in progress)
 
--  Pull request #12378: https://github.com/neovim/neovim/pull/12378
+Neovim 0.7.0 has API functions for autocommands. See `:help api-autocmd`
+for details
+
 -  Pull request #14661: https://github.com/neovim/neovim/pull/14661   lua:
 autocmds take 2
 
-In the meantime, you can either create autocommands in
-Vimscript or use  this wrapper from norcalli/nvim_utils:
-https://github.com/norcalli/nvim_utils/blob/master/lua/nvim_utils.lua#L554-L567
-
 ==============================================================================
-DEFINING SYNTAX/HIGHLIGHTS
-                                           *luaguide-defining-syntax-highlights*
+DEFINING HIGHLIGHTS
+                                                  *luaguide-defining-highlights*
 
-The syntax API is still a work in progress. Here are a couple of pointers:
+(this section is a work in progress)
 
--  Issue #9876: https://github.com/neovim/neovim/issues/9876
--  tjdevries/colorbuddy.vim, a library for creating colorschemes in Lua:
-https://github.com/tjdevries/colorbuddy.vim
-- |lua-treesitter|
+Neovim 0.7.0 has API functions for highlight groups. See also:
+
+- |nvim_set_hl()|
+- |nvim_get_hl_by_id()|
+- |nvim_get_hl_by_name()|
 
 ==============================================================================
 GENERAL TIPS AND RECOMMENDATIONS
