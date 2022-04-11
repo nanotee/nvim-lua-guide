@@ -950,13 +950,13 @@ vim.api.nvim_buf_del_keymap(0, 'i', '<Tab>')
 Neovim provides API functions for user-defined commands:
 
 - Global user commands:
-    - [`vim.api.nvim_add_user_command()`](https://neovim.io/doc/user/api.html#nvim_add_user_command())
+    - [`vim.api.nvim_create_user_command()`](https://neovim.io/doc/user/api.html#nvim_create_user_command())
     - [`vim.api.nvim_del_user_command()`](https://neovim.io/doc/user/api.html#nvim_del_user_command())
 - Buffer-local user commands:
-    - [`vim.api.nvim_buf_add_user_command()`](https://neovim.io/doc/user/api.html#nvim_buf_add_user_command())
+    - [`vim.api.nvim_buf_create_user_command()`](https://neovim.io/doc/user/api.html#nvim_buf_create_user_command())
     - [`vim.api.nvim_buf_del_user_command()`](https://neovim.io/doc/user/api.html#nvim_buf_del_user_command())
 
-Let's start with `vim.api.nvim_add_user_command()`
+Let's start with `vim.api.nvim_create_user_command()`
 
 The first argument passed to this function is the name of the command (which must start with an uppercase letter).
 
@@ -964,15 +964,15 @@ The second argument is the code to execute when invoking said command. It can ei
 
 A string (in which case it will be executed as Vimscript). You can use escape sequences like `<q-args>`, `<range>`, etc. like you would with `:command`
 ```lua
-vim.api.nvim_add_user_command('Upper', 'echo toupper(<q-args>)', { nargs = 1 })
+vim.api.nvim_create_user_command('Upper', 'echo toupper(<q-args>)', { nargs = 1 })
 -- :command! -nargs=1 Upper echo toupper(<q-args>)
 
 vim.cmd('Upper hello world') -- prints "HELLO WORLD"
 ```
 
-Or a Lua function. It receives a dictionary-like table that contains the data normally provided by escape sequences (see [`:help nvim_add_user_command()`](https://neovim.io/doc/user/api.html#nvim_add_user_command()) for a list of available keys)
+Or a Lua function. It receives a dictionary-like table that contains the data normally provided by escape sequences (see [`:help nvim_create_user_command()`](https://neovim.io/doc/user/api.html#nvim_create_user_command()) for a list of available keys)
 ```lua
-vim.api.nvim_add_user_command(
+vim.api.nvim_create_user_command(
     'Upper',
     function(opts)
         print(string.upper(opts.args))
@@ -981,7 +981,7 @@ vim.api.nvim_add_user_command(
 )
 ```
 
-The third argument lets you pass command attributes as a table (see [`:help command-attributes`](https://neovim.io/doc/user/map.html#command-attributes)). Since you can already define buffer-local user commands with `vim.api.nvim_buf_add_user_command()`, `-buffer` is not a valid attribute.
+The third argument lets you pass command attributes as a table (see [`:help command-attributes`](https://neovim.io/doc/user/map.html#command-attributes)). Since you can already define buffer-local user commands with `vim.api.nvim_buf_create_user_command()`, `-buffer` is not a valid attribute.
 
 Two additional attributes are available:
 - `desc` allows you to control what gets displayed when you run `:command {cmd}` on a command defined as a Lua callback.
@@ -990,7 +990,7 @@ Two additional attributes are available:
 The `-complete` attribute can take a Lua function in addition to the attributes listed in [`:help :command-complete`](https://neovim.io/doc/user/map.html#:command-complete).
 
 ```lua
-vim.api.nvim_add_user_command('Upper', function() end, {
+vim.api.nvim_create_user_command('Upper', function() end, {
     nargs = 1,
     complete = function(ArgLead, CmdLine, CursorPos)
         -- return completion candidates as a list-like table
@@ -1002,7 +1002,7 @@ vim.api.nvim_add_user_command('Upper', function() end, {
 Buffer-local user commands also take a buffer number as their first argument. This is an advantage over `-buffer` which can only define a command for the current buffer.
 
 ```lua
-vim.api.nvim_buf_add_user_command(4, 'Upper', function() end, {})
+vim.api.nvim_buf_create_user_command(4, 'Upper', function() end, {})
 ```
 
 `vim.api.nvim_del_user_command()` takes a command name.
@@ -1019,7 +1019,7 @@ vim.api.nvim_buf_del_user_command(4, 'Upper')
 ```
 
 See also:
-- [`:help nvim_add_user_command()`](https://neovim.io/doc/user/api.html#nvim_add_user_command())
+- [`:help nvim_create_user_command()`](https://neovim.io/doc/user/api.html#nvim_create_user_command())
 - [`:help 40.2`](https://neovim.io/doc/user/usr_40.html#40.2)
 - [`:help command-attributes`](https://neovim.io/doc/user/map.html#command-attributes)
 
@@ -1043,7 +1043,7 @@ command! -nargs=1 -complete=custom,s:completion_function Test echo <q-args>
 Passing a Lua function to `complete` makes it behave like `customlist` which leaves filtering up to the user:
 
 ```lua
-vim.api.nvim_add_user_command('Test', function() end, {
+vim.api.nvim_create_user_command('Test', function() end, {
     nargs = 1,
     complete = function(ArgLead, CmdLine, CursorPos)
         return {
