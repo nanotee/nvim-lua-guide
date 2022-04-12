@@ -642,15 +642,15 @@ print(vim.api.nvim_buf_get_option(10, 'shiftwidth')) -- 4
 
 A few meta-accessors are available if you want to set options in a more "idiomatic" way. They essentially wrap the above API functions and allow you to manipulate options as if they were variables:
 
-- [`vim.o`](https://neovim.io/doc/user/lua.html#vim.o): behaves like `:set`
-- [`vim.go`](https://neovim.io/doc/user/lua.html#vim.go): behaves like `:setglobal`
-- [`vim.bo`](https://neovim.io/doc/user/lua.html#vim.bo): behaves like `:setlocal` for buffer-local options
-- [`vim.wo`](https://neovim.io/doc/user/lua.html#vim.wo): behaves like `:setlocal` for window-local options
+- [`vim.o`](https://neovim.io/doc/user/lua.html#vim.o): behaves like `:let &{option-name}`
+- [`vim.go`](https://neovim.io/doc/user/lua.html#vim.go): behaves like `:let &g:{option-name}`
+- [`vim.bo`](https://neovim.io/doc/user/lua.html#vim.bo): behaves like `:let &l:{option-name}` for buffer-local options
+- [`vim.wo`](https://neovim.io/doc/user/lua.html#vim.wo): behaves like `:let &l:{option-name}` for window-local options
 
 ```lua
-vim.o.smarttab = false
+vim.o.smarttab = false -- let &smarttab = v:false
 print(vim.o.smarttab) -- false
-vim.o.isfname = vim.o.isfname .. ',@-@' -- on Linux: set isfname+=@-@
+vim.o.isfname = vim.o.isfname .. ',@-@' -- on Linux: let &isfname = &isfname .. ',@-@'
 print(vim.o.isfname) -- '@,48-57,/,.,-,_,+,,,#,$,%,~,=,@-@'
 
 vim.bo.shiftwidth = 4
