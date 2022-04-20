@@ -648,15 +648,15 @@ print(vim.api.nvim_buf_get_option(10, 'shiftwidth')) -- 4
 
 A few meta-accessors are available if you want to set options in a more "idiomatic" way. They essentially wrap the above API functions and allow you to manipulate options as if they were variables:
 
-- [`vim.o`](https://neovim.io/doc/user/lua.html#vim.o): behaves like `:set`
-- [`vim.go`](https://neovim.io/doc/user/lua.html#vim.go): behaves like `:setglobal`
-- [`vim.bo`](https://neovim.io/doc/user/lua.html#vim.bo): behaves like `:setlocal` for buffer-local options
-- [`vim.wo`](https://neovim.io/doc/user/lua.html#vim.wo): behaves like `:setlocal` for window-local options
+- [`vim.o`](https://neovim.io/doc/user/lua.html#vim.o): behaves like `:let &{option-name}`
+- [`vim.go`](https://neovim.io/doc/user/lua.html#vim.go): behaves like `:let &g:{option-name}`
+- [`vim.bo`](https://neovim.io/doc/user/lua.html#vim.bo): behaves like `:let &l:{option-name}` for buffer-local options
+- [`vim.wo`](https://neovim.io/doc/user/lua.html#vim.wo): behaves like `:let &l:{option-name}` for window-local options
 
 ```lua
-vim.o.smarttab = false
+vim.o.smarttab = false -- let &smarttab = v:false
 print(vim.o.smarttab) -- false
-vim.o.isfname = vim.o.isfname .. ',@-@' -- on Linux: set isfname+=@-@
+vim.o.isfname = vim.o.isfname .. ',@-@' -- on Linux: let &isfname = &isfname .. ',@-@'
 print(vim.o.isfname) -- '@,48-57,/,.,-,_,+,,,#,$,%,~,=,@-@'
 
 vim.bo.shiftwidth = 4
@@ -959,13 +959,14 @@ vim.api.nvim_buf_del_keymap(0, 'i', '<Tab>')
 Neovim provides API functions for user-defined commands:
 
 - Global user commands:
+
   - [`vim.api.nvim_add_user_command()`](<https://neovim.io/doc/user/api.html#nvim_add_user_command()>)
   - [`vim.api.nvim_del_user_command()`](<https://neovim.io/doc/user/api.html#nvim_del_user_command()>)
 - Buffer-local user commands:
   - [`vim.api.nvim_buf_add_user_command()`](<https://neovim.io/doc/user/api.html#nvim_buf_add_user_command()>)
   - [`vim.api.nvim_buf_del_user_command()`](<https://neovim.io/doc/user/api.html#nvim_buf_del_user_command()>)
 
-Let's start with `vim.api.nvim_add_user_command()`
+Let's start with `vim.api.nvim_create_user_command()`
 
 The first argument passed to this function is the name of the command (which must start with an uppercase letter).
 
@@ -974,7 +975,7 @@ The second argument is the code to execute when invoking said command. It can ei
 A string (in which case it will be executed as Vimscript). You can use escape sequences like `<q-args>`, `<range>`, etc. like you would with `:command`
 
 ```lua
-vim.api.nvim_add_user_command('Upper', 'echo toupper(<q-args>)', { nargs = 1 })
+vim.api.nvim_create_user_command('Upper', 'echo toupper(<q-args>)', { nargs = 1 })
 -- :command! -nargs=1 Upper echo toupper(<q-args>)
 
 vim.cmd('Upper hello world') -- prints "HELLO WORLD"
@@ -983,7 +984,7 @@ vim.cmd('Upper hello world') -- prints "HELLO WORLD"
 Or a Lua function. It receives a dictionary-like table that contains the data normally provided by escape sequences (see [`:help nvim_add_user_command()`](<https://neovim.io/doc/user/api.html#nvim_add_user_command()>) for a list of available keys)
 
 ```lua
-vim.api.nvim_add_user_command(
+vim.api.nvim_create_user_command(
     'Upper',
     function(opts)
         print(string.upper(opts.args))
@@ -992,7 +993,7 @@ vim.api.nvim_add_user_command(
 )
 ```
 
-The third argument lets you pass command attributes as a table (see [`:help command-attributes`](https://neovim.io/doc/user/map.html#command-attributes)). Since you can already define buffer-local user commands with `vim.api.nvim_buf_add_user_command()`, `-buffer` is not a valid attribute.
+The third argument lets you pass command attributes as a table (see [`:help command-attributes`](https://neovim.io/doc/user/map.html#command-attributes)). Since you can already define buffer-local user commands with `vim.api.nvim_buf_create_user_command()`, `-buffer` is not a valid attribute.
 
 Two additional attributes are available:
 
@@ -1002,7 +1003,7 @@ Two additional attributes are available:
 The `-complete` attribute can take a Lua function in addition to the attributes listed in [`:help :command-complete`](https://neovim.io/doc/user/map.html#:command-complete).
 
 ```lua
-vim.api.nvim_add_user_command('Upper', function() end, {
+vim.api.nvim_create_user_command('Upper', function() end, {
     nargs = 1,
     complete = function(ArgLead, CmdLine, CursorPos)
         -- return completion candidates as a list-like table
@@ -1014,7 +1015,7 @@ vim.api.nvim_add_user_command('Upper', function() end, {
 Buffer-local user commands also take a buffer number as their first argument. This is an advantage over `-buffer` which can only define a command for the current buffer.
 
 ```lua
-vim.api.nvim_buf_add_user_command(4, 'Upper', function() end, {})
+vim.api.nvim_buf_create_user_command(4, 'Upper', function() end, {})
 ```
 
 `vim.api.nvim_del_user_command()` takes a command name.
@@ -1033,8 +1034,6 @@ vim.api.nvim_buf_del_user_command(4, 'Upper')
 See also:
 
 - [`:help nvim_add_user_command()`](<https://neovim.io/doc/user/api.html#nvim_add_user_command()>)
-- [`:help 40.2`](https://neovim.io/doc/user/usr_40.html#40.2)
-- [`:help command-attributes`](https://neovim.io/doc/user/map.html#command-attributes)
 
 ### Caveats
 
@@ -1056,7 +1055,7 @@ command! -nargs=1 -complete=custom,s:completion_function Test echo <q-args>
 Passing a Lua function to `complete` makes it behave like `customlist` which leaves filtering up to the user:
 
 ```lua
-vim.api.nvim_add_user_command('Test', function() end, {
+vim.api.nvim_create_user_command('Test', function() end, {
     nargs = 1,
     complete = function(ArgLead, CmdLine, CursorPos)
         return {
@@ -1297,10 +1296,13 @@ Probably one of the most well-known transpilers for Lua. Adds a lots of convenie
 
 A lisp that compiles to Lua. You can write configuration and plugins for Neovim in Fennel with the [Olical/aniseed](https://github.com/Olical/aniseed) or the [Hotpot](https://github.com/rktjmp/hotpot.nvim) plugin. Additionally, the [Olical/conjure](https://github.com/Olical/conjure) plugin provides an interactive development environment that supports Fennel (among other languages).
 
+- [Teal](https://github.com/teal-language/tl)
+
+The name Teal comes from pronouncing TL (typed lua).  This is exactly what it tries to do - add strong typing to lua while otherwise remaining close to standard lua syntax.  The [nvim-teal-maker](https://github.com/svermeulen/nvim-teal-maker) plugin can be used to write Neovim plugins or configuration files directly in Teal
+
 Other interesting projects:
 
 - [TypeScriptToLua/TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua)
-- [teal-language/tl](https://github.com/teal-language/tl)
 - [Haxe](https://haxe.org/)
 - [SwadicalRag/wasm2lua](https://github.com/SwadicalRag/wasm2lua)
 - [hengestone/lua-languages](https://github.com/hengestone/lua-languages)
