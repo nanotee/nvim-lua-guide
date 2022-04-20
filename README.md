@@ -36,14 +36,14 @@ Note: the version of Lua that Neovim embeds is [LuaJIT](https://staff.fnwi.uva.n
 
 A few tutorials have already been written to help people write plugins in Lua. Some of them helped quite a bit when writing this guide. Many thanks to their authors.
 
-- [teukka.tech - From init.vim to init.lua](https://teukka.tech/luanvim.html)
-- [dev.to - How to write neovim plugins in Lua](https://dev.to/2nit/how-to-write-neovim-plugins-in-lua-5cca)
-- [dev.to - How to make UI for neovim plugins in Lua](https://dev.to/2nit/how-to-make-ui-for-neovim-plugins-in-lua-3b6e)
+- [teukka.tech - From init.vim to init.lua](https://teukka.tech/luanvim.html) -- [:cn: Chinese version](https://github.com/lyb200/lua_nvim/blob/main/%E4%BB%8E%20init.vim%20%E5%88%B0%20init.lua.md)
+- [dev.to - How to write neovim plugins in Lua](https://dev.to/2nit/how-to-write-neovim-plugins-in-lua-5cca) -- [:cn: Chinese version](https://github.com/lyb200/lua_nvim/blob/main/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20lua%20%E7%BC%96%E5%86%99%20neovim%20%E6%8F%92%E4%BB%B6.md)
+- [dev.to - How to make UI for neovim plugins in Lua](https://dev.to/2nit/how-to-make-ui-for-neovim-plugins-in-lua-3b6e) -- [:cn: Chinese version](https://github.com/lyb200/lua_nvim/blob/main/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8lua%E5%88%9B%E5%BB%BAneovim%E6%8F%92%E4%BB%B6%E7%9A%84UI.md)
 - [ms-jpq - Neovim Async Tutorial](https://github.com/ms-jpq/neovim-async-tutorial)
-- [oroques.dev - Neovim 0.5 features and the switch to init.lua](https://oroques.dev/notes/neovim-init/)
-- [Building A Vim Statusline from Scratch - jdhao's blog](https://jdhao.github.io/2019/11/03/vim_custom_statusline/)
-- [Configuring Neovim using Lua](https://icyphox.sh/blog/nvim-lua/)
-- [Devlog | Everything you need to know to configure neovim using lua](https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/)
+- [oroques.dev - Neovim 0.5 features and the switch to init.lua](https://oroques.dev/notes/neovim-init/) -- [:cn: Chinese version](https://github.com/lyb200/lua_nvim/blob/main/Neovim%200.5%20%E7%89%B9%E6%80%A7%E5%92%8C%E5%88%87%E6%8D%A2%E5%88%B0%20init.lua.md)
+- [Building A Vim Statusline from Scratch - jdhao's blog](https://jdhao.github.io/2019/11/03/vim_custom_statusline/) -- [:cn: Chinese version](https://github.com/lyb200/lua_nvim/blob/main/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AAvim%E7%8A%B6%E6%80%81%E6%A0%8F.md)
+- [Configuring Neovim using Lua](https://icyphox.sh/blog/nvim-lua/) -- [:cn: Chinese version](https://github.com/lyb200/lua_nvim/blob/main/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AAvim%E7%8A%B6%E6%80%81%E6%A0%8F.md)
+- [Devlog | Everything you need to know to configure neovim using lua](https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/) -- [:cn: Chinese version](https://github.com/lyb200/lua_nvim/blob/main/%E4%BD%BF%E7%94%A8lua%E9%85%8D%E7%BD%AEneovim%E6%89%80%E9%9C%80%E7%9A%84%E4%B8%80%E5%88%87.md)
 
 ### Companion plugins
 
@@ -65,6 +65,7 @@ Neovim supports loading an `init.lua` file for configuration instead of the usua
 Note: `init.lua` is of course _completely_ optional. Support for `init.vim` is not going away and is still a valid option for configuration. Do keep in mind that some features are not 100% exposed to Lua yet.
 
 See also:
+
 - [`:help config`](https://neovim.io/doc/user/starting.html#config)
 
 ### Modules
@@ -123,6 +124,7 @@ end
 ```
 
 See also:
+
 - [`:help lua-require`](https://neovim.io/doc/user/lua.html#lua-require)
 
 #### Tips
@@ -148,6 +150,7 @@ Much like Vimscript files, Lua files can be loaded automatically from special fo
 Note: in a runtime directory, all `*.vim` files are sourced before `*.lua` files.
 
 See also:
+
 - [`:help 'runtimepath'`](https://neovim.io/doc/user/options.html#'runtimepath')
 - [`:help load-plugins`](https://neovim.io/doc/user/starting.html#load-plugins)
 
@@ -253,14 +256,14 @@ See also:
 You might be wondering what the difference between calling the `require()` function and sourcing a Lua file is and whether you should prefer one way over the other. They have different use cases:
 
 - `require()`:
-    - is a built-in Lua function. It allows you to take advantage of Lua's module system
-    - searches for modules in `lua/` folders in your `'runtimepath'`
-    - keeps track of what modules have been loaded and prevents a script from being parsed and executed a second time. If you change the file containing the code for a module and try to `require()` it a second time while Neovim is running, the module will not actually update
+  - is a built-in Lua function. It allows you to take advantage of Lua's module system
+  - searches for modules in `lua/` folders in your `'runtimepath'`
+  - keeps track of what modules have been loaded and prevents a script from being parsed and executed a second time. If you change the file containing the code for a module and try to `require()` it a second time while Neovim is running, the module will not actually update
 - `:luafile`, `:source` and `:runtime`:
-    - are Ex commands. They do not support modules
-    - execute the contents of a script regardless of whether it has been executed before
-    - `:luafile` and `:source` take a path that is either absolute or relative to the working directory of the current window
-    - `:runtime` uses the `'runtimepath'` option to find files
+  - are Ex commands. They do not support modules
+  - execute the contents of a script regardless of whether it has been executed before
+  - `:luafile` and `:source` take a path that is either absolute or relative to the working directory of the current window
+  - `:runtime` uses the `'runtimepath'` option to find files
 
 Files sourced via `:source`, `:runtime` or automatically from runtime directories will also show up in `:scriptnames` and `--startuptime`
 
@@ -319,7 +322,8 @@ echo luaeval('string.format("Lua is %s", _A)', 'awesome')
 ```
 
 See also:
-- [`:help luaeval()`](https://neovim.io/doc/user/lua.html#luaeval())
+
+- [`:help luaeval()`](<https://neovim.io/doc/user/lua.html#luaeval()>)
 
 ### v:lua
 
@@ -368,6 +372,7 @@ call v:lua.require'module'.foo()
 ```
 
 See also:
+
 - [`:help v:lua`](https://neovim.io/doc/user/eval.html#v:lua)
 - [`:help v:lua-call`](https://neovim.io/doc/user/lua.html#v:lua-call)
 
@@ -408,7 +413,7 @@ This list is by no means comprehensive. If you wish to know more about what's ma
 
 #### Tips
 
-Writing `print(vim.inspect(x))` every time you want to inspect the contents of an object can get pretty tedious. It might be worthwhile to have a global wrapper function somewhere in your configuration (in Neovim 0.7.0+, this function is built-in, see [`:help vim.pretty_print()`](https://neovim.io/doc/user/lua.html#vim.pretty_print())):
+Writing `print(vim.inspect(x))` every time you want to inspect the contents of an object can get pretty tedious. It might be worthwhile to have a global wrapper function somewhere in your configuration (in Neovim 0.7.0+, this function is built-in, see [`:help vim.pretty_print()`](<https://neovim.io/doc/user/lua.html#vim.pretty_print()>)):
 
 ```lua
 function _G.put(...)
@@ -434,6 +439,7 @@ put({1, 2, 3})
 ```
 
 Alternatively, you can use the `:lua` command to pretty-print a Lua expression by prefixing it with `=` (Neovim 0.7+ only):
+
 ```vim
 :lua =vim.loop
 ```
@@ -588,7 +594,7 @@ See also:
 
 - [`:help keycodes`](https://neovim.io/doc/user/intro.html#keycodes)
 - [`:help expr-quote`](https://neovim.io/doc/user/eval.html#expr-quote)
-- [`:help nvim_replace_termcodes()`](https://neovim.io/doc/user/api.html#nvim_replace_termcodes())
+- [`:help nvim_replace_termcodes()`](<https://neovim.io/doc/user/api.html#nvim_replace_termcodes()>)
 
 ## Managing vim options
 
@@ -597,14 +603,14 @@ See also:
 Neovim provides a set of API functions to either set an option or get its current value:
 
 - Global options:
-    - [`vim.api.nvim_set_option()`](https://neovim.io/doc/user/api.html#nvim_set_option())
-    - [`vim.api.nvim_get_option()`](https://neovim.io/doc/user/api.html#nvim_get_option())
+  - [`vim.api.nvim_set_option()`](<https://neovim.io/doc/user/api.html#nvim_set_option()>)
+  - [`vim.api.nvim_get_option()`](<https://neovim.io/doc/user/api.html#nvim_get_option()>)
 - Buffer-local options:
-    - [`vim.api.nvim_buf_set_option()`](https://neovim.io/doc/user/api.html#nvim_buf_set_option())
-    - [`vim.api.nvim_buf_get_option()`](https://neovim.io/doc/user/api.html#nvim_buf_get_option())
+  - [`vim.api.nvim_buf_set_option()`](<https://neovim.io/doc/user/api.html#nvim_buf_set_option()>)
+  - [`vim.api.nvim_buf_get_option()`](<https://neovim.io/doc/user/api.html#nvim_buf_get_option()>)
 - Window-local options:
-    - [`vim.api.nvim_win_set_option()`](https://neovim.io/doc/user/api.html#nvim_win_set_option())
-    - [`vim.api.nvim_win_get_option()`](https://neovim.io/doc/user/api.html#nvim_win_get_option())
+  - [`vim.api.nvim_win_set_option()`](<https://neovim.io/doc/user/api.html#nvim_win_set_option()>)
+  - [`vim.api.nvim_win_get_option()`](<https://neovim.io/doc/user/api.html#nvim_win_get_option()>)
 
 They take a string containing the name of the option to set/get as well as the value you want to set it to.
 
@@ -697,6 +703,7 @@ vim.opt.whichwrap = vim.opt.whichwrap - { 'b', 's' }
 Be sure to look at [`:help vim.opt`](https://neovim.io/doc/user/lua.html#vim.opt) for more information.
 
 See also:
+
 - [`:help lua-vim-options`](https://neovim.io/doc/user/lua.html#lua-vim-options)
 
 ## Managing vim internal variables
@@ -706,24 +713,24 @@ See also:
 Much like options, internal variables have their own set of API functions:
 
 - Global variables (`g:`):
-    - [`vim.api.nvim_set_var()`](https://neovim.io/doc/user/api.html#nvim_set_var())
-    - [`vim.api.nvim_get_var()`](https://neovim.io/doc/user/api.html#nvim_get_var())
-    - [`vim.api.nvim_del_var()`](https://neovim.io/doc/user/api.html#nvim_del_var())
+  - [`vim.api.nvim_set_var()`](<https://neovim.io/doc/user/api.html#nvim_set_var()>)
+  - [`vim.api.nvim_get_var()`](<https://neovim.io/doc/user/api.html#nvim_get_var()>)
+  - [`vim.api.nvim_del_var()`](<https://neovim.io/doc/user/api.html#nvim_del_var()>)
 - Buffer variables (`b:`):
-    - [`vim.api.nvim_buf_set_var()`](https://neovim.io/doc/user/api.html#nvim_buf_set_var())
-    - [`vim.api.nvim_buf_get_var()`](https://neovim.io/doc/user/api.html#nvim_buf_get_var())
-    - [`vim.api.nvim_buf_del_var()`](https://neovim.io/doc/user/api.html#nvim_buf_del_var())
+  - [`vim.api.nvim_buf_set_var()`](<https://neovim.io/doc/user/api.html#nvim_buf_set_var()>)
+  - [`vim.api.nvim_buf_get_var()`](<https://neovim.io/doc/user/api.html#nvim_buf_get_var()>)
+  - [`vim.api.nvim_buf_del_var()`](<https://neovim.io/doc/user/api.html#nvim_buf_del_var()>)
 - Window variables (`w:`):
-    - [`vim.api.nvim_win_set_var()`](https://neovim.io/doc/user/api.html#nvim_win_set_var())
-    - [`vim.api.nvim_win_get_var()`](https://neovim.io/doc/user/api.html#nvim_win_get_var())
-    - [`vim.api.nvim_win_del_var()`](https://neovim.io/doc/user/api.html#nvim_win_del_var())
+  - [`vim.api.nvim_win_set_var()`](<https://neovim.io/doc/user/api.html#nvim_win_set_var()>)
+  - [`vim.api.nvim_win_get_var()`](<https://neovim.io/doc/user/api.html#nvim_win_get_var()>)
+  - [`vim.api.nvim_win_del_var()`](<https://neovim.io/doc/user/api.html#nvim_win_del_var()>)
 - Tabpage variables (`t:`):
-    - [`vim.api.nvim_tabpage_set_var()`](https://neovim.io/doc/user/api.html#nvim_tabpage_set_var())
-    - [`vim.api.nvim_tabpage_get_var()`](https://neovim.io/doc/user/api.html#nvim_tabpage_get_var())
-    - [`vim.api.nvim_tabpage_del_var()`](https://neovim.io/doc/user/api.html#nvim_tabpage_del_var())
+  - [`vim.api.nvim_tabpage_set_var()`](<https://neovim.io/doc/user/api.html#nvim_tabpage_set_var()>)
+  - [`vim.api.nvim_tabpage_get_var()`](<https://neovim.io/doc/user/api.html#nvim_tabpage_get_var()>)
+  - [`vim.api.nvim_tabpage_del_var()`](<https://neovim.io/doc/user/api.html#nvim_tabpage_del_var()>)
 - Predefined Vim variables (`v:`):
-    - [`vim.api.nvim_set_vvar()`](https://neovim.io/doc/user/api.html#nvim_set_vvar())
-    - [`vim.api.nvim_get_vvar()`](https://neovim.io/doc/user/api.html#nvim_get_vvar())
+  - [`vim.api.nvim_set_vvar()`](<https://neovim.io/doc/user/api.html#nvim_set_vvar()>)
+  - [`vim.api.nvim_get_vvar()`](<https://neovim.io/doc/user/api.html#nvim_get_vvar()>)
 
 With the exception of predefined Vim variables, they can also be deleted (the `:unlet` command is the equivalent in Vimscript). Local variables (`l:`), script variables (`s:`) and function arguments (`a:`) cannot be manipulated as they only make sense in the context of a Vim script, Lua has its own scoping rules.
 
@@ -780,6 +787,7 @@ vim.g.some_global_variable = nil
 ```
 
 See also:
+
 - [`:help lua-vim-variables`](https://neovim.io/doc/user/lua.html#lua-vim-variables)
 
 #### Caveats
@@ -840,6 +848,7 @@ The functionality of `vim.fn` is identical to `vim.call`, but allows a more Lua-
 It is distinct from `vim.api.nvim_call_function` in that converting Vim/Lua objects is automatic: `vim.api.nvim_call_function` returns a table for floating point numbers and does not accept Lua closures while `vim.fn` handles these types transparently.
 
 See also:
+
 - [`:help vim.fn`](https://neovim.io/doc/user/lua.html#vim.fn)
 
 #### Tips
@@ -871,13 +880,13 @@ end
 Neovim provides a list of API functions to set, get and delete mappings:
 
 - Global mappings:
-    - [`vim.api.nvim_set_keymap()`](https://neovim.io/doc/user/api.html#nvim_set_keymap())
-    - [`vim.api.nvim_get_keymap()`](https://neovim.io/doc/user/api.html#nvim_get_keymap())
-    - [`vim.api.nvim_del_keymap()`](https://neovim.io/doc/user/api.html#nvim_del_keymap())
+  - [`vim.api.nvim_set_keymap()`](<https://neovim.io/doc/user/api.html#nvim_set_keymap()>)
+  - [`vim.api.nvim_get_keymap()`](<https://neovim.io/doc/user/api.html#nvim_get_keymap()>)
+  - [`vim.api.nvim_del_keymap()`](<https://neovim.io/doc/user/api.html#nvim_del_keymap()>)
 - Buffer-local mappings:
-    - [`vim.api.nvim_buf_set_keymap()`](https://neovim.io/doc/user/api.html#nvim_buf_set_keymap())
-    - [`vim.api.nvim_buf_get_keymap()`](https://neovim.io/doc/user/api.html#nvim_buf_get_keymap())
-    - [`vim.api.nvim_buf_del_keymap()`](https://neovim.io/doc/user/api.html#nvim_buf_del_keymap())
+  - [`vim.api.nvim_buf_set_keymap()`](<https://neovim.io/doc/user/api.html#nvim_buf_set_keymap()>)
+  - [`vim.api.nvim_buf_get_keymap()`](<https://neovim.io/doc/user/api.html#nvim_buf_get_keymap()>)
+  - [`vim.api.nvim_buf_del_keymap()`](<https://neovim.io/doc/user/api.html#nvim_buf_del_keymap()>)
 
 Let's start with `vim.api.nvim_set_keymap()` and `vim.api.nvim_buf_set_keymap()`
 
@@ -950,11 +959,11 @@ vim.api.nvim_buf_del_keymap(0, 'i', '<Tab>')
 Neovim provides API functions for user-defined commands:
 
 - Global user commands:
-    - [`vim.api.nvim_add_user_command()`](https://neovim.io/doc/user/api.html#nvim_add_user_command())
-    - [`vim.api.nvim_del_user_command()`](https://neovim.io/doc/user/api.html#nvim_del_user_command())
+  - [`vim.api.nvim_add_user_command()`](<https://neovim.io/doc/user/api.html#nvim_add_user_command()>)
+  - [`vim.api.nvim_del_user_command()`](<https://neovim.io/doc/user/api.html#nvim_del_user_command()>)
 - Buffer-local user commands:
-    - [`vim.api.nvim_buf_add_user_command()`](https://neovim.io/doc/user/api.html#nvim_buf_add_user_command())
-    - [`vim.api.nvim_buf_del_user_command()`](https://neovim.io/doc/user/api.html#nvim_buf_del_user_command())
+  - [`vim.api.nvim_buf_add_user_command()`](<https://neovim.io/doc/user/api.html#nvim_buf_add_user_command()>)
+  - [`vim.api.nvim_buf_del_user_command()`](<https://neovim.io/doc/user/api.html#nvim_buf_del_user_command()>)
 
 Let's start with `vim.api.nvim_add_user_command()`
 
@@ -963,6 +972,7 @@ The first argument passed to this function is the name of the command (which mus
 The second argument is the code to execute when invoking said command. It can either be:
 
 A string (in which case it will be executed as Vimscript). You can use escape sequences like `<q-args>`, `<range>`, etc. like you would with `:command`
+
 ```lua
 vim.api.nvim_add_user_command('Upper', 'echo toupper(<q-args>)', { nargs = 1 })
 -- :command! -nargs=1 Upper echo toupper(<q-args>)
@@ -970,7 +980,8 @@ vim.api.nvim_add_user_command('Upper', 'echo toupper(<q-args>)', { nargs = 1 })
 vim.cmd('Upper hello world') -- prints "HELLO WORLD"
 ```
 
-Or a Lua function. It receives a dictionary-like table that contains the data normally provided by escape sequences (see [`:help nvim_add_user_command()`](https://neovim.io/doc/user/api.html#nvim_add_user_command()) for a list of available keys)
+Or a Lua function. It receives a dictionary-like table that contains the data normally provided by escape sequences (see [`:help nvim_add_user_command()`](<https://neovim.io/doc/user/api.html#nvim_add_user_command()>) for a list of available keys)
+
 ```lua
 vim.api.nvim_add_user_command(
     'Upper',
@@ -984,6 +995,7 @@ vim.api.nvim_add_user_command(
 The third argument lets you pass command attributes as a table (see [`:help command-attributes`](https://neovim.io/doc/user/map.html#command-attributes)). Since you can already define buffer-local user commands with `vim.api.nvim_buf_add_user_command()`, `-buffer` is not a valid attribute.
 
 Two additional attributes are available:
+
 - `desc` allows you to control what gets displayed when you run `:command {cmd}` on a command defined as a Lua callback.
 - `force` is equivalent to calling `:command!` and replaces a command if one with the same name already exists. It is true by default, unlike its Vimscript equivalent.
 
@@ -1019,7 +1031,8 @@ vim.api.nvim_buf_del_user_command(4, 'Upper')
 ```
 
 See also:
-- [`:help nvim_add_user_command()`](https://neovim.io/doc/user/api.html#nvim_add_user_command())
+
+- [`:help nvim_add_user_command()`](<https://neovim.io/doc/user/api.html#nvim_add_user_command()>)
 - [`:help 40.2`](https://neovim.io/doc/user/usr_40.html#40.2)
 - [`:help command-attributes`](https://neovim.io/doc/user/map.html#command-attributes)
 
@@ -1071,9 +1084,9 @@ Neovim 0.7.0 has API functions for autocommands. See `:help api-autocmd` for det
 
 Neovim 0.7.0 has API functions for highlight groups. See also:
 
-- [`:help nvim_set_hl()`](https://neovim.io/doc/user/api.html#nvim_set_hl())
-- [`:help nvim_get_hl_by_id()`](https://neovim.io/doc/user/api.html#nvim_get_hl_by_id())
-- [`:help nvim_get_hl_by_name()`](https://neovim.io/doc/user/api.html#nvim_get_hl_by_name())
+- [`:help nvim_set_hl()`](<https://neovim.io/doc/user/api.html#nvim_set_hl()>)
+- [`:help nvim_get_hl_by_id()`](<https://neovim.io/doc/user/api.html#nvim_get_hl_by_id()>)
+- [`:help nvim_get_hl_by_name()`](<https://neovim.io/doc/user/api.html#nvim_get_hl_by_name()>)
 
 ## General tips and recommendations
 
@@ -1103,7 +1116,8 @@ In the above example, `<Leader>f` is mapped to `<Space><Cmd>call foo()<CR><Space
 ### Notes about Vimscript <-> Lua type conversion
 
 #### Converting a variable creates a copy:
-You can't directly interact with the reference to a Vim object from Lua or a Lua object from Vimscript.  
+
+You can't directly interact with the reference to a Vim object from Lua or a Lua object from Vimscript.
 For example, the `map()` function in Vimscript modifies a variable in place:
 
 ```vim
@@ -1130,6 +1144,7 @@ print(tbl == newtbl) -- false
 ```
 
 #### Conversion is not always possible
+
 This mostly affects functions and tables:
 
 Lua tables that are a mix between a List and a Dictionary can't be converted:
@@ -1173,6 +1188,7 @@ echo g:test_dict
 ```
 
 #### Vim booleans
+
 A common pattern in Vim scripts is to use `1` or `0` instead of proper booleans. Indeed, Vim did not have a separate boolean type until version 7.4.1154.
 
 Lua booleans are converted to actual booleans in Vimscript, not numbers:
@@ -1240,6 +1256,7 @@ The plugin uses the [Debug Adapter Protocol](https://microsoft.github.io/debug-a
 - [teukka.tech - Using LibUV in Neovim](https://teukka.tech/posts/2020-01-07-vimloop/)
 
 See also:
+
 - [`:help vim.loop`](https://neovim.io/doc/user/lua.html#vim.loop)
 
 ### vim.lsp
@@ -1247,6 +1264,7 @@ See also:
 `vim.lsp` is the module that controls the built-in LSP client. The [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/) repository contains default configurations for popular language servers.
 
 The behavior of the client can be configured using "lsp-handlers". For more information:
+
 - [`:help lsp-handler`](https://neovim.io/doc/user/lsp.html#lsp-handler)
 - [neovim/neovim#12655](https://github.com/neovim/neovim/pull/12655)
 - [How to migrate from diagnostic-nvim](https://github.com/nvim-lua/diagnostic-nvim/issues/73#issue-737897078)
@@ -1254,6 +1272,7 @@ The behavior of the client can be configured using "lsp-handlers". For more info
 You may also want to take a look at [plugins built around the LSP client](https://github.com/rockerBOO/awesome-neovim#lsp)
 
 See also:
+
 - [`:help lsp`](https://neovim.io/doc/user/lsp.html#LSP)
 
 ### vim.treesitter
@@ -1263,6 +1282,7 @@ See also:
 The [nvim-treesitter](https://github.com/nvim-treesitter/) organisation hosts various plugins taking advantage of the library.
 
 See also:
+
 - [`:help lua-treesitter`](https://neovim.io/doc/user/treesitter.html#lua-treesitter)
 
 ### Transpilers
@@ -1278,6 +1298,7 @@ Probably one of the most well-known transpilers for Lua. Adds a lots of convenie
 A lisp that compiles to Lua. You can write configuration and plugins for Neovim in Fennel with the [Olical/aniseed](https://github.com/Olical/aniseed) or the [Hotpot](https://github.com/rktjmp/hotpot.nvim) plugin. Additionally, the [Olical/conjure](https://github.com/Olical/conjure) plugin provides an interactive development environment that supports Fennel (among other languages).
 
 Other interesting projects:
+
 - [TypeScriptToLua/TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua)
 - [teal-language/tl](https://github.com/teal-language/tl)
 - [Haxe](https://haxe.org/)
