@@ -1220,6 +1220,30 @@ You can debug Lua code running in a separate Neovim instance with [jbyuki/one-sm
 
 The plugin uses the [Debug Adapter Protocol](https://microsoft.github.io/debug-adapter-protocol/). Connecting to a debug adapter requires a DAP client like [mfussenegger/nvim-dap](https://github.com/mfussenegger/nvim-dap/) or [puremourning/vimspector](https://github.com/puremourning/vimspector/).
 
+### Debugging Lua mappings/commands/autocommands
+
+The `:verbose` command allows you to see where a mapping/command/autocommand was defined:
+
+```vim
+:verbose map m
+```
+
+```text
+n  m_          * <Cmd>echo 'example'<CR>
+        Last set from ~/.config/nvim/init.vim line 26
+```
+
+By default, this feature is disabled in Lua for performance reasons. You can enable it by starting Neovim with a verbose level greater than 0:
+
+```sh
+nvim -V1
+```
+
+See also:
+- [`:help 'verbose'`](https://neovim.io/doc/user/options.html#'verbose')
+- [`:help -V`](https://neovim.io/doc/user/starting.html#-V)
+- [neovim/neovim#15079](https://github.com/neovim/neovim/pull/15079)
+
 ### Testing Lua code
 
 - [plenary.nvim: test harness](https://github.com/nvim-lua/plenary.nvim/#plenarytest_harness)
