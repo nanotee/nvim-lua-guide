@@ -837,7 +837,7 @@ end
 vim.fn.jobstart('ls', { on_stdout = print_stdout })
 ```
 
-Hashes (`#`) are not valid characters for indentifiers in Lua, so autoload functions have to be called with this syntax:
+Hashes (`#`) are not valid characters for identifiers in Lua, so autoload functions have to be called with this syntax:
 
 ```lua
 vim.fn['my#autoload#function']()
