@@ -505,7 +505,7 @@ Tips~
 Writing `print(vim.inspect(x))` every time you want to inspect the
 contents of an object can get pretty tedious. It might be worthwhile
 to have a global wrapper function somewhere in your configuration (in
-Neovim 0.7.0+, this function is built-in, see |vim.pretty_print()|):
+Neovim 0.7.0+, this function is built-in, see |vim.pretty_print()|:
 
     >
     function _G.put(...)
@@ -1006,7 +1006,7 @@ converted back and forth from Lua to Vimscript.
     vim.fn.jobstart('ls', { on_stdout = print_stdout })
 <
 
-Hashes (`#`) are not valid characters for indentifiers in Lua, so autoload
+Hashes (`#`) are not valid characters for identifiers in Lua, so autoload
 functions have to be called with this syntax:
 
     >
@@ -1212,6 +1212,14 @@ the options passed to `vim.api.nvim_set_keymap()`, with a few additions
     end, {desc = 'Prints "Example 2" to the message area'})
 <
 
+Defining keymaps with a Lua function is different from using a string. The
+usual way to show information about a keymap like `:nmap <Leader>ex1`
+will not output useful information (the string itself), but instead
+only show `Lua function`. It is recommended to add a `desc` key to
+describe the behavior of your keymap. This is especially important for
+documenting plugin mappings so users can understand the usage of the
+keymap more easily.
+
 An interesting feature of this API is that it irons out some historical
 quirks of Vim mappings:
 - Mappings are `noremap` by default, except when the `rhs` is a `<Plug>`
@@ -1303,7 +1311,8 @@ with |nvim_buf_create_user_command()|, `-buffer` is not a valid attribute.
 
 Two additional attributes are available:
 - `desc` allows you to control what gets displayed when you run `:command
-{cmd}` on a command defined as a Lua callback.
+{cmd}` on a command defined as a Lua callback. Similarly to keymaps, it
+is recommended to add a `desc` key to commands defined as Lua functions.
 - `force` is equivalent to calling `:command!` and replaces a command
 if one with the same name already exists. It is true by default, unlike
 its Vimscript equivalent.
