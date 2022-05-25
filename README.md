@@ -998,7 +998,7 @@ vim.keymap.set('n', '<Leader>ex1', '<Cmd>echomsg "Example 1"<CR>', {buffer = tru
 vim.keymap.set('n', '<Leader>ex2', function() print('Example 2') end, {desc = 'Prints "Example 2" to the message area'})
 ```
 
-Defining keymaps with lua function is different from using commands. The traditional way to show information about the keymap like `:nmap <Leader>ex1` will not output useful information like a command (a string), but instead only show a `lua function`. It is recommended to write `desc` key to describe what the behavior your keymap is. Especially when you want to write plugin and define the keymaps within the plugin. The user could understand the usage of the keymap more easily.
+Defining keymaps with a Lua function is different from using a string. The usual way to show information about a keymap like `:nmap <Leader>ex1` will not output useful information (the string itself), but instead only show `Lua function`. It is recommended to add a `desc` key to describe the behavior of your keymap. This is especially important for documenting plugin mappings so users can understand the usage of the keymap more easily.
 
 An interesting feature of this API is that it irons out some historical quirks of Vim mappings:
 - Mappings are `noremap` by default, except when the `rhs` is a `<Plug>` mapping. This means you rarely have to think about whether a mapping should be recursive or not:
@@ -1072,7 +1072,7 @@ vim.api.nvim_create_user_command(
 The third argument lets you pass command attributes as a table (see [`:help command-attributes`](https://neovim.io/doc/user/map.html#command-attributes)). Since you can already define buffer-local user commands with `vim.api.nvim_buf_create_user_command()`, `-buffer` is not a valid attribute.
 
 Two additional attributes are available:
-- `desc` allows you to control what gets displayed when you run `:command {cmd}` on a command defined as a Lua callback. Similar to define keymaps using lua functions. It is also recommended to add a `desc` key to the command defined by lua function.
+- `desc` allows you to control what gets displayed when you run `:command {cmd}` on a command defined as a Lua callback. Similarly to keymaps, it is recommended to add a `desc` key to commands defined as Lua functions.
 - `force` is equivalent to calling `:command!` and replaces a command if one with the same name already exists. It is true by default, unlike its Vimscript equivalent.
 
 The `-complete` attribute can take a Lua function in addition to the attributes listed in [`:help :command-complete`](https://neovim.io/doc/user/map.html#:command-complete).
