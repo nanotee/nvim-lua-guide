@@ -9,6 +9,7 @@
 - [:brazil: Portuguese version](https://github.com/npxbr/nvim-lua-guide/blob/master/README.pt-br.md)
 - [:jp: Japanese version](https://github.com/willelz/nvim-lua-guide-ja/blob/master/README.ja.md)
 - [:ru: Russian version](https://github.com/kuator/nvim-lua-guide-ru)
+- [🇺🇦 Ukrainian version](https://github.com/famiclone/nvim-lua-guide-ua)
 
 ## Introduction
 
