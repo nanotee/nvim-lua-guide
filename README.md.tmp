@@ -13,34 +13,29 @@
 
 ## 소개
 
-[네오빔에서 first-class 언어](https://github.com/neovim/neovim/wiki/FAQ#why-embed-lua-instead-of-x)로서 [통합된 루아](https://www.youtube.com/watch?v=IP3J56sKtn0)는 킬러 피쳐들 중 하나로 자리잡고 있습니다.
-하지만 루아로 플러그인 작성하는 방법에 대해 배울 수 있는 자료는 빔스크립트로 작성하는 방법에 비해 많지 않습니다.
-그래서 사람들이 좀 더 쉽게 시작할 수 있도록 기본적인 정보를 제공하려고 합니다.
+The [integration of Lua](https://www.youtube.com/watch?v=IP3J56sKtn0) as a [first-class language inside Neovim](https://github.com/neovim/neovim/wiki/FAQ#why-embed-lua-instead-of-x) is shaping up to be one of its killer features.
+However, the amount of teaching material for learning how to write plugins in Lua is not as large as what you would find for writing them in Vimscript. This is an attempt at providing some basic information to get people started.
 
-이 가이드는 당신이 최소 Neovim 0.5 버전 이상을 사용하고 있다고 가정합니다.
+This guide assumes you are using at least version 0.5 of Neovim.
 
-### 루아 배우기
+### Learning Lua
 
-루아에 익숙하지 않다면 여기 시작하기에 좋은 자료들이 많이 있습니다.
+If you are not already familiar with the language, there are plenty of resources to get started:
 
-- ['X를 Y분 만에 배우자'의 루아 페이지](https://learnxinyminutes.com/docs/lua/)에서는 기본적인 것들을 빠르게 훑어볼 수 있습니다.
-- [이 가이드](https://github.com/medwatt/알림s/blob/main/Lua/Lua_Quick_Guide.ipynb)도 빠르게 시작하기 좋은 자료입니다.
-- 당신이 비디오로 배우는 것을 더 선호한다면 Derek Banas의 [1 시간짜리 튜토리얼](https://www.youtube.com/watch?v=iMacxZQMPXs)도 있습니다.
-- 실행 가능한 예제와 함께 좀 더 인터랙티브하게 배우고 싶다면 [루아 스크립트 튜토리얼](https://www.luascript.dev/learn)도 있습니다.
-- [루아 유저 위키](http://lua-users.org/wiki/LuaDirectory)에는 루아와 관련된 유용한 정보들이 많이 있습니다.
-- [루아 공식 레퍼런스 매뉴얼](https://www.lua.org/manual/5.1/)은 가장 광범위한 자료를 둘러볼 수 있습니다.(빔 에디터 내에서 읽고 싶다면 Vimdoc 플러그인으로도 있습니다.: [milisims/nvim-luaref](https://github.com/milisims/nvim-luaref))
+- The [Learn X in Y minutes page about Lua](https://learnxinyminutes.com/docs/lua/) should give you a quick overview of the basics
+- [This guide](https://github.com/medwatt/Notes/blob/main/Lua/Lua_Quick_Guide.ipynb) is also a good resource for getting started quickly
+- If videos are more to your liking, Derek Banas has a [1-hour tutorial on the language](https://www.youtube.com/watch?v=iMacxZQMPXs)
+- Want something a little more interactive with runnable examples? Try [the LuaScript tutorial](https://www.luascript.dev/learn)
+- The [lua-users wiki](http://lua-users.org/wiki/LuaDirectory) is full of useful information on all kinds of Lua-related topics
+- The [official reference manual for Lua](https://www.lua.org/manual/5.1/) should give you the most comprehensive tour of the language (exists as a Vimdoc plugin if you want to read it from the comfort of your editor: [milisims/nvim-luaref](https://github.com/milisims/nvim-luaref))
 
 It should also be noted that Lua is a very clean and simple language. It is easy to learn, especially if you have experience with similar scripting languages like JavaScript. You may already know more Lua than you realise!
 
-루아는 정말 깔끔하고 단순한 언어라는 것을 먼저 말하고 시작하고 싶습니다.
-자바스크립트같은 스트립팅 언어에 대한 경험이 있다면 정말 쉽게 배울 수 있습니다. 그렇지 않더라도요.
-아마도 이미 생각보다 루아에 대해 더 많은 것을 알고 있을지도 몰라요.
+Note: the version of Lua that Neovim embeds is [LuaJIT](https://staff.fnwi.uva.nl/h.vandermeer/docs/lua/luajit/luajit_intro.html) 2.1.0, which maintains compatibility with Lua 5.1.
 
-알림: 네오빔에 내장된 루아 컴파일러는 [LuaJIT](https://staff.fnwi.uva.nl/h.vandermeer/docs/lua/luajit/luajit_intro.html) 2.1.0 버전입니다. 루아 5.1 버전과 호환 가능합니다.
+### Existing tutorials for writing Lua in Neovim
 
-### 네오빔에서 루아 작성하기에 대한 튜토리얼들
-
-루아로 네오빔 설정하기에 관해 다음 튜토리얼들이 이미 있습니다. 그 중에서 이 가이드를 쓰는데 도움 받은 것도 있습니다. 작성자들에게 정말 감사합니다.
+A few tutorials have already been written to help people write plugins in Lua. Some of them helped quite a bit when writing this guide. Many thanks to their authors.
 
 - [teukka.tech - From init.vim to init.lua](https://teukka.tech/luanvim.html)
 - [dev.to - How to write neovim plugins in Lua](https://dev.to/2nit/how-to-write-neovim-plugins-in-lua-5cca)
@@ -51,35 +46,33 @@ It should also be noted that Lua is a very clean and simple language. It is easy
 - [Configuring Neovim using Lua](https://icyphox.sh/blog/nvim-lua/)
 - [Devlog | Everything you need to know to configure neovim using lua](https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/)
 
-### 도움 될만한 플러그인들
+### Companion plugins
 
-- [Vimpeccable](https://github.com/svermeulen/vimpeccable) - 루아로 .vimrc 작성할 때 도와주는 플러그인
-- [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) - 여러 번 작성하기 싫은 루아 함수들 (헬퍼 함수)
-- [popup.nvim](https://github.com/nvim-lua/popup.nvim) - vim 팝업 API를 Neovim에서 구현한 것 
+- [Vimpeccable](https://github.com/svermeulen/vimpeccable) - Plugin to help write your .vimrc in Lua
+- [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) - All the lua functions I don't want to write twice
+- [popup.nvim](https://github.com/nvim-lua/popup.nvim) - An implementation of the Popup API from vim in Neovim
 - [nvim_utils](https://github.com/norcalli/nvim_utils)
-- [nvim-luadev](https://github.com/bfredl/nvim-luadev) - 루아 플러그인들을 위한 REPL/debug 콘솔
-- [nvim-luapad](https://github.com/rafcamlet/nvim-luapad) - 내장된 루아 엔진과 실시간으로 상호작용 할 수 있는 네오빔 스크래치패드
-- [nlua.nvim](https://github.com/tjdevries/nlua.nvim) - Neovim을 위한 루아 개발 도구
-- [BetterLua.vim](https://github.com/euclidianAce/BetterLua.vim) - 더 나은 루아 구문(syntax) 하이라이팅
+- [nvim-luadev](https://github.com/bfredl/nvim-luadev) - REPL/debug console for nvim lua plugins
+- [nvim-luapad](https://github.com/rafcamlet/nvim-luapad) - Interactive real time neovim scratchpad for embedded lua engine
+- [nlua.nvim](https://github.com/tjdevries/nlua.nvim) - Lua Development for Neovim
+- [BetterLua.vim](https://github.com/euclidianAce/BetterLua.vim) - Better Lua syntax highlighting in Vim/NeoVim
 
-## Lua 파일들은 어디에 넣나요
+## Where to put Lua files
 
 ### init.lua
 
-Neovim은 `init.vim` 대신 `init.lua` 파일을 설정(configuration) 파일로 로딩할 수도 있습니다.
+Neovim supports loading an `init.lua` file for configuration instead of the usual `init.vim`.
 
-알림: `init.lua` is of course _completely_ optional. Support for `init.vim` is not going away and is still a valid option for configuration. Do keep in mind that some features are not 100% exposed to Lua yet.
+Note: `init.lua` is of course _completely_ optional. Support for `init.vim` is not going away and is still a valid option for configuration. Do keep in mind that some features are not 100% exposed to Lua yet.
 
-알림: `init.lua` 파일을 사용하는 것은 물론 _완전히_ 선택 가능합니다. `init.vim`을 사용해도 상관 없으며 여전히 유효한 설정입니다. vim의 기능들 중 몇몇은 아직 루아로 접근할 수 없다는 것도 기억하면 좋습니다.
-
-자세한 정보:
+See also:
 - [`:help config`](https://neovim.io/doc/user/starting.html#config)
 
-### 모듈
+### Modules
 
-루아 모듈들은 Neovim의 `runtimepath` (대부분의 \*nix 시스템 [*맥 | 리눅스*] 에서는 `~/.config/nvim/lua`, 윈도우에서는 `~/AppData/Local/nvim/lua` ) 안의 `lua/` 폴더 안에 위치합니다. 이 폴더 안에 있는 루아 파일들은 모듈로서 `require()` 할 수 있습니다.
+Lua modules are found inside a `lua/` folder in your `'runtimepath'` (for most users, this will mean `~/.config/nvim/lua` on \*nix systems and `~/AppData/Local/nvim/lua` on Windows). You can `require()` files in this folder as Lua modules.
 
-다음 폴더 구조를 예시로 한 번 봐봅시다:
+Let's take the following folder structure as an example:
 
 ```text
 📂 ~/.config/nvim
@@ -96,15 +89,15 @@ Neovim은 `init.vim` 대신 `init.lua` 파일을 설정(configuration) 파일로
 └── 🇻 init.vim
 ```
 
-다음 루아 코드는 `myloamodule.lua` 파일을 불러옵니다:
+The following Lua code will load `myluamodule.lua`:
 
 ```lua
 require('myluamodule')
 ```
 
-`.lua` 확장자가 없는 것을 볼 수 있습니다.
+Notice the absence of a `.lua` extension.
 
-비슷하게, `other_modules/anothermodule.lua` 파일을 불러오는 것도 다음과 같습니다:
+Similarly, loading `other_modules/anothermodule.lua` is done like so:
 
 ```lua
 require('other_modules.anothermodule')
@@ -112,16 +105,16 @@ require('other_modules.anothermodule')
 require('other_modules/anothermodule')
 ```
 
-경로 구분자는 `.`이나 `/`로 표기됩니다.
+Path separators are denoted by either a dot `.` or a slash `/`.
 
-`init.lua` 파일을 포함하고 있는 폴더는 파일 이름을 지정하지 않아도 바로 불러올 수 있습니다.
+A folder containing an `init.lua` file can be required directly, without having to specify the name of the file.
 
 ```lua
 require('other_modules') -- loads other_modules/init.lua
 ```
 
-존재하지 않는 모듈이나 구문 에러를 포함하고 있는 모듈을 불러오게 되면 현재 실행 중인 스크립트가 종료됩니다.
-`pcall()` 함수를 사용하면 에러로 인해 스크립트가 종료되는 것을 방지할 수 있습니다.
+Requiring a nonexistent module or a module which contains syntax errors aborts the currently executing script.
+`pcall()` may be used to prevent errors.
 
 ```lua
 local ok, _ = pcall(require, 'module_with_error')
@@ -130,22 +123,20 @@ if not ok then
 end
 ```
 
-자세한 정보:
+See also:
 - [`:help lua-require`](https://neovim.io/doc/user/lua.html#lua-require)
 
 #### Tips
 
-루아 플러그인들 중 몇몇은 그 플러그인의 `lua/` 폴더 안에 동일한 파일 이름이 존재할 수도 있습니다. 그럴 경우 이름공간([namespace](https://ko.wikipedia.org/wiki/%EC%9D%B4%EB%A6%84%EA%B3%B5%EA%B0%84)) 충돌로 이어질 수 있습니다.
+Several Lua plugins might have identical filenames in their `lua/` folder. This could lead to namespace clashes.
 
-만약 두개의 다른 플러그인이 `lua/main.lua` 파일을 가지고 있다면, `require('main')` 을 실행할 때 어떤 파일을 불러야 하는지 알기 힘듭니다.
+If two different plugins have a `lua/main.lua` file, then doing `require('main')` is ambiguous: which file do we want to source?
 
-그래서 당신의 설정 파일이나 플러그인들의 namespace를 최상위 폴더와 같이 관리하는 것도 좋은 아이디어일 수 있습니다. 다음과 같이요:
-`lua/plugin_name/main.lua`
-
+It might be a good idea to namespace your config or your plugin with a top-level folder, like so: `lua/plugin_name/main.lua`
 
 ### Runtime files
 
-Vimscript 파일들과 마찬가지로, 루아 파일들도 당신의 `runtimepath`에 지정된 특별한 폴더들에서 자동적으로 불러와질 수 있습니다. 현재는 다음 폴더들이 지원되고 있습니다:
+Much like Vimscript files, Lua files can be loaded automatically from special folders in your `runtimepath`. Currently, the following folders are supported:
 
 - `colors/`
 - `compiler/`
@@ -155,27 +146,27 @@ Vimscript 파일들과 마찬가지로, 루아 파일들도 당신의 `runtimepa
 - `plugin/`
 - `syntax/`
 
-알림: runtime 디렉터리에서는 모든 `*.vim*` 파일들이 `*.lua` 파일들보다 먼저 불러와집니다.
+Note: in a runtime directory, all `*.vim` files are sourced before `*.lua` files.
 
-자세한 정보:
+See also:
 - [`:help 'runtimepath'`](https://neovim.io/doc/user/options.html#'runtimepath')
 - [`:help load-plugins`](https://neovim.io/doc/user/starting.html#load-plugins)
 
 #### Tips
 
-runtime 파일들이 Lua 모듈 시스템을 기반으로 하지 않기 때문에 두 플러그인들이 문제 없이 `plugin/main.lua` 파일을 가지고 있을 수 있습니다.
+Since runtime files aren't based on the Lua module system, two plugins can have a `plugin/main.lua` file without it being an issue.
 
-## Vimscript에서 Lua 사용하기
+## Using Lua from Vimscript
 
 ### :lua
 
-이 명령어는 루아 코드 조각을 실행합니다.
+This command executes a chunk of Lua code.
 
 ```vim
 :lua require('myluamodule')
 ```
 
-여러 줄의 스크립트는 [heredoc](https://ko.wikipedia.org/wiki/%ED%9E%88%EC%96%B4_%EB%8F%84%ED%81%90%EB%A8%BC%ED%8A%B8)구문을 사용해 실행할 수 있습니다:
+Multi-line scripts are possible using heredoc syntax:
 
 ```vim
 echo "Here's a bigger chunk of Lua code"
@@ -192,7 +183,7 @@ print(tbl)
 EOF
 ```
 
-알림: `:lua` 명령어는 각각의 scope를 가지고 있으며 `local` 키워드로 선언된 변수들은 명령어 밖에서 접근할 수 없습니다. 다음은 작동하지 않습니다:
+Note: each `:lua` command has its own scope and variables declared with the `local` keyword are not accessible outside of the command. This won't work:
 
 ```vim
 :lua local foo = 1
@@ -200,42 +191,42 @@ EOF
 " prints 'nil' instead of '1'
 ```
 
-알림 2: 루아의 `print()` 함수는 `:echomsg` 명령어와 비슷하게 작동합니다. 실행 결과가 message-history에 저장되며 이는 `:silent` 커맨드를 사용해 보이지 않게 할수도 있습니다.
+Note 2: the `print()` function in Lua behaves similarly to the `:echomsg` command. Its output is saved in the message-history and can be suppressed by the `:silent` command.
 
-자세한 정보:
+See also:
 
 - [`:help :lua`](https://neovim.io/doc/user/lua.html#Lua)
 - [`:help :lua-heredoc`](https://neovim.io/doc/user/lua.html#:lua-heredoc)
 
 ### :luado
 
-이 명령어는 현재 버퍼에 라인들의 특정한 범위에 루아 코드를 실행합니다. 만약 범위가 지정되지 않았다면 버퍼 전체에서 실행됩니다. 어떤 string이든 루아 코드에서 `return`되면, 어떤 라인들이 바뀌어야 할지 정해집니다.
+This command executes a chunk of Lua code that acts on a range of lines in the current buffer. If no range is specified, the whole buffer is used instead. Whatever string is `return`ed from the chunk is used to determine what each line should be replaced with.
 
-다음 명령은 현재 버퍼의 모든 라인을 `hello world`로 변경합니다:
+The following command would replace every line in the current buffer with the text `hello world`:
 
 ```vim
 :luado return 'hello world'
 ```
 
-`line`과 `linenr` 변수도 제공됩니다. 각 라인들을 하나씩 반복하는 중에 `linenr`의 숫자는 라인의 인덱스, 그 라인의 내용이 `line` 입니다. 다음 명령어는 2로 나눠질 수 있는 라인들을 대문자로 변경합니다.
+Two implicit `line` and `linenr` variables are also provided. `line` is the text of the line being iterated upon whereas `linenr` is its number. The following command would make every line whose number is divisible by 2 uppercase:
 
 ```vim
 :luado if linenr % 2 == 0 then return line:upper() end
 ```
 
-자세한 정보:
+See also:
 
 - [`:help :luado`](https://neovim.io/doc/user/lua.html#:luado)
 
-### 루아 파일 가져오기 (Sourcing Lua files)
+### Sourcing Lua files
 
-Neovim은 루아 파일을 가져오기 위해 다음 3개의 실행 명령어들을 제공합니다.
+Neovim provides 3 Ex commands to source Lua files
 
 - `:luafile`
 - `:source`
 - `:runtime`
 
-`:luafile`과 `:source`는 비슷합니다:
+`:luafile` and `:source` are very similar:
 
 ```vim
 :luafile ~/foo/bar/baz/myluafile.lua
@@ -244,27 +235,26 @@ Neovim은 루아 파일을 가져오기 위해 다음 3개의 실행 명령어�
 :source %
 ```
 
-`:source`는 범위도 지정할 수 있습니다. 스크립트 파일의 일부분만 실행하고 싶을 때 유용합니다:
+`:source` also supports ranges, which can be useful to only execute part of a script:
 
 ```vim
 :1,10source
 ```
 
-`:runtime`은 조금 다릅니다: `runtimepath` 옵션을 사용해서 어떤 파일을 가져올지 정할 수 있습니다. 더 많은 정보는 [`:help :runtime`](https://neovim.io/doc/user/repeat.html#:runtime)에서 확인할 수 있습니다.
+`:runtime` is a little different: it uses the `'runtimepath'` option to determine which files to source. See [`:help :runtime`](https://neovim.io/doc/user/repeat.html#:runtime) for more details.
 
-자세한 정보:
+See also:
 
 - [`:help :luafile`](https://neovim.io/doc/user/lua.html#:luafile)
 - [`:help :source`](https://neovim.io/doc/user/repeat.html#:source)
 - [`:help :runtime`](https://neovim.io/doc/user/repeat.html#:runtime)
 
-#### 루아 파일 가져오기 (sourcing) vs require() 호출하기:
+#### Sourcing a lua file vs calling require():
 
-`require()` 함수를 호출하는 것과 직접 루아 파일을 소싱하는 것의 차이와 어떤 것을 언제 사용해야 할지 궁금할 겁니다. 둘은 다음과 같은 서로 다른 사용 사례들이 있습니다:
+You might be wondering what the difference between calling the `require()` function and sourcing a Lua file is and whether you should prefer one way over the other. They have different use cases:
 
 - `require()`:
     - is a built-in Lua function. It allows you to take advantage of Lua's module system
-    - 루아의 기본 빌트인 함수입니다. 
     - searches for modules in `lua/` folders in your `'runtimepath'`
     - keeps track of what modules have been loaded and prevents a script from being parsed and executed a second time. If you change the file containing the code for a module and try to `require()` it a second time while Neovim is running, the module will not actually update
 - `:luafile`, `:source` and `:runtime`:
@@ -294,7 +284,7 @@ echo list[0]
 " 1
 echo list[1]
 " 2
-" 알림 that unlike Lua tables, Vim lists are 0-indexed
+" Note that unlike Lua tables, Vim lists are 0-indexed
 
 " Dict-like tables are converted to Vim dictionaries
 let dict = luaeval('{foo = "bar", baz = "qux"}')
@@ -329,7 +319,7 @@ echo luaeval('string.format("Lua is %s", _A)', 'awesome')
 " 'Lua is awesome'
 ```
 
-자세한 정보:
+See also:
 - [`:help luaeval()`](https://neovim.io/doc/user/lua.html#luaeval())
 
 ### v:lua
@@ -378,7 +368,7 @@ inoremap <silent> <expr> <Tab>
 call v:lua.require'module'.foo()
 ```
 
-자세한 정보:
+See also:
 - [`:help v:lua`](https://neovim.io/doc/user/eval.html#v:lua)
 - [`:help v:lua-call`](https://neovim.io/doc/user/lua.html#v:lua-call)
 
@@ -603,7 +593,7 @@ vim.keymap.set('i', '<Tab>', function()
 end, {expr = true})
 ```
 
-자세한 정보:
+See also:
 
 - [`:help keycodes`](https://neovim.io/doc/user/intro.html#keycodes)
 - [`:help expr-quote`](https://neovim.io/doc/user/eval.html#expr-quote)
@@ -715,7 +705,7 @@ vim.opt.whichwrap = vim.opt.whichwrap - { 'b', 's' }
 
 Be sure to look at [`:help vim.opt`](https://neovim.io/doc/user/lua.html#vim.opt) for more information.
 
-자세한 정보:
+See also:
 - [`:help lua-vim-options`](https://neovim.io/doc/user/lua.html#lua-vim-options)
 
 ## Managing vim internal variables
@@ -798,7 +788,7 @@ To delete one of these variables, simply assign `nil` to it:
 vim.g.some_global_variable = nil
 ```
 
-자세한 정보:
+See also:
 - [`:help lua-vim-variables`](https://neovim.io/doc/user/lua.html#lua-vim-variables)
 
 #### Caveats
@@ -858,7 +848,7 @@ The functionality of `vim.fn` is identical to `vim.call`, but allows a more Lua-
 
 It is distinct from `vim.api.nvim_call_function` in that converting Vim/Lua objects is automatic: `vim.api.nvim_call_function` returns a table for floating point numbers and does not accept Lua closures while `vim.fn` handles these types transparently.
 
-자세한 정보:
+See also:
 - [`:help vim.fn`](https://neovim.io/doc/user/lua.html#vim.fn)
 
 #### Tips
@@ -1032,7 +1022,7 @@ An interesting feature of this API is that it irons out some historical quirks o
     end, {expr = true})
     ```
 
-자세한 정보:
+See also:
 - [`:help recursive_mapping`](https://neovim.io/doc/user/map.html#recursive_mapping)
 
 `vim.keymap.del()` works the same way but deletes mappings instead:
@@ -1117,7 +1107,7 @@ Again, `vim.api.nvim_buf_del_user_command()`, takes a buffer number as its first
 vim.api.nvim_buf_del_user_command(4, 'Upper')
 ```
 
-자세한 정보:
+See also:
 - [`:help nvim_create_user_command()`](https://neovim.io/doc/user/api.html#nvim_create_user_command())
 - [`:help 40.2`](https://neovim.io/doc/user/usr_40.html#40.2)
 - [`:help command-attributes`](https://neovim.io/doc/user/map.html#command-attributes)
@@ -1168,7 +1158,7 @@ Neovim 0.7.0 has API functions for autocommands. See `:help api-autocmd` for det
 
 (this section is a work in progress)
 
-Neovim 0.7.0 has API functions for highlight groups. 자세한 정보:
+Neovim 0.7.0 has API functions for highlight groups. See also:
 
 - [`:help nvim_set_hl()`](https://neovim.io/doc/user/api.html#nvim_set_hl())
 - [`:help nvim_get_hl_by_id()`](https://neovim.io/doc/user/api.html#nvim_get_hl_by_id())
@@ -1199,7 +1189,7 @@ vim.api.nvim_set_keymap('n', '<Leader>f', [[ <Cmd>call foo()<CR> ]], {noremap = 
 
 In the above example, `<Leader>f` is mapped to `<Space><Cmd>call foo()<CR><Space>` instead of `<Cmd>call foo()<CR>`.
 
-### 알림s about Vimscript <-> Lua type conversion
+### Notes about Vimscript <-> Lua type conversion
 
 #### Converting a variable creates a copy:
 You can't directly interact with the reference to a Vim object from Lua or a Lua object from Vimscript.  
@@ -1263,7 +1253,7 @@ vim.fn.jobstart({'ls'}, {
 vim.g.test_dict = {test_lambda = function() return 1 end} -- Error: Cannot convert given lua type
 ```
 
-알림 however that doing the same from Vimscript with `luaeval()` **does** work:
+Note however that doing the same from Vimscript with `luaeval()` **does** work:
 
 ```vim
 let g:test_dict = {'test_lambda': luaeval('function() return 1 end')}
@@ -1338,7 +1328,7 @@ By default, this feature is disabled in Lua for performance reasons. You can ena
 nvim -V1
 ```
 
-자세한 정보:
+See also:
 - [`:help 'verbose'`](https://neovim.io/doc/user/options.html#'verbose')
 - [`:help -V`](https://neovim.io/doc/user/starting.html#-V)
 - [neovim/neovim#15079](https://github.com/neovim/neovim/pull/15079)
@@ -1362,7 +1352,7 @@ nvim -V1
 - [Luv documentation](https://github.com/luvit/luv/blob/master/docs.md)
 - [teukka.tech - Using LibUV in Neovim](https://teukka.tech/posts/2020-01-07-vimloop/)
 
-자세한 정보:
+See also:
 - [`:help vim.loop`](https://neovim.io/doc/user/lua.html#vim.loop)
 
 ### vim.lsp
@@ -1376,7 +1366,7 @@ The behavior of the client can be configured using "lsp-handlers". For more info
 
 You may also want to take a look at [plugins built around the LSP client](https://github.com/rockerBOO/awesome-neovim#lsp)
 
-자세한 정보:
+See also:
 - [`:help lsp`](https://neovim.io/doc/user/lsp.html#LSP)
 
 ### vim.treesitter
@@ -1385,7 +1375,7 @@ You may also want to take a look at [plugins built around the LSP client](https:
 
 The [nvim-treesitter](https://github.com/nvim-treesitter/) organisation hosts various plugins taking advantage of the library.
 
-자세한 정보:
+See also:
 - [`:help lua-treesitter`](https://neovim.io/doc/user/treesitter.html#lua-treesitter)
 
 ### Transpilers
