@@ -561,8 +561,7 @@ end
 vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.smart_tab()', {expr = true, noremap = true})
 ```
 
-only to find out that the mapping inserts `\<Tab>` and `\<C-N>` literally...
-키매핑이 문자 그대로 `\<Tab>`과 `\<C-N>`를 입력하는 지 알아보기 위해서...
+매핑이 문자 그대로 `\<Tab>`과 `\<C-N>`를 입력하는지 알아내기만 하면 됩니다.
 
 키코드를 escape 할 수 있는 것은 빔스크립트의 기능입니다. 많은 프로그래밍 언어에서 흔히 볼 수 있는 `\r`, `\42`, `\x10` 같은 보통의 escape 시퀀스들를 제외하고, 빔스크립트의 `expr-quotes` (큰 따옴표로 둘러쌓인 문자열)은 빔 키코드들을 사람이 읽을 수 있게 표기할 수 있습니다.
 
