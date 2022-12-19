@@ -1,5 +1,9 @@
 :arrow_upper_left: (Feeling lost? Use the GitHub TOC!)
 
+**:warning: :warning: :warning: A more up-to-date version of this guide is available in the Neovim documentation, see [`:help lua-guide`](https://neovim.io/doc/user/lua-guide.html#lua-guide) :warning: :warning: :warning:**
+
+---
+
 # Getting started using Lua in Neovim
 
 ## Translations
