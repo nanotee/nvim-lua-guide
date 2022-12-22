@@ -68,6 +68,15 @@ A few tutorials have already been written to help people write plugins in Lua. S
 
 Neovim supports loading an `init.lua` file for configuration instead of the usual `init.vim`.
 
+`init.lua` does not need to be in the `.config/lua` directory, and the location is the same as the original `init.vim`. As an example for beginners who have not used `init.vim` before:
+
+```text
+📂 ~/.config/nvim
+├── 📂 lua
+│  └── 🌑 plugins.lua
+└── 🇻 init.lua
+```
+
 Note: `init.lua` is of course _completely_ optional. Support for `init.vim` is not going away and is still a valid option for configuration. Do keep in mind that some features are not 100% exposed to Lua yet.
 
 See also:
