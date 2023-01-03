@@ -66,7 +66,7 @@ A few tutorials have already been written to help people write plugins in Lua. S
 
 ### init.lua
 
-Neovim supports loading an `init.lua` file for configuration instead of the usual `init.vim`.
+Neovim loads scripts starting from `init.lua` or the usual `init.vim` located in `'runtimepath'` (for most users, this will mean `~/.config/nvim/lua` on \*nix systems and `~/AppData/Local/nvim/lua` on Windows).
 
 Note: `init.lua` is of course _completely_ optional. Support for `init.vim` is not going away and is still a valid option for configuration. Do keep in mind that some features are not 100% exposed to Lua yet.
 
@@ -75,7 +75,7 @@ See also:
 
 ### Modules
 
-Lua modules are found inside a `lua/` folder in your `'runtimepath'` (for most users, this will mean `~/.config/nvim/lua` on \*nix systems and `~/AppData/Local/nvim/lua` on Windows). You can `require()` files in this folder as Lua modules.
+Lua modules are placed inside a `lua/` folder in your `'runtimepath'`. You can `require()` files from this folder from `init.lua` (or `init.vim`) script.
 
 Let's take the following folder structure as an example:
 
