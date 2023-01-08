@@ -50,6 +50,7 @@ A few tutorials have already been written to help people write plugins in Lua. S
 - [Building A Vim Statusline from Scratch - jdhao's blog](https://jdhao.github.io/2019/11/03/vim_custom_statusline/)
 - [Configuring Neovim using Lua](https://icyphox.sh/blog/nvim-lua/)
 - [Devlog | Everything you need to know to configure neovim using lua](https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/)
+- [create-nvim-plugin - CLI tool to scaffold neovim lua plugins](https://github.com/KaiSpencer/create-nvim-plugin)
 
 ### Companion plugins
 
